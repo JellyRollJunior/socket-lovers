@@ -26,9 +26,11 @@
 | POST   | /login  | Login user         | { username, password} |       |
 | GET    | /users  | Retrieve all users |                       |       |
 
-| Socket Event   | Arguments | Use              |
-| -------------- | --------- | ---------------- |
-| 'send_message' | message   | sending messages |
+| Socket Event   | Arguments      | Use               |
+| -------------- | -------------- | ----------------- |
+| 'connection'   | token          | socket connection |
+| 'send_message' | token, message | sending messages  |
+| 'join_room'    | token, chatId  | join chat         |
 
 ### Learning Outcomes
 
@@ -49,10 +51,25 @@
 ### TODO
 
 -   server
-    -   handle jwt errors properly on server
+
+    -   create chats
 
 -   client
 
 -   LATER
+    -   handle jwt errors properly on server
     -   user signup input validation
     -   refactor statusCode to status
+
+
+
+
+
+
+#### Data
+
+const chat = await createChat('swagstersz', [
+    {id: "ffb6b765-e140-489e-b694-a8b40b978145"},
+    {id: "bdcbf276-85d3-4970-959c-591d2c575fad"},
+]);
+console.log(chat)
