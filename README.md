@@ -20,12 +20,13 @@
 
 ### Endpoints
 
-| Method | URI     | Function           | Body                                | Notes |
-| ------ | ------- | ------------------ | ----------------------------------- | ----- |
-| POST   | /signup | Create user        | { username, password}               |       |
-| POST   | /login  | Login user         | { username, password}               |       |
-| GET    | /users  | Retrieve all users |                                     |       |
-| POST   | /chats  | Create chat        | { name, userIds: ['id_1', 'id_2'] } |       |
+| Method | URI     | Function           | Token | Body                                | Notes |
+| ------ | ------- | ------------------ | ----- | ----------------------------------- | ----- |
+| POST   | /signup | Create user        | N     | { username, password}               |       |
+| POST   | /login  | Login user         | N     | { username, password}               |       |
+| GET    | /users  | Retrieve all users | Y     |                                     |       |
+| GET    | /chats  | Retrieve chats     | Y     |                                     |       |
+| POST   | /chats  | Create chat        | Y     | { name, userIds: ['id_1', 'id_2'] } |       |
 
 | Socket Event   | Arguments      | Use               |
 | -------------- | -------------- | ----------------- |

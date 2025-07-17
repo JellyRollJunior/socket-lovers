@@ -1,5 +1,15 @@
 import * as chatQueries from '../db/chat.queries.js';
 
+const getChats = async (req, res, next) => {
+    try {
+        const userId = req.user.id;
+        const chats = await chatQueries.getChats(userId);
+        res.json({ chats });
+    } catch (error) {
+        next(error);
+    }
+};
+
 const createChat = async (req, res, next) => {
     try {
         const userIdArray = [...req.body.userIds, req.user.id];
@@ -11,4 +21,4 @@ const createChat = async (req, res, next) => {
     }
 };
 
-export { createChat };
+export { getChats, createChat };
