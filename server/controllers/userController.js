@@ -17,6 +17,7 @@ const postUser = async (req, res, next) => {
         const hashedPassword = await bcrypt.hash(password, 10);
         const user = await userQueries.createUser(username, hashedPassword);
         res.json({
+            id: user.id,
             username: user.username,
         });
     } catch (error) {

@@ -5,7 +5,7 @@ const prisma = new PrismaClient();
 
 const getUserByUsername = async (username) => {
     try {
-        const user = await prisma.user.findMany({
+        const user = await prisma.user.findFirst({
             where: {
                 username,
             },

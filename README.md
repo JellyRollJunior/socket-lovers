@@ -20,10 +20,10 @@
 
 ### Endpoints
 
-| Method | URI    | Function          | Body                  | Notes |
-| ------ | ------ | ----------------- | --------------------- | ----- |
+| Method | URI    | Function           | Body                  | Notes |
+| ------ | ------ | ------------------ | --------------------- | ----- |
 | GET    | /users | Retrieve all users |                       |       |
-| POST   | /users | Create user       | { username, password} |       |
+| POST   | /users | Create user        | { username, password} |       |
 
 | Socket Event   | Arguments | Use              |
 | -------------- | --------- | ---------------- |
@@ -47,10 +47,10 @@
 ### TODO
 
 -   server
-
-    -   token
-    -   bcrypt
-    -   input validation
-    -   user signup
+    -   login
+        -   token
 
 -   client
+
+-   LATER
+    -   user signup input validation
