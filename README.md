@@ -48,13 +48,12 @@
 ### TODO
 
 -   server
-    -   socket
-        -   token
-            -   login
-            -   save token
-            -   pass token on socket auth
+    -   refactor socket listener structure
+    -   handle jwt errors properly on server
 
 -   client
+    -   refactor fetching / api calls
 
 -   LATER
     -   user signup input validation
+    -   refactor statusCode to status

@@ -11,7 +11,8 @@ const SocketProvider = ({ children }) => {
   const [socket, setSocket] = useState(null);
 
   useEffect(() => {
-    const socket = io(SERVER_URL);
+    const token = localStorage.getItem('token');
+    const socket = io(SERVER_URL, { auth: { token }, withCredentials: true });
 
     setSocket(socket);
 
@@ -19,9 +20,7 @@ const SocketProvider = ({ children }) => {
   }, []);
 
   return (
-    <SocketContext.Provider value={socket}>
-      {children}
-    </SocketContext.Provider>
+    <SocketContext.Provider value={socket}>{children}</SocketContext.Provider>
   );
 };
 
