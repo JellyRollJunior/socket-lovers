@@ -12,6 +12,7 @@
   "description": "",
   "dependencies": {
     "@prisma/client": "^6.12.0",
+    "@socket.io/admin-ui": "^0.5.1",
     "bcryptjs": "^3.0.2",
     "cors": "^2.8.5",
     "dotenv": "^17.2.0",
