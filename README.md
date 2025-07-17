@@ -25,6 +25,7 @@
 | POST   | /signup | Create user        | { username, password} |       |
 | POST   | /login  | Login user         | { username, password} |       |
 | GET    | /users  | Retrieve all users |                       |       |
+| POST   | /chats  | Create chat        | { name, userIds: [] }   |       |
 
 | Socket Event   | Arguments      | Use               |
 | -------------- | -------------- | ----------------- |
@@ -58,18 +59,16 @@
 
 -   LATER
     -   handle jwt errors properly on server
-    -   user signup input validation
     -   refactor statusCode to status
-
-
-
-
-
+    -   validate input
+        -   login
+        -   signup
+        -   create chat
 
 #### Data
 
 const chat = await createChat('swagstersz', [
-    {id: "ffb6b765-e140-489e-b694-a8b40b978145"},
-    {id: "bdcbf276-85d3-4970-959c-591d2c575fad"},
+{id: "ffb6b765-e140-489e-b694-a8b40b978145"},
+{id: "bdcbf276-85d3-4970-959c-591d2c575fad"},
 ]);
 console.log(chat)
