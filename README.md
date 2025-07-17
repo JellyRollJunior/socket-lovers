@@ -52,7 +52,6 @@
     -   handle jwt errors properly on server
 
 -   client
-    -   refactor fetching / api calls
 
 -   LATER
     -   user signup input validation
