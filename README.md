@@ -38,6 +38,7 @@
 
 -   Frontend
     -   Utilizing Socket.io-client to receive message updates
+    -   vite default env variables!
 
 ### Retrospective aka yapping
 
@@ -48,7 +49,6 @@
 ### TODO
 
 -   server
-    -   refactor socket listener structure
     -   handle jwt errors properly on server
 
 -   client

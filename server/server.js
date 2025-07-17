@@ -3,7 +3,7 @@ import bcrypt from 'bcryptjs';
 import { app } from './app.js';
 import { createServer } from 'http';
 import { Server } from 'socket.io';
-import { attachSocketListeners } from './sockets/socketListeners.js';
+import { attachSocketListeners } from './sockets/attachSocketListeners.js';
 import { instrument } from '@socket.io/admin-ui';
 dotenv.config();
 
