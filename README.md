@@ -20,12 +20,12 @@
 
 ### Endpoints
 
-| Method | URI     | Function           | Body                  | Notes |
-| ------ | ------- | ------------------ | --------------------- | ----- |
-| POST   | /signup | Create user        | { username, password} |       |
-| POST   | /login  | Login user         | { username, password} |       |
-| GET    | /users  | Retrieve all users |                       |       |
-| POST   | /chats  | Create chat        | { name, userIds: [] }   |       |
+| Method | URI     | Function           | Body                                | Notes |
+| ------ | ------- | ------------------ | ----------------------------------- | ----- |
+| POST   | /signup | Create user        | { username, password}               |       |
+| POST   | /login  | Login user         | { username, password}               |       |
+| GET    | /users  | Retrieve all users |                                     |       |
+| POST   | /chats  | Create chat        | { name, userIds: ['id_1', 'id_2'] } |       |
 
 | Socket Event   | Arguments      | Use               |
 | -------------- | -------------- | ----------------- |
@@ -56,6 +56,8 @@
     -   create chats
 
 -   client
+
+    -   extract client socket actions
 
 -   LATER
     -   handle jwt errors properly on server

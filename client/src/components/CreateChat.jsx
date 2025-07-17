@@ -1,20 +1,53 @@
-import { useUsers } from "../hooks/useUsers.js";
+import { useEffect, useState } from 'react';
+import { useUsers } from '../hooks/useUsers.js';
+import { createChat } from '../services/chatApi.js';
 
 const CreateChat = () => {
   const { users } = useUsers();
-  console.log(users);
+  const [name, setName] = useState('');
+  const [selectedUsers, setSelectedUsers] = useState([]);
 
-  const handleCreateChat = () => {}
+  useEffect(() => {
+    // set first user as default
+    if (users[0]) setSelectedUsers(users[0].id)
+  }, [users])
+
+  const handleCreateChat = async (event) => {
+    event.preventDefault();
+    try {
+      const data = await createChat(name,[selectedUsers]);
+      console.log(data);
+      // Move user to messages with new chat!
+      setName('');
+    } catch {
+      // Chat creation failure notification
+    }
+  };
 
   return (
     <>
       <h2>Create chat</h2>
       <form onSubmit={handleCreateChat}>
-        <select>
+        <select
+          value={selectedUsers}
+          onChange={(event) => setSelectedUsers(event.target.value)}
+          required
+        >
           {users.map((user) => (
-            <option key={user.id}>{user.username}</option>
+            <option key={user.id} value={user.id}>
+              {user.username}
+            </option>
           ))}
         </select>
+        <label htmlFor="name">Chat name</label>
+        <input
+          type="text"
+          id="name"
+          value={name}
+          onChange={(event) => setName(event.target.value)}
+          minLength={1}
+          required
+        />
         <button>Create</button>
       </form>
     </>

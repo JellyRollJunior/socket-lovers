@@ -1,10 +1,11 @@
 import { PrismaClient } from '@prisma/client';
+import { DatabaseError } from '../errors/DatabaseError.js';
 
 const prisma = new PrismaClient();
 
 const createChat = async (name, userIdArray) => {
     try {
-        const userIdObjectArray = userIdArray.map((user) => ({ id: user.id }));
+        const userIdObjectArray = userIdArray.map((id) => ({ id }));
         const chat = await prisma.chat.create({
             data: {
                 name,
