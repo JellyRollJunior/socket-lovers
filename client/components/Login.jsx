@@ -4,7 +4,29 @@ const Login = () => {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
 
-  const handleLogin = () => {}
+  const handleLogin = async (event) => {
+    event.preventDefault();
+    try {
+      const response = await fetch('http://localhost:3000/login', {
+        mode: 'cors',
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          username,
+          password,
+        }),
+      });
+      const json = await response.json();
+      if (!response.ok) {
+        throw new Error('response not ok!');
+      }
+      localStorage.setItem('token', json.token);
+    } catch (error) {
+      console.log(error);
+    }
+  };
 
   return (
     <>

@@ -49,8 +49,10 @@
 
 -   server
     -   socket
-        -   admin portal
         -   token
+            -   login
+            -   save token
+            -   pass token on socket auth
 
 -   client
 
