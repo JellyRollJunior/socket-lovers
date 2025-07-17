@@ -5,6 +5,7 @@ const Messages = () => {
   const socket = useContext(SocketContext);
   const [messages, setMessages] = useState([]);
   const [text, setText] = useState('');
+  const [room, setRoom] = useState('');
 
   useEffect(() => {
     if (!socket) return;
@@ -13,13 +14,21 @@ const Messages = () => {
     });
   }, [socket]);
 
-  const handleSubmit = (event) => {
+  const handleSendMessage = (event) => {
     event.preventDefault();
     setMessages((prev) => [...prev, text]);
     if (socket) {
       socket.emit('send_message', text);
     }
     setText('');
+  };
+
+  const handleJoinRoom = (event) => {
+    event.preventDefault();
+    if (socket) {
+      socket.emit('join_room', room);
+    }
+    setRoom('');
   };
 
   return (
@@ -30,11 +39,20 @@ const Messages = () => {
           <li>{message}</li>
         ))}
       </ul>
-      <form onSubmit={handleSubmit}>
+      <form onSubmit={handleSendMessage}>
         <input
           type="text"
           value={text}
           onChange={(event) => setText(event.target.value)}
+          required
+        />
+        <button>Send</button>
+      </form>
+      <form onSubmit={handleJoinRoom}>
+        <input
+          type="text"
+          value={room}
+          onChange={(event) => setRoom(event.target.value)}
           required
         />
         <button>Send</button>
