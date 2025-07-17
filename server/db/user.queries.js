@@ -31,7 +31,7 @@ const getUserById = async (id) => {
 
 const getAllUsers = async () => {
     try {
-        const user = await prisma.user.findMany({
+        const users = await prisma.user.findMany({
             select: {
                 id: true,
                 username: true,
@@ -40,7 +40,7 @@ const getAllUsers = async () => {
                 username: 'asc',
             },
         });
-        return user;
+        return { users };
     } catch (error) {
         throw new DatabaseError('Unable to fetch users');
     }

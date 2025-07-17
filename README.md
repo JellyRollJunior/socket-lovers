@@ -20,8 +20,10 @@
 
 ### Endpoints
 
-| Method | URI | Function | Body | Notes |
-| ------ | --- | -------- | ---- | ----- |
+| Method | URI    | Function          | Body                  | Notes |
+| ------ | ------ | ----------------- | --------------------- | ----- |
+| GET    | /users | Retrieve all users |                       |       |
+| POST   | /users | Create user       | { username, password} |       |
 
 | Socket Event   | Arguments | Use              |
 | -------------- | --------- | ---------------- |
@@ -30,14 +32,25 @@
 ### Learning Outcomes
 
 -   Backend
+
     -   Utilizing Socket.io to implement real time chatting
 
 -   Frontend
     -   Utilizing Socket.io-client to receive message updates
-
 
 ### Retrospective aka yapping
 
 ### Start commands
 
 ### Acknowledgements
+
+### TODO
+
+-   server
+
+    -   token
+    -   bcrypt
+    -   input validation
+    -   user signup
+
+-   client
