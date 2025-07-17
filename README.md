@@ -20,14 +20,21 @@
 
 ### Endpoints
 
-| METHOD | URI | Function | Body | Notes |
+| Method | URI | Function | Body | Notes |
 | ------ | --- | -------- | ---- | ----- |
+
+| Socket Event   | Arguments | Use              |
+| -------------- | --------- | ---------------- |
+| 'send_message' | message   | sending messages |
 
 ### Learning Outcomes
 
 -   Backend
+    -   Utilizing Socket.io to implement real time chatting
 
 -   Frontend
+    -   Utilizing Socket.io-client to receive message updates
+
 
 ### Retrospective aka yapping
 
