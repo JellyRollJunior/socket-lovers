@@ -20,10 +20,11 @@
 
 ### Endpoints
 
-| Method | URI    | Function           | Body                  | Notes |
-| ------ | ------ | ------------------ | --------------------- | ----- |
-| GET    | /users | Retrieve all users |                       |       |
-| POST   | /users | Create user        | { username, password} |       |
+| Method | URI     | Function           | Body                  | Notes |
+| ------ | ------- | ------------------ | --------------------- | ----- |
+| POST   | /signup | Create user        | { username, password} |       |
+| POST   | /login  | Login user         | { username, password} |       |
+| GET    | /users  | Retrieve all users |                       |       |
 
 | Socket Event   | Arguments | Use              |
 | -------------- | --------- | ---------------- |
@@ -47,7 +48,8 @@
 ### TODO
 
 -   server
-    -   login
+    -   socket
+        -   admin portal
         -   token
 
 -   client

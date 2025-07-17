@@ -5,6 +5,21 @@ import * as userQueries from '../db/user.queries.js';
 import { AuthenticationError } from '../errors/AuthenticationError.js';
 dotenv.config();
 
+const signup = async (req, res, next) => {
+    try {
+        const username = req.body.username;
+        const password = req.body.password;
+        const hashedPassword = await bcrypt.hash(password, 10);
+        const user = await userQueries.createUser(username, hashedPassword);
+        res.json({
+            id: user.id,
+            username: user.username,
+        });
+    } catch (error) {
+        next(error);
+    }
+};
+
 const login = async (req, res, next) => {
     try {
         // authenticate user credentials
@@ -32,4 +47,4 @@ const login = async (req, res, next) => {
     }
 };
 
-export { login };
+export { signup, login };
