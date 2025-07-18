@@ -1,34 +1,31 @@
 import { useContext, useEffect, useState } from 'react';
 import { SocketContext } from '../contexts/SocketProvider.jsx';
+import { useParams } from 'react-router';
 
 const Chat = () => {
   const socket = useContext(SocketContext);
+  const { chatId } = useParams();
   const [messages, setMessages] = useState([]);
   const [text, setText] = useState('');
-  const [room, setRoom] = useState('');
 
   useEffect(() => {
     if (!socket) return;
+    socket.emit('join_room', chatId);
     socket.on('receive_message', (message) => {
       setMessages((prev) => [...prev, message]);
     });
-  }, [socket]);
+  }, [socket, chatId]);
 
   const handleSendMessage = (event) => {
     event.preventDefault();
+    // display message on client
     setMessages((prev) => [...prev, text]);
+    
+    // emit message to server
     if (socket) {
       socket.emit('send_message', text);
     }
     setText('');
-  };
-
-  const handleJoinRoom = (event) => {
-    event.preventDefault();
-    if (socket) {
-      socket.emit('join_room', room);
-    }
-    setRoom('');
   };
 
   return (
@@ -44,15 +41,6 @@ const Chat = () => {
           type="text"
           value={text}
           onChange={(event) => setText(event.target.value)}
-          required
-        />
-        <button>Send</button>
-      </form>
-      <form onSubmit={handleJoinRoom}>
-        <input
-          type="text"
-          value={room}
-          onChange={(event) => setRoom(event.target.value)}
           required
         />
         <button>Send</button>

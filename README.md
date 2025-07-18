@@ -54,6 +54,7 @@
 
 -   server
     -   create messages
+    -   on join room, remove all rooms except new room to join
 
 -   client
 
@@ -61,6 +62,7 @@
     -   create a page folder for all the pages later
     -   retrieve chats by URL
         -   join room by URL
+    
 
 -   LATER
     -   handle jwt errors properly on server
