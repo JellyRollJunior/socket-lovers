@@ -53,12 +53,14 @@
 ### TODO
 
 -   server
-
-    -   create chats
+    -   create messages
 
 -   client
 
     -   extract client socket actions
+    -   create a page folder for all the pages later
+    -   retrieve chats by URL
+        -   join room by URL
 
 -   LATER
     -   handle jwt errors properly on server

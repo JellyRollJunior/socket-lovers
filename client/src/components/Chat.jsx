@@ -1,7 +1,7 @@
 import { useContext, useEffect, useState } from 'react';
 import { SocketContext } from '../contexts/SocketProvider.jsx';
 
-const Messages = () => {
+const Chat = () => {
   const socket = useContext(SocketContext);
   const [messages, setMessages] = useState([]);
   const [text, setText] = useState('');
@@ -61,4 +61,4 @@ const Messages = () => {
   );
 };
 
-export { Messages };
+export { Chat };
