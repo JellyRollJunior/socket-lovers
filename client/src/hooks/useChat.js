@@ -1,31 +1,32 @@
 import { useEffect, useState } from 'react';
-import { fetchChats } from '../services/chatApi.js';
+import { fetchChat } from '../services/chatApi.js';
 
-const useChats = () => {
-    const [chats, setChats] = useState([]);
+const useChat = (chatId) => {
+    const [chat, setChat] = useState([]);
     const [isLoading, setIsLoading] = useState(false);
 
     useEffect(() => {
         const abortController = new AbortController();
-        const getChats = async () => {
+        const getChat = async () => {
+            if (!chatId) return;
             try {
                 setIsLoading(true);
-                const data = await fetchChats(abortController.signal);
-                setChats(data);
+                const chat = await fetchChat(chatId, abortController.signal);
+                setChat(chat);
             } catch (error) {
-                // throw error notification
+                // toast error
                 console.log(error);
             } finally {
                 setIsLoading(false);
             }
         };
 
-        getChats();
+        getChat();
 
         return () => abortController.abort();
-    }, []);
+    }, [chatId]);
 
-    return { chats, isLoading };
+    return { chat, isLoading };
 };
 
-export { useChats };
+export { useChat };
