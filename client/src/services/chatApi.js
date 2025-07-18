@@ -13,7 +13,22 @@ const fetchChats = async (signal) => {
         signal,
     });
     return data.chats;
-}
+};
+
+const fetchChat = async (chatId, signal) => {
+    const token = localStorage.getItem('token');
+    if (!token) throw new Error('Token not found. Please login again.');
+    const data = await request(`/chats/${chatId}`, {
+        mode: 'cors',
+        method: 'GET',
+        headers: {
+            'Content-Type': 'application/json',
+            Authorization: `bearer ${token}`,
+        },
+        signal,
+    });
+    return data;
+};
 
 const createChat = async (name, userIds) => {
     const token = localStorage.getItem('token');
@@ -33,4 +48,4 @@ const createChat = async (name, userIds) => {
     return data;
 };
 
-export { fetchChats, createChat };
+export { fetchChats, fetchChat, createChat };

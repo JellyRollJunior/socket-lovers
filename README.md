@@ -68,6 +68,7 @@
     -   create a page folder for all the pages later
 
 -   LATER
+    -   extract token function
     -   handle jwt errors properly on server
     -   refactor statusCode to status
     -   server side error handler
