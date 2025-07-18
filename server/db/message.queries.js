@@ -3,6 +3,31 @@ import { DatabaseError } from '../errors/DatabaseError.js';
 
 const prisma = new PrismaClient();
 
+const getMessages = async (chatId) => {
+    try {
+        const messages = await prisma.message.findMany({
+            where: {
+                chatId,
+            },
+            select: {
+                id: true,
+                content: true,
+                sendTime: true,
+                chatId: true,
+                sender: {
+                    select: {
+                        id: true,
+                        username: true,
+                    },
+                },
+            },
+        });
+        return messages;
+    } catch (error) {
+        throw new DatabaseError('Unable to retrieve messages');
+    }
+};
+
 const createMessage = async (chatId, senderId, content) => {
     try {
         const message = await prisma.message.create({
@@ -18,5 +43,4 @@ const createMessage = async (chatId, senderId, content) => {
     }
 };
 
-export { createMessage };
-
+export { getMessages, createMessage };
