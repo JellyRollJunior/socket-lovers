@@ -6,6 +6,6 @@ const chatRouter = Router();
 
 chatRouter.get('/', authenticateToken, chatController.getChats);
 chatRouter.post('/', authenticateToken, chatController.createChat);
-chatRouter.get('/:chatId', authenticateToken, chatController.getChatMessages);
+chatRouter.get('/:chatId', authenticateToken, chatController.getChat);
 
 export { chatRouter };

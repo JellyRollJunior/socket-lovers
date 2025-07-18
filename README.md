@@ -56,16 +56,21 @@
 
 -   server
 
-    -   create messages
+    -   on socket send_message
+        -   add message to database
 
 -   client
 
+    -   on loading into chat,
+        -   retrieve existing chat messages
+        -   display existing chat messages
     -   extract client socket actions
     -   create a page folder for all the pages later
 
 -   LATER
     -   handle jwt errors properly on server
     -   refactor statusCode to status
+    -   server side error handler
     -   validate input
         -   login
         -   signup

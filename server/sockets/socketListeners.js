@@ -22,11 +22,15 @@ const handleDisconnecting = (socket) => {
         socket.leave(room);
         console.log(`${socket.id} has left room: ${room}`);
     });
-}
+};
 
 const handleDisconnect = (socket) => {
     console.log(`${socket.id} has disconnected`);
-}
+};
 
-
-export { handleSendMessage, handleJoinRoom, handleDisconnecting, handleDisconnect };
+export {
+    handleSendMessage,
+    handleJoinRoom,
+    handleDisconnecting,
+    handleDisconnect,
+};

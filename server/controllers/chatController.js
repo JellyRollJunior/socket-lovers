@@ -23,10 +23,13 @@ const createChat = async (req, res, next) => {
 };
 
 const getChat = async (req, res, next) => {
-    // check if user is authorized to retrieve this chat (he is in the chat)
-    // retrieve the chat by using :chatId param
-    // swag
-    // return the chat
-}
+    try {
+        const { chatId } = req.params;
+        const chat = await messageQueries.getChat(chatId, req.user.id);
+        res.json(chat);
+    } catch (error) {
+        next(error);
+    }
+};
 
 export { getChats, createChat, getChat };
