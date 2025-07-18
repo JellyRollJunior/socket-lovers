@@ -7,7 +7,7 @@ const attachSocketListeners = (io) => {
     io.on('connection', (socket) => {
         console.log(`Connected with socket ID: ${socket.id}`);
 
-        socket.on('send_message', (message) => handleSendMessage(socket, message));
+        socket.on('send_message', (chatId, content) => handleSendMessage(socket, chatId, content));
         socket.on('join_room', (room) => handleJoinRoom(socket, room));
         socket.on('disconnecting', () => handleDisconnecting(socket));
         socket.on('disconnect', () => handleDisconnect(socket));

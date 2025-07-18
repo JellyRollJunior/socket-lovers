@@ -1,8 +1,15 @@
-const handleSendMessage = (socket, message) => {
-    socket.rooms.forEach((room) => {
-        socket.to(room).emit('receive_message', message);
-        console.log(`Emiting message to room: ${room}`)
-    });
+import * as messageQueries from '../db/message.queries.js';
+
+const handleSendMessage = async (socket, chatId, content) => {
+    try {
+        const message = await messageQueries.createMessage(chatId, socket.data.user.id, content);
+        socket.rooms.forEach((room) => {
+            socket.to(room).emit('receive_message', message);
+            console.log(`Emiting message to room: ${room}`);
+        });
+    } catch (error) {
+        console.log(error);
+    }
 };
 
 const handleJoinRoom = (socket, room) => {

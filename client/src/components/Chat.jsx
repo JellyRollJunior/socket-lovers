@@ -12,7 +12,7 @@ const Chat = () => {
     if (!socket) return;
     socket.emit('join_room', chatId);
     socket.on('receive_message', (message) => {
-      setMessages((prev) => [...prev, message]);
+      setMessages((prev) => [...prev, message.content]);
     });
 
     return () => socket.off('receive_message');
@@ -25,7 +25,7 @@ const Chat = () => {
     
     // emit message to server
     if (socket) {
-      socket.emit('send_message', text);
+      socket.emit('send_message', chatId, text);
     }
     setText('');
   };
