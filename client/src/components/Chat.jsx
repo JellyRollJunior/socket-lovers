@@ -14,6 +14,8 @@ const Chat = () => {
     socket.on('receive_message', (message) => {
       setMessages((prev) => [...prev, message]);
     });
+
+    return () => socket.off('receive_message');
   }, [socket, chatId]);
 
   const handleSendMessage = (event) => {

@@ -54,14 +54,11 @@
 
 -   server
     -   create messages
-    -   on join room, remove all rooms except new room to join
 
 -   client
 
     -   extract client socket actions
     -   create a page folder for all the pages later
-    -   retrieve chats by URL
-        -   join room by URL
     
 
 -   LATER
