@@ -1,4 +1,5 @@
 import * as chatQueries from '../db/chat.queries.js';
+import * as messageQueries from '../db/message.queries.js';
 
 const getChats = async (req, res, next) => {
     try {
@@ -21,4 +22,11 @@ const createChat = async (req, res, next) => {
     }
 };
 
-export { getChats, createChat };
+const getChat = async (req, res, next) => {
+    // check if user is authorized to retrieve this chat (he is in the chat)
+    // retrieve the chat by using :chatId param
+    // swag
+    // return the chat
+}
+
+export { getChats, createChat, getChat };

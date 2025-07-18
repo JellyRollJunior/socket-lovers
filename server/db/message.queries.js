@@ -3,26 +3,42 @@ import { DatabaseError } from '../errors/DatabaseError.js';
 
 const prisma = new PrismaClient();
 
-const getMessages = async (chatId) => {
+const getChat = async (chatId, userId) => {
+    // Verify userId has permission to retrieve chat
+    // Retrieve messages
     try {
-        const messages = await prisma.message.findMany({
+        const chat = await prisma.chat.findFirst({
             where: {
-                chatId,
+                id: chatId,
+                users: {
+                    some: {
+                        id: userId,
+                    },
+                },
             },
             select: {
                 id: true,
-                content: true,
-                sendTime: true,
-                chatId: true,
-                sender: {
+                name: true,
+                messages: {
                     select: {
                         id: true,
-                        username: true,
+                        content: true,
+                        sendTime: true,
+                        sender: {
+                            select: {
+                                id: true,
+                                username: true,
+                            }
+                        }
+                    },
+                    orderBy: {
+                        sendTime: 'asc',
                     },
                 },
             },
         });
-        return messages;
+        if (!chat) throw new Error();
+        return chat;
     } catch (error) {
         throw new DatabaseError('Unable to retrieve messages');
     }
@@ -43,4 +59,4 @@ const createMessage = async (chatId, senderId, content) => {
     }
 };
 
-export { getMessages, createMessage };
+export { getChat, createMessage };
