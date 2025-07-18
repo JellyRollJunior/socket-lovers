@@ -1,18 +1,27 @@
 import { useContext, useEffect, useState } from 'react';
 import { SocketContext } from '../contexts/SocketProvider.jsx';
 import { useParams } from 'react-router';
+import { useChat } from '../hooks/useChat.js';
 
 const Chat = () => {
   const socket = useContext(SocketContext);
   const { chatId } = useParams();
+  const { chat } = useChat(chatId);
   const [messages, setMessages] = useState([]);
   const [text, setText] = useState('');
 
+  // Retrieve initial message data
+  useEffect(() => {
+    if (!chat || chat.length == 0) return;
+    setMessages(chat.messages);
+  }, [chat]);
+
+  // Join chat room on load and handle receive_message from server
   useEffect(() => {
     if (!socket) return;
     socket.emit('join_room', chatId);
     socket.on('receive_message', (message) => {
-      setMessages((prev) => [...prev, message.content]);
+      setMessages((prev) => [...prev, message]);
     });
 
     return () => socket.off('receive_message');
@@ -21,8 +30,8 @@ const Chat = () => {
   const handleSendMessage = (event) => {
     event.preventDefault();
     // display message on client
-    setMessages((prev) => [...prev, text]);
-    
+    setMessages((prev) => [...prev, {content: text}]);
+
     // emit message to server
     if (socket) {
       socket.emit('send_message', chatId, text);
@@ -33,9 +42,10 @@ const Chat = () => {
   return (
     <>
       <h2>Messages</h2>
+      <h3>Chat: {chat && chat.name}</h3>
       <ul>
-        {messages.map((message) => (
-          <li>{message}</li>
+        {messages && messages.map((message) => (
+          <li>{message.content}</li>
         ))}
       </ul>
       <form onSubmit={handleSendMessage}>

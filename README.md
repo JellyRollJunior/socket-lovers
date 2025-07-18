@@ -20,13 +20,14 @@
 
 ### Endpoints
 
-| Method | URI     | Function           | Token | Body                                | Notes |
-| ------ | ------- | ------------------ | ----- | ----------------------------------- | ----- |
-| POST   | /signup | Create user        | N     | { username, password}               |       |
-| POST   | /login  | Login user         | N     | { username, password}               |       |
-| GET    | /users  | Retrieve all users | Y     |                                     |       |
-| GET    | /chats  | Retrieve chats     | Y     |                                     |       |
-| POST   | /chats  | Create chat        | Y     | { name, userIds: ['id_1', 'id_2'] } |       |
+| Method | URI            | Function           | Token | Body                                | Notes |
+| ------ | -------------- | ------------------ | ----- | ----------------------------------- | ----- |
+| POST   | /signup        | Create user        | N     | { username, password}               |       |
+| POST   | /login         | Login user         | N     | { username, password}               |       |
+| GET    | /users         | Retrieve all users | Y     |                                     |       |
+| GET    | /chats         | Retrieve chats     | Y     |                                     |       |
+| POST   | /chats         | Create chat        | Y     | { name, userIds: ['id_1', 'id_2'] } |       |
+| GET    | /chats/:chatId | Retrieve chat      | Y     |                                     |       |
 
 | Socket Event    | Arguments      | Use                           |
 | --------------- | -------------- | ----------------------------- |
@@ -61,11 +62,9 @@
 
 -   client
 
-    -   on loading into chat,
-        -   retrieve existing chat messages
-        -   display existing chat messages
     -   extract client socket actions
     -   create a page folder for all the pages later
+    -   TODO: Write a "CREATE MESSAGE OBJECT LIKE ONE ON BACKEND" function & create message object
 
 -   LATER
     -   extract token function
@@ -77,15 +76,13 @@
         -   signup
         -   create chat
 
-
-
-
-
 #### Data
 
 users:
-- usagii: "ffb6b765-e140-489e-b694-a8b40b978145"
-- hachiware: "bdcbf276-85d3-4970-959c-591d2c575fad"
+
+-   usagii: "ffb6b765-e140-489e-b694-a8b40b978145"
+-   hachiware: "bdcbf276-85d3-4970-959c-591d2c575fad"
 
 chats:
-- hachiChat: "8495bfb4-3c4a-4f04-b022-3422f67faf57"
+
+-   hachiChat: "8495bfb4-3c4a-4f04-b022-3422f67faf57"
