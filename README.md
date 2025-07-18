@@ -71,10 +71,15 @@
         -   signup
         -   create chat
 
+
+
+
+
 #### Data
 
-const chat = await createChat('swagstersz', [
-{id: "ffb6b765-e140-489e-b694-a8b40b978145"},
-{id: "bdcbf276-85d3-4970-959c-591d2c575fad"},
-]);
-console.log(chat)
+users:
+- usagii: "ffb6b765-e140-489e-b694-a8b40b978145"
+- hachiware: "bdcbf276-85d3-4970-959c-591d2c575fad"
+
+chats:
+- hachiChat: "8495bfb4-3c4a-4f04-b022-3422f67faf57"
