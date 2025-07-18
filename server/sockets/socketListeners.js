@@ -17,4 +17,16 @@ const handleJoinRoom = (socket, room) => {
     console.log(`${socket.id} joined room ${room}`);
 };
 
-export { handleSendMessage, handleJoinRoom };
+const handleDisconnecting = (socket) => {
+    socket.rooms.forEach((room) => {
+        socket.leave(room);
+        console.log(`${socket.id} has left room: ${room}`);
+    });
+}
+
+const handleDisconnect = (socket) => {
+    console.log(`${socket.id} has disconnected`);
+}
+
+
+export { handleSendMessage, handleJoinRoom, handleDisconnecting, handleDisconnect };

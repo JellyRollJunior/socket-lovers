@@ -28,11 +28,13 @@
 | GET    | /chats  | Retrieve chats     | Y     |                                     |       |
 | POST   | /chats  | Create chat        | Y     | { name, userIds: ['id_1', 'id_2'] } |       |
 
-| Socket Event   | Arguments      | Use               |
-| -------------- | -------------- | ----------------- |
-| 'connection'   | token          | socket connection |
-| 'send_message' | token, message | sending messages  |
-| 'join_room'    | token, chatId  | join chat         |
+| Socket Event    | Arguments      | Use                           |
+| --------------- | -------------- | ----------------------------- |
+| 'connection'    | token          | socket connection             |
+| 'send_message'  | token, message | sending messages              |
+| 'join_room'     | token, chatId  | join chat                     |
+| 'disconnecting' |                | leave rooms before disconnect |
+| 'disconnect'    |                | log id has disconnected       |
 
 ### Learning Outcomes
 
@@ -53,13 +55,13 @@
 ### TODO
 
 -   server
+
     -   create messages
 
 -   client
 
     -   extract client socket actions
     -   create a page folder for all the pages later
-    
 
 -   LATER
     -   handle jwt errors properly on server
