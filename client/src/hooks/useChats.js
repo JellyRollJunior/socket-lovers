@@ -1,18 +1,19 @@
 import { useEffect, useState } from 'react';
-import { fetchUsers } from '../services/userApi.js';
+import { fetchChats } from '../services/chatApi.js';
 
-const useUsers = () => {
-    const [users, setUsers] = useState([]);
+const useChats = () => {
+    const [chats, setChats] = useState([]);
     const [isLoading, setIsLoading] = useState(false);
 
     useEffect(() => {
         const abortController = new AbortController();
-        const getUsers = async () => {
+
+        const getChats = async () => {
             try {
                 setIsLoading(true);
-                const data = await fetchUsers(abortController.signal);
-                setUsers(data.users);
-            } catch(error) {
+                const data = await fetchChats(abortController.signal);
+                setChats(data);
+            } catch (error) {
                 // throw error notification
                 console.log(error);
             } finally {
@@ -20,12 +21,12 @@ const useUsers = () => {
             }
         };
 
-        getUsers();
+        getChats();
 
         return () => abortController.abort();
     }, []);
 
-    return { users, isLoading };
+    return { chats, isLoading };
 };
 
-export { useUsers };
+export { useChats };

@@ -1,9 +1,24 @@
 import { request } from './request.js';
 
-const createChat = (name, userIds) => {
+const fetchChats = async (signal) => {
     const token = localStorage.getItem('token');
     if (!token) throw new Error('Token not found. Please login again.');
-    const data = request('/chats', {
+    const data = await request('/chats', {
+        mode: 'cors',
+        method: 'GET',
+        headers: {
+            'Content-Type': 'application/json',
+            Authorization: `bearer ${token}`,
+        },
+        signal,
+    });
+    return data.chats;
+}
+
+const createChat = async (name, userIds) => {
+    const token = localStorage.getItem('token');
+    if (!token) throw new Error('Token not found. Please login again.');
+    const data = await request('/chats', {
         mode: 'cors',
         method: 'POST',
         headers: {
@@ -18,4 +33,4 @@ const createChat = (name, userIds) => {
     return data;
 };
 
-export { createChat };
+export { fetchChats, createChat };
