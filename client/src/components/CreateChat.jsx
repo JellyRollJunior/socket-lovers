@@ -9,7 +9,7 @@ const CreateChat = () => {
 
   useEffect(() => {
     // set first user as default
-    if (users[0]) setSelectedUsers(users[0].id)
+    if (users && users[0]) setSelectedUsers(users[0].id)
   }, [users])
 
   const handleCreateChat = async (event) => {
@@ -33,7 +33,7 @@ const CreateChat = () => {
           onChange={(event) => setSelectedUsers(event.target.value)}
           required
         >
-          {users.map((user) => (
+          {users && users.map((user) => (
             <option key={user.id} value={user.id}>
               {user.username}
             </option>

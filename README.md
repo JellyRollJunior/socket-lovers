@@ -57,9 +57,6 @@
 
 -   server
 
-    -   on socket send_message
-        -   add message to database
-
 -   client
 
     -   extract client socket actions

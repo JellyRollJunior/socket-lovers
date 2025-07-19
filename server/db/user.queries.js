@@ -18,7 +18,11 @@ const getUserByUsername = async (username) => {
 
 const getUserById = async (id) => {
     try {
-        const user = await prisma.user.findMany({
+        const user = await prisma.user.findFirst({
+            select: {
+                id: true,
+                username: true,
+            },
             where: {
                 id,
             },
