@@ -1,4 +1,6 @@
 import { check } from "express-validator";
+import { validationResult } from 'express-validator';
+import { ValidationError } from '../errors/ValidationError.js';
 const EMPTY_ERROR = 'must not be empty.';
 const CREDENTIAL_LENGTH_ERROR = 'must be between 6 and 24 characters';
 const ARRAY_ERROR = 'must be an array of user ids.';
@@ -33,9 +35,17 @@ const messageValidations = [
         .isLength({ min: 1, max: 250 }).withMessage(`content ${MESSAGE_LENGTH_ERROR}`),
 ]
 
-export { 
+const validateInput = (req) => {
+    const validationErrors = validationResult(req);
+    if (!validationErrors.isEmpty()) {
+        throw new ValidationError(validationErrors.array());
+    }
+};
+
+export {
     userValidation, 
     chatIdValidations, 
     chatValidation, 
-    messageValidations
+    messageValidations,
+    validateInput,
 };
