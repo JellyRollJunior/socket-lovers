@@ -67,7 +67,7 @@
     -   TODO: Write a "CREATE MESSAGE OBJECT LIKE ONE ON BACKEND" function & create message object
 
 -   LATER
-    -   extract token function
+
 
 #### Data
 
