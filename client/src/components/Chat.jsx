@@ -2,9 +2,11 @@ import { useContext, useEffect, useState } from 'react';
 import { SocketContext } from '../contexts/SocketProvider.jsx';
 import { useParams } from 'react-router';
 import { useChat } from '../hooks/useChat.js';
+import { CurrentContext } from '../contexts/CurrentProvider.jsx';
 
 const Chat = () => {
   const socket = useContext(SocketContext);
+  const {id, username} = useContext(CurrentContext);
   const { chatId } = useParams();
   const { chat } = useChat(chatId);
   const [messages, setMessages] = useState([]);
@@ -41,6 +43,7 @@ const Chat = () => {
 
   return (
     <>
+    <h1>{id} {username}</h1>
       <h2>Messages</h2>
       <h3>Chat: {chat && chat.name}</h3>
       <ul>

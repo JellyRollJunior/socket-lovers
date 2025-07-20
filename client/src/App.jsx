@@ -1,10 +1,13 @@
 import { Outlet } from 'react-router';
 import { SocketProvider } from './contexts/SocketProvider.jsx';
+import { CurrentProvider } from './contexts/CurrentProvider.jsx';
 
 function App() {
   return (
     <SocketProvider>
-      <Outlet />
+      <CurrentProvider>
+        <Outlet />
+      </CurrentProvider>
     </SocketProvider>
   );
 }
