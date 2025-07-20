@@ -4,9 +4,22 @@ import { useParams } from 'react-router';
 import { useChat } from '../hooks/useChat.js';
 import { CurrentContext } from '../contexts/CurrentProvider.jsx';
 
+const createMessage = (senderId, username, content) => {
+  const now = new Date().toISOString();
+  return {
+    id: now,
+    content,
+    sendTime: now,
+    sender: {
+      id: senderId,
+      username,
+    },
+  };
+};
+
 const Chat = () => {
   const socket = useContext(SocketContext);
-  const {id, username} = useContext(CurrentContext);
+  const { id, username } = useContext(CurrentContext);
   const { chatId } = useParams();
   const { chat } = useChat(chatId);
   const [messages, setMessages] = useState([]);
@@ -32,7 +45,7 @@ const Chat = () => {
   const handleSendMessage = (event) => {
     event.preventDefault();
     // display message on client
-    setMessages((prev) => [...prev, {content: text}]);
+    setMessages((prev) => [...prev, createMessage(id, username, text)]);
 
     // emit message to server
     if (socket) {
@@ -43,7 +56,6 @@ const Chat = () => {
 
   return (
     <>
-    <h1>{id} {username}</h1>
       <h2>Messages</h2>
       <h3>Chat: {chat && chat.name}</h3>
       <ul>

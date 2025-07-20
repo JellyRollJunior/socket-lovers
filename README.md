@@ -58,16 +58,20 @@
 -   server
 
     -   validate input
+        -   endpoints
+        -   socket
     -   latest message
 
 -   client
 
-    -   extract client socket actions
-    -   create a page folder for all the pages later
-    -   TODO: Write a "CREATE MESSAGE OBJECT LIKE ONE ON BACKEND" function & create message object
 
 -   LATER
-
+    -   create a page folder for all the pages later
+    -   toasts
+    -   handle errors
+        -   token error -> redirect to logini
+        -   other errors -> toast
+            -   display no content found warnings or msth (do when focusing on client)
 
 #### Data
 
