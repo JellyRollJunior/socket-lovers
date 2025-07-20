@@ -1,8 +1,8 @@
 class AuthenticationError extends Error {
-    constructor(statusCode = 401) {
-        super("Unable to authenticate user");
+    constructor(status = 401) {
+        super("Unable to authenticate user. Please log in again");
         this.name = "Authentication Error";
-        this.statusCode = statusCode;
+        this.status = status;
     }
 }
 

@@ -1,8 +1,8 @@
 class DatabaseError extends Error {
-    constructor(message, statusCode = 500) {
+    constructor(message, status = 500) {
         super(message);
         this.name = "Database Error";
-        this.statusCode = statusCode;
+        this.status = status;
     }
 }
 

@@ -24,9 +24,7 @@ const expressRetrieveToken = (req, res, next) => {
         req.token = bearerToken;
         next();
     } else {
-        const error = new Error('Authorization token not found.');
-        error.status = 403;
-        next(error);
+        next(new AuthenticationError());
     }
 };
 
@@ -37,9 +35,7 @@ const expressVerifyToken = (req, res, next) => {
         req.user = data;
         next();
     } catch {
-        const error = new Error('Invalid or expired token.');
-        error.statusCode = 403;
-        next(error);
+        next(new AuthenticationError());
     }
 };
 

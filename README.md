@@ -57,6 +57,9 @@
 
 -   server
 
+    -   validate input
+    -   latest message
+
 -   client
 
     -   extract client socket actions
@@ -65,13 +68,6 @@
 
 -   LATER
     -   extract token function
-    -   handle jwt errors properly on server
-    -   refactor statusCode to status
-    -   server side error handler
-    -   validate input
-        -   login
-        -   signup
-        -   create chat
 
 #### Data
 
