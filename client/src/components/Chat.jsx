@@ -34,7 +34,7 @@ const Chat = () => {
   // Join chat room on load and handle receive_message from server
   useEffect(() => {
     if (!socket) return;
-    socket.emit('join_room', chatId); // implement error callback
+    socket.emit('join_room', chatId, socketErrorCallback);
     socket.on('receive_message', (message) => {
       setMessages((prev) => [...prev, message]);
     });
@@ -49,15 +49,15 @@ const Chat = () => {
 
     // emit message to server
     if (socket) {
-      // TODO: once toast is ready, change callback to toast error
-      socket.emit('send_message', chatId, text, (error) =>
-        console.log(error.message + ' i am a callback!!! yippee')
-      );
+      socket.emit('send_message', chatId, text, socketErrorCallback);
     }
     setText('');
   };
 
-  // socket error callback -> handle token error, 
+  const socketErrorCallback = (error) => {
+    // toast error.message
+    console.log(error.message + ' i am a callback!!! yippee');
+  };
 
   return (
     <>

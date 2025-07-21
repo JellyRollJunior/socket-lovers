@@ -65,9 +65,6 @@
 -   LATER
     -   create a page folder for all the pages later
     -   toasts
-    -   handle errors
-        -   client socket errors
-        -   other errors -> toast
     -   display no content found warnings or msth (do when focusing on client)
 
 #### Data

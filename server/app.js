@@ -4,7 +4,7 @@ import { authRouter } from './routes/authRouter.js';
 import { userRouter } from './routes/userRouter.js';
 import { chatRouter } from './routes/chatRouter.js';
 import { currentRouter } from './routes/currentRouter.js';
-import { error404Handler, errorHandler } from './errors/errorHandler.js';
+import { error404Handler, errorHandler } from './middleware/errorHandler.js';
 
 const app = express();
 app.use(cors());
