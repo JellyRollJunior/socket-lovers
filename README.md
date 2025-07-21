@@ -58,9 +58,6 @@
 
 -   server
 
-    -   latest message
-        -   db
-        -   serve
 
 -   client
     -   client show latest message

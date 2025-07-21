@@ -7,9 +7,14 @@ const createMessage = async (chatId, senderId, content) => {
     try {
         const message = await prisma.message.create({
             data: {
-                content,
-                senderId,
                 chatId,
+                senderId,
+                content,
+                latestMessage: {
+                    connect: {
+                        id: chatId,
+                    },
+                },
             },
         });
         return message;

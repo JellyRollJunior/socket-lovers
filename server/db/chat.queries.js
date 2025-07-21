@@ -13,14 +13,23 @@ const getChats = async (userId) => {
                     },
                 },
             },
-            include: {
+            select: {
+                id: true,
+                name: true,
                 users: {
                     select: {
                         id: true,
                         username: true,
                     },
                 },
-                latestMessage: true,
+                latestMessage: {
+                    select: {
+                        id: true,
+                        content: true,
+                        sendTime: true,
+                        senderId: true,
+                    },
+                },
             },
         });
         return data;
