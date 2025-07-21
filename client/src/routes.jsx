@@ -1,23 +1,14 @@
 import App from './App.jsx';
-import { Chats } from './components/Chats.jsx';
-import { CreateChat } from './components/CreateChat.jsx';
-import { Login } from './components/Login.jsx';
-import { Chat } from './components/Chat.jsx';
+import { Home } from './pages/Home.jsx';
+import { Chat } from './pages/Chat.jsx';
+import { Login } from './pages/Login.jsx';
 
 const routes = [
   {
     path: '/',
     element: <App />,
     children: [
-      {
-        index: true,
-        element: (
-          <>
-            <Chats />
-            <CreateChat />
-          </>
-        ),
-      },
+      { index: true, element: <Home /> },
       { path: '/chats/:chatId', element: <Chat /> },
     ],
   },

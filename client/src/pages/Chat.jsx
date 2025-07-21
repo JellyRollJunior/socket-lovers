@@ -44,12 +44,14 @@ const Chat = () => {
 
   const handleSendMessage = (event) => {
     event.preventDefault();
-    // display message on client
-    setMessages((prev) => [...prev, createMessage(id, username, text)]);
-
-    // emit message to server
     if (socket) {
+      // display message on client
+      setMessages((prev) => [...prev, createMessage(id, username, text)]);
+
+      // emit message to server
       socket.emit('send_message', chatId, text, socketErrorCallback);
+    } else {
+      // toast error sending message
     }
     setText('');
   };
