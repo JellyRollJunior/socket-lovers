@@ -3,11 +3,11 @@ import * as messageQueries from '../db/message.queries.js';
 
 const handleSendMessage = async (socket, chatId, content, callback) => {
     try {
-        if (!chatId || !content) throw Error('Payload error');
+        if (!chatId || !content || content.length > 250 || content.trim().length <= 0) throw Error('Payload error');
         const message = await messageQueries.createMessage(
             chatId,
             socket.data.user.id,
-            content
+            content.trim()
         );
         socket.rooms.forEach((room) => {
             socket.to(room).emit('receive_message', message);
