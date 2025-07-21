@@ -63,7 +63,6 @@
 
 
 -   LATER
-    -   create a page folder for all the pages later
     -   toasts
     -   display no content found warnings or msth (do when focusing on client)
 
