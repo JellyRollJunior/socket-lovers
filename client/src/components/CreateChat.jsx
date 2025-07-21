@@ -1,11 +1,13 @@
 import { useEffect, useState } from 'react';
 import { useUsers } from '../hooks/useUsers.js';
 import { createChat } from '../services/chatApi.js';
+import { useTokenErrorHandler } from '../hooks/useTokenErrorHandler.js';
 
 const CreateChat = () => {
   const { users } = useUsers();
   const [name, setName] = useState('');
   const [selectedUsers, setSelectedUsers] = useState([]);
+  const { handleTokenErrors} = useTokenErrorHandler()
 
   useEffect(() => {
     // set first user as default
@@ -19,8 +21,10 @@ const CreateChat = () => {
       console.log(data);
       // Move user to messages with new chat!
       setName('');
-    } catch {
+    } catch (error) {
+      handleTokenErrors(error);
       // Chat creation failure notification
+      console.log(error)
     }
   };
 

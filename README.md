@@ -60,16 +60,15 @@
 
 
 -   client
-    -   client show latest message
 
 
 -   LATER
     -   create a page folder for all the pages later
     -   toasts
     -   handle errors
-        -   token error -> redirect to logini
+        -   client socket errors
         -   other errors -> toast
-            -   display no content found warnings or msth (do when focusing on client)
+    -   display no content found warnings or msth (do when focusing on client)
 
 #### Data
 

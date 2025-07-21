@@ -34,7 +34,7 @@ const Chat = () => {
   // Join chat room on load and handle receive_message from server
   useEffect(() => {
     if (!socket) return;
-    socket.emit('join_room', chatId);
+    socket.emit('join_room', chatId); // implement error callback
     socket.on('receive_message', (message) => {
       setMessages((prev) => [...prev, message]);
     });
@@ -56,6 +56,8 @@ const Chat = () => {
     }
     setText('');
   };
+
+  // socket error callback -> handle token error, 
 
   return (
     <>

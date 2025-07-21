@@ -1,9 +1,11 @@
 import { useEffect, useState } from 'react';
 import { fetchChat } from '../services/chatApi.js';
+import { useTokenErrorHandler } from './useTokenErrorHandler.js';
 
 const useChat = (chatId) => {
     const [chat, setChat] = useState([]);
     const [isLoading, setIsLoading] = useState(false);
+    const { handleTokenErrors } = useTokenErrorHandler();
 
     useEffect(() => {
         const abortController = new AbortController();
@@ -14,7 +16,8 @@ const useChat = (chatId) => {
                 const chat = await fetchChat(chatId, abortController.signal);
                 setChat(chat);
             } catch (error) {
-                // toast error
+                handleTokenErrors(error);
+                // toast error loading chat
                 console.log(error);
             } finally {
                 setIsLoading(false);
@@ -24,7 +27,7 @@ const useChat = (chatId) => {
         getChat();
 
         return () => abortController.abort();
-    }, [chatId]);
+    }, [chatId, handleTokenErrors]);
 
     return { chat, isLoading };
 };
