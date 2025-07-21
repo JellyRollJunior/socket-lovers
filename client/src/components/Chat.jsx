@@ -49,7 +49,10 @@ const Chat = () => {
 
     // emit message to server
     if (socket) {
-      socket.emit('send_message', chatId, text);
+      // TODO: once toast is ready, change callback to toast error
+      socket.emit('send_message', chatId, null, (error) =>
+        console.log(error.message + ' i am a callback!!! yippee')
+      );
     }
     setText('');
   };
@@ -59,9 +62,7 @@ const Chat = () => {
       <h2>Messages</h2>
       <h3>Chat: {chat && chat.name}</h3>
       <ul>
-        {messages && messages.map((message) => (
-          <li>{message.content}</li>
-        ))}
+        {messages && messages.map((message) => <li>{message.content}</li>)}
       </ul>
       <form onSubmit={handleSendMessage}>
         <input

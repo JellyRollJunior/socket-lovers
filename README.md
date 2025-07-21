@@ -57,8 +57,6 @@
 
 -   server
 
-    -   validate input
-        -   socket
     -   latest message
 
 -   client
