@@ -58,7 +58,6 @@
 -   server
 
     -   validate input
-        -   endpoints
         -   socket
     -   latest message
 

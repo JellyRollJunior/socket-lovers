@@ -1,3 +1,4 @@
+import { validateInput } from '../middleware/validations.js';
 import * as chatQueries from '../db/chat.queries.js';
 import * as messageQueries from '../db/message.queries.js';
 
@@ -13,6 +14,7 @@ const getChats = async (req, res, next) => {
 
 const createChat = async (req, res, next) => {
     try {
+        validateInput(req);
         const userIdArray = [...req.body.userIds, req.user.id];
         const name = req.body.name;
         const chat = await chatQueries.createChat(name, userIdArray);
@@ -24,6 +26,7 @@ const createChat = async (req, res, next) => {
 
 const getChat = async (req, res, next) => {
     try {
+        validateInput(req);
         const { chatId } = req.params;
         const chat = await messageQueries.getChat(chatId, req.user.id);
         res.json(chat);

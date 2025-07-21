@@ -20,7 +20,7 @@ const chatIdValidations = [
         .isUUID().withMessage(`chat id ${UUID_ERROR}`),
 ];
 
-const chatValidation = [
+const chatValidations = [
     check('userIds')
         .isArray().withMessage(`userIds ${ARRAY_ERROR}`),
     check('userIds.*')
@@ -45,7 +45,7 @@ const validateInput = (req) => {
 export {
     userValidation, 
     chatIdValidations, 
-    chatValidation, 
+    chatValidations, 
     messageValidations,
     validateInput,
 };
