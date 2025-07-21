@@ -45,6 +45,7 @@
 
 -   Frontend
     -   Utilizing Socket.io-client to receive message updates
+    -   Extracting API logic away from components (My code is so clean now!)
     -   vite default env variables!
 
 ### Retrospective aka yapping
@@ -58,8 +59,11 @@
 -   server
 
     -   latest message
+        -   db
+        -   serve
 
 -   client
+    -   client show latest message
 
 
 -   LATER

@@ -50,7 +50,7 @@ const Chat = () => {
     // emit message to server
     if (socket) {
       // TODO: once toast is ready, change callback to toast error
-      socket.emit('send_message', chatId, null, (error) =>
+      socket.emit('send_message', chatId, text, (error) =>
         console.log(error.message + ' i am a callback!!! yippee')
       );
     }

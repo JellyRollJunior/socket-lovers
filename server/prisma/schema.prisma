@@ -22,15 +22,19 @@ model Message {
   content  String
   sendTime DateTime @default(now())
 
-  sender   User   @relation(fields: [senderId], references: [id])
-  senderId String
-  chat     Chat   @relation(fields: [chatId], references: [id])
-  chatId   String
+  sender        User   @relation(fields: [senderId], references: [id])
+  senderId      String
+  chat          Chat   @relation(fields: [chatId], references: [id])
+  chatId        String
+  latestMessage Chat?  @relation(name: "latestMessage")
 }
 
 model Chat {
   id   String @id @default(uuid())
   name String
+
+  latestMessage   Message? @relation(name: "latestMessage", fields: [latestMessageId], references: [id])
+  latestMessageId String?  @unique
 
   users    User[]
   messages Message[]
