@@ -14,12 +14,12 @@ const handleSendMessage = async (socket, chatId, content, callback) => {
             console.log(`Emiting message to room: ${room}`);
         });
     } catch (error) {
-        return callback(createSocketError('Unable to send message'));
+        return callback(createSocketError('Unable to send message. Please refresh page'));
     }
 };
 
 const handleJoinRoom = (socket, room, callback) => {
-    if (!room) return callback(createSocketError(`Unable to join room: ${room}`));
+    if (!room) return callback(createSocketError(`Unable to join room id: ${room}`));
     // leave all rooms besides [room: socket.id]
     socket.rooms.forEach((room) => {
         if (room != socket.id) {

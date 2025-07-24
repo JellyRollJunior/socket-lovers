@@ -3,6 +3,7 @@ import { ToastContext } from '../contexts/ToastProvider.jsx';
 import { fetchChat } from '../services/chatApi.js';
 import { useTokenErrorHandler } from './useTokenErrorHandler.js';
 import { SocketContext } from '../contexts/SocketProvider.jsx';
+import { useSocketErrorHandler } from './useSocketErrorHandler.js';
 
 const createMessage = (senderId, username, content) => {
     const now = new Date().toISOString();
@@ -24,6 +25,7 @@ const useChat = (chatId) => {
     const [isLoading, setIsLoading] = useState(false);
     const { handleTokenErrors } = useTokenErrorHandler();
     const { toast } = useContext(ToastContext);
+    const { socketErrorHandler } = useSocketErrorHandler();
 
     // retrieve initial chat
     useEffect(() => {
@@ -62,15 +64,10 @@ const useChat = (chatId) => {
     const sendMessage = (id, username, text) => {
         if (!socket) return;
         // emit message to server
-        socket.emit('send_message', chatId, text, socketErrorCallback);
+        socket.emit('send_message', chatId, text, socketErrorHandler);
 
         // display message on client
         setMessages((prev) => [...prev, createMessage(id, username, text)]);
-    };
-
-    const socketErrorCallback = (error) => {
-        // toast error.message
-        console.log(error.message + ' i am a callback!!! yippee');
     };
 
     return { chat, messages, sendMessage, isLoading };

@@ -7,7 +7,6 @@ import { useJoinRoom } from '../hooks/useJoinRoom.js';
 const Chat = () => {
   const { chatId } = useParams();
   const { id, username } = useContext(CurrentContext);
-  useJoinRoom(chatId);
   const { chat, messages, sendMessage } = useChat(chatId);
   const [text, setText] = useState('');
 
@@ -16,6 +15,9 @@ const Chat = () => {
     sendMessage(id, username, text)
     setText('');
   };
+
+  // join room on mount
+  useJoinRoom(chatId);
 
   return (
     <>

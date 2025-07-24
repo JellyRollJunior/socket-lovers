@@ -59,9 +59,6 @@
 -   server
 
 -   client
-    -   display message through callback? 
-        -   can i send two callbacks?
-    -   extract socket error callback
 
 -   LATER
 
