@@ -10,18 +10,19 @@ const ToastContext = createContext({
 const ToastProvider = ({ children }) => {
   const [toasts, setToasts] = useState([]);
 
-  const toast = useCallback((message, isError = false) => {
+  const toast = useCallback((message, isError = false, isTemp = false) => {
     const toastObject = {
       id: crypto.randomUUID(),
       message,
       isError,
+      isTemp,
     };
     setToasts((prev) => [...prev, toastObject]);
     return toastObject;
   }, []);
 
   const toastTemp = useCallback(async (message, isError = false, ms = 2000) => {
-    const toastObject = toast(message, isError);
+    const toastObject = toast(message, isError, true);
 
     await new Promise((resolve) => setTimeout(resolve, ms));
     deleteToast(toastObject.id);
