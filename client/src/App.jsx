@@ -1,12 +1,17 @@
 import { Outlet } from 'react-router';
 import { SocketProvider } from './contexts/SocketProvider.jsx';
 import { CurrentProvider } from './contexts/CurrentProvider.jsx';
+import { ToastProvider } from './contexts/ToastProvider.jsx';
+import { Toaster } from './components/Toaster.jsx';
 
 function App() {
   return (
     <SocketProvider>
       <CurrentProvider>
-        <Outlet />
+        <ToastProvider>
+          <Toaster />
+          <Outlet />
+        </ToastProvider>
       </CurrentProvider>
     </SocketProvider>
   );
