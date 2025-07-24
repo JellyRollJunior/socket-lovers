@@ -1,4 +1,4 @@
-import { createContext, useState } from 'react';
+import { createContext, useCallback, useState } from 'react';
 
 const ToastContext = createContext({
   toasts: [],
@@ -10,7 +10,7 @@ const ToastContext = createContext({
 const ToastProvider = ({ children }) => {
   const [toasts, setToasts] = useState([]);
 
-  const toast = (message, isError = false) => {
+  const toast = useCallback((message, isError = false) => {
     const toastObject = {
       id: crypto.randomUUID(),
       message,
@@ -18,14 +18,14 @@ const ToastProvider = ({ children }) => {
     };
     setToasts((prev) => [...prev, toastObject]);
     return toastObject;
-  };
+  }, []);
 
-  const toastTemp = async (message, isError = false, ms = 2000) => {
+  const toastTemp = useCallback(async (message, isError = false, ms = 2000) => {
     const toastObject = toast(message, isError);
 
     await new Promise((resolve) => setTimeout(resolve, ms));
     deleteToast(toastObject.id);
-  };
+  }, [toast]);
 
   const deleteToast = (id) => {
     setToasts((prev) => prev.filter((toast) => toast.id != id));

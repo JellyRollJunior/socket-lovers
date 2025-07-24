@@ -62,6 +62,8 @@
     -   display message through callback? 
         -   can i send two callbacks?
     -   toasts
+        -   toast on errors
+        -   toast deletes
 
 -   LATER
 

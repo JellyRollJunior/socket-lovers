@@ -1,4 +1,5 @@
-import { useEffect, useState } from 'react';
+import { useContext, useEffect, useState } from 'react';
+import { ToastContext } from '../contexts/ToastProvider.jsx';
 import { fetchChats } from '../services/chatApi.js';
 import { useTokenErrorHandler } from './useTokenErrorHandler.js';
 
@@ -6,6 +7,7 @@ const useChats = () => {
     const [chats, setChats] = useState([]);
     const [isLoading, setIsLoading] = useState(false);
     const { handleTokenErrors } = useTokenErrorHandler();
+    const { toast } = useContext(ToastContext);
 
     useEffect(() => {
         const abortController = new AbortController();
@@ -16,7 +18,7 @@ const useChats = () => {
                 setChats(data);
             } catch (error) {
                 handleTokenErrors(error);
-                // throw error notification
+                toast('Unable to fetch chats')
                 console.log(error);
             } finally {
                 setIsLoading(false);
@@ -26,7 +28,7 @@ const useChats = () => {
         getChats();
 
         return () => abortController.abort();
-    }, [handleTokenErrors]);
+    }, [handleTokenErrors, toast]);
 
     return { chats, isLoading };
 };
