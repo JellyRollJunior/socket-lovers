@@ -1,31 +1,20 @@
-import { useContext, useEffect, useState } from 'react';
-import { SocketContext } from '../contexts/SocketProvider.jsx';
+import { useContext, useState } from 'react';
 import { useParams } from 'react-router';
 import { useChat } from '../hooks/useChat.js';
 import { CurrentContext } from '../contexts/CurrentProvider.jsx';
+import { useJoinRoom } from '../hooks/useJoinRoom.js';
 
 const Chat = () => {
-  const socket = useContext(SocketContext);
-  const { id, username } = useContext(CurrentContext);
   const { chatId } = useParams();
+  const { id, username } = useContext(CurrentContext);
+  useJoinRoom(chatId);
   const { chat, messages, sendMessage } = useChat(chatId);
   const [text, setText] = useState('');
-
-  // Join chat room on load and handle receive_message from server
-  useEffect(() => {
-    if (!socket) return;
-    socket.emit('join_room', chatId, socketErrorCallback);
-  }, [socket, chatId]);
 
   const handleSendMessage = (event) => {
     event.preventDefault();
     sendMessage(id, username, text)
     setText('');
-  };
-
-  const socketErrorCallback = (error) => {
-    // toast error.message
-    console.log(error.message + ' i am a callback!!! yippee');
   };
 
   return (

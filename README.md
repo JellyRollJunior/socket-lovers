@@ -61,8 +61,6 @@
 -   client
     -   display message through callback? 
         -   can i send two callbacks?
-    -   useChat encapsulate all chat logic
-    -   useJoinRoom 
     -   extract socket error callback
 
 -   LATER
