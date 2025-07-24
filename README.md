@@ -58,13 +58,12 @@
 
 -   server
 
-
 -   client
-
+    -   display message through callback? 
+        -   can i send two callbacks?
+    -   toasts
 
 -   LATER
-    -   toasts
-    -   display no content found warnings or msth (do when focusing on client)
 
 #### Data
 
