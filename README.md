@@ -59,6 +59,7 @@
 -   server
 
 -   client
+    -   extract modal dialog control from chats to home page
     -   home
         -   mobile
             -   chats
