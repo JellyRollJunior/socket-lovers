@@ -59,6 +59,22 @@
 -   server
 
 -   client
+    -   home
+        -   mobile
+            -   chats
+            -   nav
+            -   create chat thingy
+        -   desktop
+            -   nav
+            -   chats
+            -   messages
+    -   messages
+        -   mobile
+            -   messages
+        -   desktop
+            -   nav
+            -   chats
+            -   messages
 
 -   LATER
 
