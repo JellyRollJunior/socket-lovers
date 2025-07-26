@@ -12,7 +12,7 @@ const Chat = () => {
 
   const handleSendMessage = (event) => {
     event.preventDefault();
-    sendMessage(id, username, text)
+    sendMessage(id, username, text);
     setText('');
   };
 
@@ -21,11 +21,17 @@ const Chat = () => {
 
   return (
     <>
-      <h2>Messages</h2>
-      <h3>Chat: {chat && chat.name}</h3>
+      <header className="border-b-1 flex gap-2 border-gray-500 px-4 py-4">
+        <div className="size-14 rounded-full bg-gray-200"></div>
+        <div className="flex flex-col">
+          <h2 className="text-lg font-medium">{chat && chat.name}</h2>
+          <p className="text-align -mt-1 items-start justify-self-start">
+            chat participants username
+          </p>
+        </div>
+      </header>
       <ul>
-        {messages &&
-          messages.map((message) => <li>{message.content}</li>)}
+        {messages && messages.map((message) => <li>{message.content}</li>)}
       </ul>
       <form onSubmit={handleSendMessage}>
         <input

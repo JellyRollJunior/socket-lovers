@@ -58,10 +58,9 @@
 - server
 
 - client
-    - nav
-    - desktop
 
 - LATER
+    - motion
 
 #### Data
 
