@@ -3,7 +3,7 @@ import { SocketProvider } from './contexts/SocketProvider.jsx';
 import { CurrentProvider } from './contexts/CurrentProvider.jsx';
 import { ToastProvider } from './contexts/ToastProvider.jsx';
 import { Toaster } from './components/Toaster.jsx';
-import { Navigation } from './components/Navigation.jsx';
+import { NavigationPageWrapper } from './components/NavigationPageWrapper.jsx';
 
 function App() {
   return (
@@ -11,8 +11,9 @@ function App() {
       <CurrentProvider>
         <ToastProvider>
           <Toaster />
-          <Outlet />
-          <Navigation />
+          <NavigationPageWrapper>
+            <Outlet />
+          </NavigationPageWrapper>
         </ToastProvider>
       </CurrentProvider>
     </SocketProvider>

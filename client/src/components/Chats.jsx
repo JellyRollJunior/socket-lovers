@@ -10,7 +10,7 @@ const Chats = ({ openNewChatModal }) => {
   const { username } = useContext(CurrentContext);
 
   return (
-    <section className="h-full pt-9">
+    <section className="flex h-full flex-col pt-9">
       <header className="flex justify-between pl-5 pr-7">
         <h2 className="text-3xl font-bold">{username}</h2>
         <button className="mt-auto" onClick={openNewChatModal}>
@@ -25,7 +25,7 @@ const Chats = ({ openNewChatModal }) => {
         />
       </div>
       <h3 className="mt-5 pl-4 text-xl font-extrabold">Conversations</h3>
-      <ul className="mt-2 overflow-scroll">
+      <ul className="mt-2 h-auto flex-1 overflow-scroll">
         {chats &&
           chats.map((chat) => (
             <li key={chat.id} className="px-4 py-2">
