@@ -13,13 +13,14 @@ const Chats = ({ openNewChatModal }) => {
       <header className="flex justify-between pl-5 pr-7">
         <h2 className="text-3xl font-bold">{username}</h2>
         <button className="mt-auto" onClick={openNewChatModal}>
-          <img className="w-8" src={newChatIcon} alt="Create new chat icon" />
+          <img className="w-7" src={newChatIcon} alt="Create new chat icon" />
         </button>
       </header>
       <div className="px-3">
         <input
-          className="mt-3 h-11 w-full rounded-md border-2 border-b-black"
+          className="mt-3 h-11 w-full rounded-lg bg-gray-200 pl-3"
           type="text"
+          placeholder='Search'
         />
       </div>
       <h3 className="mt-5 pl-4 text-xl font-extrabold">Conversations</h3>
@@ -31,7 +32,7 @@ const Chats = ({ openNewChatModal }) => {
                 className="flex items-center gap-2"
                 to={`/chats/${chat.id}`}
               >
-                <div className="size-14 rounded-full border-2 border-black"></div>
+                <div className="size-14 rounded-full bg-gray-200"></div>
                 <div className="flex flex-col">
                   <h4 className="text-lg font-medium">{chat.name}</h4>
                   <p className="items-start justify-self-start">

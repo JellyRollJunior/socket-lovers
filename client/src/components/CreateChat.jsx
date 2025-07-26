@@ -33,12 +33,12 @@ const CreateChatForm = ({ cancel }) => {
   return (
     <form className="min-w-2xs flex flex-col" onSubmit={handleCreateChat}>
       <h2 className="mb-1 self-center text-lg font-bold">New Conversation</h2>
-      <hr className='mb-4' />
+      <hr className="mb-4" />
       <label className="mt-2.5 font-bold" htmlFor="user">
         Users
       </label>
       <select
-        className="border-1 h-7 rounded-md border-black"
+        className="border-1 h-8 rounded-md border-gray-400 bg-gray-200 pl-1.5"
         id="user"
         value={selectedUsers}
         onChange={(event) => setSelectedUsers(event.target.value)}
@@ -55,7 +55,7 @@ const CreateChatForm = ({ cancel }) => {
         Conversation name
       </label>
       <input
-        className="border-1 rounded-md border-black"
+        className="border-1 h-8 rounded-md border-gray-400 bg-gray-200 pl-1.5"
         type="text"
         id="name"
         value={name}
@@ -64,9 +64,11 @@ const CreateChatForm = ({ cancel }) => {
         required
       />
       <footer className="mt-8 flex justify-end gap-1.5">
-        <button className="border-1 px-5 py-0.5 rounded-md border-black">Create</button>
+        <button className="border-1 rounded-md border-black px-5 py-0.5">
+          Create
+        </button>
         <button
-        className="border-1 px-5 py-0.5 rounded-md border-black"
+          className="border-1 rounded-md border-black px-5 py-0.5"
           type="button"
           onClick={cancel}
         >
