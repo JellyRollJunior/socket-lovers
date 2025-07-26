@@ -10,7 +10,7 @@ const ToastContext = createContext({
 const ToastProvider = ({ children }) => {
   const [toasts, setToasts] = useState([]);
 
-  const toast = useCallback((message, isError = false, isTemp = false) => {
+  const addToastToList = useCallback((message, isError, isTemp = false) => {
     const toastObject = {
       id: crypto.randomUUID(),
       message,
@@ -21,12 +21,16 @@ const ToastProvider = ({ children }) => {
     return toastObject;
   }, []);
 
+  const toast = useCallback((message, isError = true) => {
+    return addToastToList(message, isError);
+  }, [addToastToList])
+
   const toastTemp = useCallback(async (message, isError = false, ms = 2000) => {
-    const toastObject = toast(message, isError, true);
+    const toastObject = addToastToList(message, isError, true);
 
     await new Promise((resolve) => setTimeout(resolve, ms));
     deleteToast(toastObject.id);
-  }, [toast]);
+  }, [addToastToList]);
 
   const deleteToast = (id) => {
     setToasts((prev) => prev.filter((toast) => toast.id != id));
