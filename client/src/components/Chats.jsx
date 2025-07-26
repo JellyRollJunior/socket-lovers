@@ -1,21 +1,18 @@
-import { useContext, useState } from 'react';
+import { useContext } from 'react';
 import { useChats } from '../hooks/useChats.js';
 import { Link } from 'react-router';
 import { CurrentContext } from '../contexts/CurrentProvider.jsx';
 import newChatIcon from '../assets/svgs/edit-square.svg';
-import { CreateChat } from './CreateChat.jsx';
-import { ModalDialog } from './ModalDialog.jsx';
 
-const Chats = () => {
+const Chats = ({ openNewChatModal }) => {
   const { chats } = useChats();
   const { username } = useContext(CurrentContext);
-  const [isModalOpen, setIsModalOpen] = useState(false);
 
   return (
     <section className="h-full pt-9">
       <header className="flex justify-between pl-5 pr-7">
         <h2 className="text-3xl font-bold">{username}</h2>
-        <button className="mt-auto" onClick={() => setIsModalOpen(true)}>
+        <button className="mt-auto" onClick={openNewChatModal}>
           <img className="w-8" src={newChatIcon} alt="Create new chat icon" />
         </button>
       </header>
@@ -47,12 +44,6 @@ const Chats = () => {
             </li>
           ))}
       </ul>
-      <ModalDialog
-        isOpen={isModalOpen}
-        closeFunction={() => setIsModalOpen(false)}
-      >
-        <CreateChat />
-      </ModalDialog>
     </section>
   );
 };
