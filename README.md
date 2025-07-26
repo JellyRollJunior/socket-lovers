@@ -59,6 +59,7 @@
 
 - client
     - nav
+    - desktop
 
 - LATER
 
