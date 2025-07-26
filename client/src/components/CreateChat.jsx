@@ -4,7 +4,7 @@ import { createChat } from '../services/chatApi.js';
 import { useTokenErrorHandler } from '../hooks/useTokenErrorHandler.js';
 import { ToastContext } from '../contexts/ToastProvider.jsx';
 
-const CreateChatForm = ({ cancel }) => {
+const CreateChatForm = () => {
   const { users } = useUsers();
   const [selectedUsers, setSelectedUsers] = useState([]);
   const [name, setName] = useState('');
@@ -63,16 +63,9 @@ const CreateChatForm = ({ cancel }) => {
         minLength={1}
         required
       />
-      <footer className="mt-8 flex justify-end gap-1.5">
-        <button className="border-1 rounded-md border-black px-5 py-0.5">
+      <footer className="mt-6">
+        <button className="w-full rounded-md bg-blue-400 px-5 py-1.5 text-neutral-100">
           Create
-        </button>
-        <button
-          className="border-1 rounded-md border-black px-5 py-0.5"
-          type="button"
-          onClick={cancel}
-        >
-          Cancel
         </button>
       </footer>
     </form>
