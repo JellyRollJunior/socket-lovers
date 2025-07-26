@@ -1,61 +1,80 @@
-import { useEffect, useState } from 'react';
+import { useContext, useEffect, useState } from 'react';
 import { useUsers } from '../hooks/useUsers.js';
 import { createChat } from '../services/chatApi.js';
 import { useTokenErrorHandler } from '../hooks/useTokenErrorHandler.js';
+import { ToastContext } from '../contexts/ToastProvider.jsx';
 
-const CreateChat = () => {
+const CreateChatForm = ({ cancel }) => {
   const { users } = useUsers();
-  const [name, setName] = useState('');
   const [selectedUsers, setSelectedUsers] = useState([]);
-  const { handleTokenErrors} = useTokenErrorHandler()
+  const [name, setName] = useState('');
+  const { handleTokenErrors } = useTokenErrorHandler();
+  const { toast } = useContext(ToastContext);
 
   useEffect(() => {
     // set first user as default
-    if (users && users[0]) setSelectedUsers(users[0].id)
-  }, [users])
+    if (users && users[0]) setSelectedUsers(users[0].id);
+  }, [users]);
 
   const handleCreateChat = async (event) => {
     event.preventDefault();
     try {
-      const data = await createChat(name,[selectedUsers]);
+      const data = await createChat(name, [selectedUsers]);
       console.log(data);
       // Move user to messages with new chat!
       setName('');
     } catch (error) {
       handleTokenErrors(error);
-      // Chat creation failure notification
-      console.log(error)
+      toast('Unable to create chat');
+      console.log(error);
     }
   };
 
   return (
-    <>
-      <h2>Create chat</h2>
-      <form onSubmit={handleCreateChat}>
-        <select
-          value={selectedUsers}
-          onChange={(event) => setSelectedUsers(event.target.value)}
-          required
-        >
-          {users && users.map((user) => (
+    <form className="min-w-2xs flex flex-col" onSubmit={handleCreateChat}>
+      <h2 className="mb-1 self-center text-lg font-bold">New Conversation</h2>
+      <hr className='mb-4' />
+      <label className="mt-2.5 font-bold" htmlFor="user">
+        Users
+      </label>
+      <select
+        className="border-1 h-7 rounded-md border-black"
+        id="user"
+        value={selectedUsers}
+        onChange={(event) => setSelectedUsers(event.target.value)}
+        required
+      >
+        {users &&
+          users.map((user) => (
             <option key={user.id} value={user.id}>
               {user.username}
             </option>
           ))}
-        </select>
-        <label htmlFor="name">Chat name</label>
-        <input
-          type="text"
-          id="name"
-          value={name}
-          onChange={(event) => setName(event.target.value)}
-          minLength={1}
-          required
-        />
-        <button>Create</button>
-      </form>
-    </>
+      </select>
+      <label className="mt-2.5 font-bold" htmlFor="name">
+        Conversation name
+      </label>
+      <input
+        className="border-1 rounded-md border-black"
+        type="text"
+        id="name"
+        value={name}
+        onChange={(event) => setName(event.target.value)}
+        minLength={1}
+        required
+      />
+      <footer className="mt-8 flex justify-end gap-1.5">
+        <button className="border-1 px-5 py-0.5 rounded-md border-black">Create</button>
+        <button
+        className="border-1 px-5 py-0.5 rounded-md border-black"
+          type="button"
+          onClick={cancel}
+        >
+          Cancel
+        </button>
+      </footer>
+    </form>
   );
 };
 
-export { CreateChat };
+export { CreateChatForm };
