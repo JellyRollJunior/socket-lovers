@@ -34,11 +34,11 @@ const CreateChatForm = () => {
     <form className="min-w-2xs flex flex-col" onSubmit={handleCreateChat}>
       <h2 className="mb-1 self-center text-lg font-bold">New Conversation</h2>
       <hr className="mb-4" />
-      <label className="mt-2.5 font-bold" htmlFor="user">
+      <label className="mt-3 font-bold" htmlFor="user">
         Users
       </label>
       <select
-        className="border-1 h-8 rounded-md border-gray-400 bg-gray-200 pl-1.5"
+        className="border-1 mt-1 h-8 rounded-md border-gray-400 bg-gray-200 pl-1.5"
         id="user"
         value={selectedUsers}
         onChange={(event) => setSelectedUsers(event.target.value)}
@@ -51,11 +51,11 @@ const CreateChatForm = () => {
             </option>
           ))}
       </select>
-      <label className="mt-2.5 font-bold" htmlFor="name">
+      <label className="mt-5 font-bold" htmlFor="name">
         Conversation name
       </label>
       <input
-        className="border-1 h-8 rounded-md border-gray-400 bg-gray-200 pl-1.5"
+        className="border-1 mt-1 h-8 rounded-md border-gray-400 bg-gray-200 pl-1.5"
         type="text"
         id="name"
         value={name}
@@ -63,9 +63,9 @@ const CreateChatForm = () => {
         minLength={1}
         required
       />
-      <footer className="mt-6">
-        <button className="w-full rounded-md bg-blue-400 px-5 py-1.5 text-neutral-100">
-          Create
+      <footer className="mt-8">
+        <button className="w-full rounded-md bg-blue-400 px-5 py-1.5 text-white hover:bg-blue-500">
+          Chat
         </button>
       </footer>
     </form>

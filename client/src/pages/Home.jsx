@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { Chats } from '../components/Chats.jsx';
 import { ModalDialog } from '../components/ModalDialog.jsx';
-import { CreateChatForm } from '../components/CreateChat.jsx';
+import { CreateChatForm } from '../components/CreateChatForm.jsx';
 
 const Home = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
