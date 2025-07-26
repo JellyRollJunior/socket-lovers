@@ -11,10 +11,8 @@ function App() {
       <CurrentProvider>
         <ToastProvider>
           <Toaster />
-          <main className='flex flex-col h-screen'>
-            <Outlet />
-            <Navigation />
-          </main>
+          <Outlet />
+          <Navigation />
         </ToastProvider>
       </CurrentProvider>
     </SocketProvider>
