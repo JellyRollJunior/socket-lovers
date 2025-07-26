@@ -10,10 +10,12 @@ const ModalDialog = ({ isOpen, closeFunction, children }) => {
   }
   return (
     <dialog
-      className="top-1/8 left-1/2 translate-x-[-50%] translate-y-[-50%] rounded-lg"
+      className="top-1/8 left-1/2 flex translate-x-[-50%] translate-y-[-50%] flex-col rounded-lg px-4 pb-4 pt-2"
       ref={modalRef}
     >
-      <button onClick={closeFunction}>CLOSE IT</button>
+      <button className="ml-auto self-end text-2xl" onClick={closeFunction}>
+        ×
+      </button>
       {children}
     </dialog>
   );
