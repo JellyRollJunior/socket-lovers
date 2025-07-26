@@ -29,13 +29,13 @@ const Chats = ({ openNewChatModal }) => {
           chats.map((chat) => (
             <li key={chat.id} className="px-4 py-2">
               <Link
-                className="flex items-center gap-2"
+                className="flex gap-2"
                 to={`/chats/${chat.id}`}
               >
                 <div className="size-14 rounded-full bg-gray-200"></div>
                 <div className="flex flex-col">
                   <h4 className="text-lg font-medium">{chat.name}</h4>
-                  <p className="items-start justify-self-start">
+                  <p className="items-start justify-self-start text-align -mt-1">
                     {chat.latestMessage
                       ? chat.latestMessage.content
                       : 'start the conversation'}

@@ -39,14 +39,13 @@
 
 ### Learning Outcomes
 
--   Backend
+- Backend
+    - Utilizing Socket.io to implement real time chatting
 
-    -   Utilizing Socket.io to implement real time chatting
-
--   Frontend
-    -   Utilizing Socket.io-client to receive message updates
-    -   Extracting API logic away from components (My code is so clean now!)
-    -   vite default env variables!
+- Frontend
+    - Utilizing Socket.io-client to receive message updates
+    - Extracting API logic away from components (My code is so clean now!)
+    - vite default env variables!
 
 ### Retrospective aka yapping
 
@@ -56,36 +55,20 @@
 
 ### TODO
 
--   server
+- server
 
--   client
-    -   extract modal dialog control from chats to home page
-    -   home
-        -   mobile
-            -   chats
-            -   nav
-            -   create chat thingy
-        -   desktop
-            -   nav
-            -   chats
-            -   messages
-    -   messages
-        -   mobile
-            -   messages
-        -   desktop
-            -   nav
-            -   chats
-            -   messages
+- client
+    - nav
 
--   LATER
+- LATER
 
 #### Data
 
 users:
 
--   usagii: "ffb6b765-e140-489e-b694-a8b40b978145"
--   hachiware: "bdcbf276-85d3-4970-959c-591d2c575fad"
+- usagii: "ffb6b765-e140-489e-b694-a8b40b978145"
+- hachiware: "bdcbf276-85d3-4970-959c-591d2c575fad"
 
 chats:
 
--   hachiChat: "8495bfb4-3c4a-4f04-b022-3422f67faf57"
+- hachiChat: "8495bfb4-3c4a-4f04-b022-3422f67faf57"
