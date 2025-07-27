@@ -58,11 +58,11 @@
 - server
 
 - client
-    - login
     - extract styles
         - input (modal + messages + login + signup)
         - buttons ? 
         - icon button ?
+    - how to extract!!! its hard >_>
     - create signup
 
 - LATER
