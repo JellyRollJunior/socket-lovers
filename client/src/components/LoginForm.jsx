@@ -2,6 +2,7 @@ import { useContext, useState } from 'react';
 import { useNavigate } from 'react-router';
 import { ToastContext } from '../contexts/ToastProvider.jsx';
 import { login } from '../services/authApi.js';
+import { LabelledInput } from './LabelledInput.jsx';
 
 const LoginForm = () => {
   const navigate = useNavigate();
@@ -23,34 +24,27 @@ const LoginForm = () => {
 
   return (
     <form
-      className="max-w-2xs mt-12 flex w-full flex-col"
+      className="max-w-2xs mt-9 flex w-full flex-col"
       onSubmit={handleLogin}
     >
-      <input
-        className="border-1 mt-1 h-11 w-full rounded-md border-gray-400 bg-gray-200 pl-1.5"
-        type="text"
-        name="username"
-        id="username"
+      <LabelledInput
+        id="Username"
         value={username}
         onChange={(event) => setUsername(event.target.value)}
-        minLength={1}
+        minlength={1}
         maxLength={36}
-        placeholder="Username"
-        required
+        placeholder="Enter username"
       />
-      <input
-        className="border-1 mt-3 h-11 w-full rounded-md border-gray-400 bg-gray-200 pl-1.5"
-        type="password"
-        name="password"
-        id="password"
+      <LabelledInput
+        id="Password"
         value={password}
         onChange={(event) => setPassword(event.target.value)}
-        minLength={1}
+        minlength={1}
         maxLength={36}
-        placeholder="Password"
-        required
+        type="password"
+        placeholder="Enter password"
       />
-      <div className="mt-8">
+      <div className="mt-4">
         <button className="w-full rounded-xl bg-blue-400 px-5 py-2 text-white hover:bg-blue-500">
           Log In
         </button>

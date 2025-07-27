@@ -62,9 +62,6 @@
         - input (modal + messages + login + signup)
         - buttons ? 
         - icon button ?
-    - create signup
-    - login errors
-    - put labels back on inputs
 
 - LATER
     - motion
