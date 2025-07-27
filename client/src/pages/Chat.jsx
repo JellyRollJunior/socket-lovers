@@ -49,7 +49,7 @@ const Chat = () => {
             placeholder='Message...'
             required
           />
-          <button>Send</button>
+          <button className="font-medium text-blue-500 hover:text-blue-400 hover:underline">Send</button>
         </form>
       </div>
     </>
