@@ -58,14 +58,12 @@
 - server
 
 - client
-    - chat
-        - header
-        - messages
-        - input
+    - login
     - extract styles
         - input (modal + messages + login + signup)
         - buttons ? 
         - icon button ?
+    - create signup
 
 - LATER
     - motion

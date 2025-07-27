@@ -6,7 +6,7 @@ import { ToastContext } from '../contexts/ToastProvider.jsx';
 
 const CreateChatForm = () => {
   const { users } = useUsers();
-  const [selectedUsers, setSelectedUsers] = useState([]);
+  const [selectedUsers, setSelectedUsers] = useState();
   const [name, setName] = useState('');
   const { handleTokenErrors } = useTokenErrorHandler();
   const { toast } = useContext(ToastContext);

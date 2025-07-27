@@ -5,7 +5,7 @@ const Toaster = () => {
   const { toasts, deleteToast } = useContext(ToastContext);
 
   return (
-    <ul className="absolute left-1/2 top-5 flex translate-x-[-50%] flex-col gap-2">
+    <ul className="absolute left-1/2 top-5 flex translate-x-[-50%] flex-col gap-2 items-end">
       {toasts &&
         toasts.map((toast) => (
           <li
