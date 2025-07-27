@@ -31,25 +31,33 @@ const Chat = () => {
             </p>
           </div>
         </header>
-        <main className="flex-1">
-          <ul>
-            {messages && messages.map((message) => <li>{message.content}</li>)}
+        <main className="flex-1 overflow-scroll px-3 pt-3">
+          <ul className='flex flex-col gap-3'>
+            {messages &&
+              messages.map((message) => (
+                <li className="rounded-3xl border-2 border-gray-300 px-5 py-2 w-fit">
+                  <h3>{message.content}</h3>
+                  <p className='text-gray-600 text-sm'>{message.sendTime}</p>
+                </li>
+              ))}
           </ul>
         </main>
         <form
-          className="mx-3 mb-3 flex gap-3 h-11 rounded-3xl border-gray-300 border-2 pl-3 pr-5 items-center"
+          className="mx-3 my-3 flex h-11 items-center gap-3 rounded-3xl border-2 border-gray-300 pl-3 pr-5"
           onSubmit={handleSendMessage}
         >
           <input
-            className="w-full h-7  pl-1"
-            id='text'
+            className="h-7 w-full pl-1"
+            id="text"
             type="text"
             value={text}
             onChange={(event) => setText(event.target.value)}
-            placeholder='Message...'
+            placeholder="Message..."
             required
           />
-          <button className="font-medium text-blue-500 hover:text-blue-400 hover:underline">Send</button>
+          <button className="font-medium text-blue-500 hover:text-blue-400 hover:underline">
+            Send
+          </button>
         </form>
       </div>
     </>
