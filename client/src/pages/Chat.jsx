@@ -1,9 +1,9 @@
-import { useContext, useState } from 'react';
+import { useContext, useEffect, useRef, useState } from 'react';
 import { useParams } from 'react-router';
+import { format } from 'date-fns';
 import { useChat } from '../hooks/useChat.js';
 import { CurrentContext } from '../contexts/CurrentProvider.jsx';
 import { useJoinRoom } from '../hooks/useJoinRoom.js';
-import { format } from 'date-fns';
 
 const Chat = () => {
   const { chatId } = useParams();
@@ -20,11 +20,20 @@ const Chat = () => {
   // join room on mount
   useJoinRoom(chatId);
 
+  // scroll to bottom of messages
+  const scrollContainerRef = useRef(null);
+  useEffect(() => {
+    const element = scrollContainerRef.current;
+    if (element) {
+      element.scrollTop = element.scrollHeight;
+    }
+  }, [messages]);
+
   return (
     <>
       <div className="flex h-full flex-col">
         <header className="border-b-1 flex gap-2 border-gray-500 px-4 py-4">
-          <div className="size-14 rounded-full bg-gray-200"></div>
+          <div className="size-12 rounded-full bg-gray-200"></div>
           <div className="flex flex-col">
             <h2 className="text-lg font-medium">{chat && chat.name}</h2>
             <p className="text-align -mt-1 items-start justify-self-start">
@@ -32,7 +41,10 @@ const Chat = () => {
             </p>
           </div>
         </header>
-        <main className="scrollbar-thin flex-1 overflow-scroll pl-3 pr-4 pt-3">
+        <main
+          ref={scrollContainerRef}
+          className="scrollbar-thin flex-1 overflow-scroll pl-3 pr-4 pt-3"
+        >
           <ul className="flex flex-col gap-3">
             {messages &&
               messages.map((message) => (
@@ -41,7 +53,7 @@ const Chat = () => {
                 >
                   <h3>{message.content}</h3>
                   <p
-                    className={`text-sm text-gray-600 ${message.sender.id == id && 'justify-self-end'}`}
+                    className={`text-sm text-gray-500 ${message.sender.id == id && 'justify-self-end'}`}
                   >
                     {format(new Date(message.sendTime), 'h:mmaaa')}
                   </p>
