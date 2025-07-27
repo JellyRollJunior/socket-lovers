@@ -3,7 +3,7 @@ import { useParams } from 'react-router';
 import { useChat } from '../hooks/useChat.js';
 import { CurrentContext } from '../contexts/CurrentProvider.jsx';
 import { useJoinRoom } from '../hooks/useJoinRoom.js';
-import { Messages } from '../components/Messages.jsx';
+import { Messages } from './Messages.jsx';
 
 const Chat = () => {
   const { chatId } = useParams();

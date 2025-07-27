@@ -58,10 +58,7 @@
 - server
 
 - client
-    - extract styles
-        - buttons ? 
-        - icon button ?
-    - no messages in chat message
+    - display users in list instead of select (?)
 
 - LATER
     - motion
