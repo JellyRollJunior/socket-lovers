@@ -3,6 +3,7 @@ import { useParams } from 'react-router';
 import { useChat } from '../hooks/useChat.js';
 import { CurrentContext } from '../contexts/CurrentProvider.jsx';
 import { useJoinRoom } from '../hooks/useJoinRoom.js';
+import { format } from 'date-fns';
 
 const Chat = () => {
   const { chatId } = useParams();
@@ -39,7 +40,11 @@ const Chat = () => {
                   className={`max-w-4/5 w-fit rounded-3xl border-2 border-gray-200 px-5 py-2 ${message.sender.id == id && 'self-end bg-gray-200'}`}
                 >
                   <h3>{message.content}</h3>
-                  <p className={`text-sm text-gray-600 ${message.sender.id == id && 'justify-self-end'}`}>{message.sendTime}</p>
+                  <p
+                    className={`text-sm text-gray-600 ${message.sender.id == id && 'justify-self-end'}`}
+                  >
+                    {format(new Date(message.sendTime), 'h:mmaaa')}
+                  </p>
                 </li>
               ))}
           </ul>
