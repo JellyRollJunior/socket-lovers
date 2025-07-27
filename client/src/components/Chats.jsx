@@ -10,7 +10,7 @@ const Chats = ({ openNewChatModal }) => {
   const { username } = useContext(CurrentContext);
 
   return (
-    <section className="flex h-full flex-col pt-9">
+    <div className="flex h-full flex-col pt-9">
       <header className="flex justify-between pl-5 pr-7">
         <h2 className="text-3xl font-bold">{username}</h2>
         <button className="mt-auto" onClick={openNewChatModal}>
@@ -43,7 +43,7 @@ const Chats = ({ openNewChatModal }) => {
             </li>
           ))}
       </ul>
-    </section>
+    </div>
   );
 };
 

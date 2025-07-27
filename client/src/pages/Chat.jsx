@@ -21,27 +21,37 @@ const Chat = () => {
 
   return (
     <>
-      <header className="border-b-1 flex gap-2 border-gray-500 px-4 py-4">
-        <div className="size-14 rounded-full bg-gray-200"></div>
-        <div className="flex flex-col">
-          <h2 className="text-lg font-medium">{chat && chat.name}</h2>
-          <p className="text-align -mt-1 items-start justify-self-start">
-            chat participants username
-          </p>
-        </div>
-      </header>
-      <ul>
-        {messages && messages.map((message) => <li>{message.content}</li>)}
-      </ul>
-      <form onSubmit={handleSendMessage}>
-        <input
-          type="text"
-          value={text}
-          onChange={(event) => setText(event.target.value)}
-          required
-        />
-        <button>Send</button>
-      </form>
+      <div className="flex h-full flex-col">
+        <header className="border-b-1 flex gap-2 border-gray-500 px-4 py-4">
+          <div className="size-14 rounded-full bg-gray-200"></div>
+          <div className="flex flex-col">
+            <h2 className="text-lg font-medium">{chat && chat.name}</h2>
+            <p className="text-align -mt-1 items-start justify-self-start">
+              chat participants username
+            </p>
+          </div>
+        </header>
+        <main className="flex-1">
+          <ul>
+            {messages && messages.map((message) => <li>{message.content}</li>)}
+          </ul>
+        </main>
+        <form
+          className="mx-3 mb-3 flex gap-3 h-11 rounded-3xl border-gray-300 border-2 pl-3 pr-5 items-center"
+          onSubmit={handleSendMessage}
+        >
+          <input
+            className="w-full h-7  pl-1"
+            id='text'
+            type="text"
+            value={text}
+            onChange={(event) => setText(event.target.value)}
+            placeholder='Message...'
+            required
+          />
+          <button>Send</button>
+        </form>
+      </div>
     </>
   );
 };
