@@ -1,13 +1,25 @@
-import { useState } from 'react';
+import { useContext, useState } from 'react';
+import { useNavigate } from 'react-router';
+import { signup } from '../services/authApi.js';
+import { ToastContext } from '../contexts/ToastProvider.jsx';
 
 const SignupForm = () => {
+  const navigate = useNavigate();
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
   const [confirmPassword, setConfirmPassword] = useState('');
+  const { toastTemp } = useContext(ToastContext);
 
-  const handleSignup = (event) => {
+  const handleSignup = async (event) => {
     event.preventDefault();
-    console.log('you signed up!');
+    if (password != confirmPassword) return toastTemp('Passwords must match', true);
+    try {
+      await signup(username, password);
+      navigate('/login');
+    } catch(error) {
+      toastTemp(error.message);
+      console.log(error);
+    }
   };
 
   return (
@@ -25,8 +37,8 @@ const SignupForm = () => {
         id="username"
         value={username}
         onChange={(event) => setUsername(event.target.value)}
-        minLength={1}
-        maxLength={36}
+        minLength={6}
+        maxLength={24}
         placeholder="Username"
         required
       />
@@ -37,8 +49,8 @@ const SignupForm = () => {
         id="password"
         value={password}
         onChange={(event) => setPassword(event.target.value)}
-        minLength={1}
-        maxLength={36}
+        minLength={6}
+        maxLength={24}
         placeholder="Password"
         required
       />
@@ -49,8 +61,8 @@ const SignupForm = () => {
         id="confirmPassword"
         value={confirmPassword}
         onChange={(event) => setConfirmPassword(event.target.value)}
-        minLength={1}
-        maxLength={36}
+        minLength={6}
+        maxLength={24}
         placeholder="Confirm password"
         required
       />

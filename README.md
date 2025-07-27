@@ -62,12 +62,14 @@
         - input (modal + messages + login + signup)
         - buttons ? 
         - icon button ?
-    - how to extract!!! its hard >_>
     - create signup
     - login errors
+    - put labels back on inputs
 
 - LATER
     - motion
+    - close modal on create chat
+    - refresh chats on create chat
 
 #### Data
 

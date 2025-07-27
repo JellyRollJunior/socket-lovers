@@ -19,4 +19,23 @@ const login = async (username, password) => {
     return data;
 };
 
-export { login };
+const signup = async (username, password) => {
+    const data = await request(
+        '/signup',
+        {
+            mode: 'cors',
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({
+                username,
+                password,
+            }),
+        },
+        false
+    );
+    return data;
+};
+
+export { login, signup };

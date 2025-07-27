@@ -61,7 +61,7 @@ const createUser = async (username, password) => {
         return user;
     } catch (error) {
         if (error.code == 'P2002') {
-            throw new DatabaseError('Username is already in use.', 409);
+            throw new DatabaseError('Username is already taken.', 409);
         }
         throw new DatabaseError('Unable to insert user');
     }
