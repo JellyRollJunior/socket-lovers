@@ -13,7 +13,7 @@ const LabelledInput = ({
         {id}
       </label>
       <input
-        className={`border-1 h-11 w-full rounded-md border-gray-400 bg-gray-200 pl-1.5`}
+        className="border-1 h-10 w-full rounded-md border-gray-400 bg-gray-200 pl-1.5"
         type={type}
         name={id}
         id={id}

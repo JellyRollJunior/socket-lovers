@@ -59,14 +59,12 @@
 
 - client
     - extract styles
-        - input (modal + messages + login + signup)
         - buttons ? 
         - icon button ?
+    - no messages in chat message
 
 - LATER
     - motion
-    - close modal on create chat
-    - refresh chats on create chat
 
 #### Data
 
