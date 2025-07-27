@@ -31,13 +31,15 @@ const Chat = () => {
             </p>
           </div>
         </header>
-        <main className="flex-1 overflow-scroll px-3 pt-3">
-          <ul className='flex flex-col gap-3'>
+        <main className="flex-1 overflow-scroll pl-3 pr-4 pt-3 scrollbar-thin">
+          <ul className="flex flex-col gap-3">
             {messages &&
               messages.map((message) => (
-                <li className="rounded-3xl border-2 border-gray-300 px-5 py-2 w-fit">
+                <li
+                  className={`w-fit rounded-3xl border-2 border-gray-200 px-5 py-2 ${message.sender.id == id && 'self-end bg-gray-200'}`}
+                >
                   <h3>{message.content}</h3>
-                  <p className='text-gray-600 text-sm'>{message.sendTime}</p>
+                  <p className="text-sm text-gray-600">{message.sendTime}</p>
                 </li>
               ))}
           </ul>
