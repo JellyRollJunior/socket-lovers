@@ -63,9 +63,6 @@
 
 - LATER
     - loading animations
-    - motion
-        - notification fade
-        - page movement?? (maybe not)
     - nav bar show which page you have selected
     - desktop
 

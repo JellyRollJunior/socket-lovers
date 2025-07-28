@@ -17,7 +17,8 @@ const CreateChatForm = () => {
 
   const handleCreateChat = async (event) => {
     event.preventDefault();
-    if (!selectedUsers || selectedUsers == '') return setIsSelectErrorShown(true);
+    if (!selectedUsers || selectedUsers == '')
+      return setIsSelectErrorShown(true);
     try {
       // currently only support selecting one user, so put selected user in an array
       const data = await createChat(name, [selectedUsers]);
@@ -35,20 +36,28 @@ const CreateChatForm = () => {
     <form className="min-w-2xs flex flex-col" onSubmit={handleCreateChat}>
       <h2 className="mb-1 self-center text-lg font-bold">New Conversation</h2>
       <hr className="mb-4" />
-      <label className="font-medium text-gray-500">Users <span className='text-red-400'>{isSelectErrorShown && '— Please select a chat partner'}</span></label>
+      <label className="font-medium text-gray-500">
+        Users{' '}
+        <span className="text-red-400">
+          {isSelectErrorShown && '— Please select a chat partner'}
+        </span>
+      </label>
       <ul className="scrollbar-thin mt-1 h-40 overflow-scroll">
         {users &&
           users.map((user) => (
             <li key={user.id}>
               <button
-                className={`flex h-full w-full gap-2 rounded-sm px-2 py-1 ${selectedUsers == user.id && 'bg-gray-200'}`}
+                className={`flex h-full w-full gap-2 rounded-sm px-2 py-1 hover:bg-gray-200`}
                 onClick={() => setSelectedUsers(user.id)}
-                type='button'
+                type="button"
               >
                 <div className="size-10 shrink-0 rounded-full bg-gray-200"></div>
                 <div className="flex items-center">
                   <h4 className="text-lg font-medium">{user.username}</h4>
                 </div>
+                {selectedUsers == user.id && (
+                  <div className="ml-auto mr-2 flex items-center">☑</div>
+                )}
               </button>
             </li>
           ))}

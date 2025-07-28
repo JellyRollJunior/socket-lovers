@@ -28,7 +28,7 @@ const Chats = ({ openNewChatModal }) => {
       <ul className="mt-2 h-auto flex-1 overflow-scroll">
         {chats &&
           chats.map((chat) => (
-            <li key={chat.id} className="px-4 py-2">
+            <li key={chat.id} className="px-4 py-2 hover:bg-gray-200">
               <Link className="flex gap-2" to={`/chats/${chat.id}`}>
                 <div className="shrink-0 size-14 rounded-full bg-gray-200"></div>
                 <div className="flex flex-col">
