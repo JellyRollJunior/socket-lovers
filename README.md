@@ -58,10 +58,10 @@
 - server
 
 - client
-    - display users in list instead of select (?)
 
 - LATER
     - motion
+    - desktop
 
 #### Data
 
