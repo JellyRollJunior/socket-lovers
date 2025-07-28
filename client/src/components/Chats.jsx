@@ -10,6 +10,7 @@ const Chats = ({ openNewChatModal }) => {
   const { username } = useContext(CurrentContext);
   const [filter, setFilter] = useState('');
 
+  // search filter
   const filteredChats = chats
     ? chats.filter((chat) =>
         chat.name.toLowerCase().includes(filter.trim().toLowerCase())

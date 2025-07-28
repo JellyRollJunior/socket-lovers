@@ -59,7 +59,6 @@
 - server
 
 - client
-    - search
 
 - LATER
     - loading animations

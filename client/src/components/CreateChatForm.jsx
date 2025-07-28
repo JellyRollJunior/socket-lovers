@@ -9,11 +9,19 @@ import { LabelledInput } from './LabelledInput.jsx';
 const CreateChatForm = () => {
   const navigate = useNavigate();
   const { users } = useUsers();
+  const [filter, setFilter] = useState('');
   const [selectedUsers, setSelectedUsers] = useState('');
   const [name, setName] = useState('');
   const [isSelectErrorShown, setIsSelectErrorShown] = useState(false);
   const { handleTokenErrors } = useTokenErrorHandler();
   const { toastTemp } = useContext(ToastContext);
+
+  // search filter
+  const filteredUsers = users
+    ? users.filter((user) =>
+        user.username.toLowerCase().includes(filter.trim().toLowerCase())
+      )
+    : [];
 
   const handleCreateChat = async (event) => {
     event.preventDefault();
@@ -43,8 +51,8 @@ const CreateChatForm = () => {
         </span>
       </label>
       <ul className="scrollbar-thin mt-1 h-40 overflow-scroll">
-        {users &&
-          users.map((user) => (
+        {filteredUsers &&
+          filteredUsers.map((user) => (
             <li key={user.id}>
               <button
                 className={`flex h-full w-full gap-2 rounded-sm px-2 py-1 hover:bg-gray-200`}
@@ -56,12 +64,21 @@ const CreateChatForm = () => {
                   <h4 className="text-lg font-medium">{user.username}</h4>
                 </div>
                 {selectedUsers == user.id && (
-                  <div className="ml-auto mr-2 flex items-center">☑</div>
+                  <div className="ml-auto mr-2 flex items-center text-2xl">
+                    ☑
+                  </div>
                 )}
               </button>
             </li>
           ))}
       </ul>
+      <input
+        className="mt-3 h-11 w-full rounded-lg bg-gray-200 pl-3"
+        type="text"
+        value={filter}
+        onChange={(event) => setFilter(event.target.value)}
+        placeholder="Search"
+      />
       <LabelledInput
         id="Conversation name"
         value={name}
