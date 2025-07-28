@@ -43,6 +43,7 @@ const CreateChatForm = () => {
               <button
                 className={`flex h-full w-full gap-2 rounded-sm px-2 py-1 ${selectedUsers == user.id && 'bg-gray-200'}`}
                 onClick={() => setSelectedUsers(user.id)}
+                type='button'
               >
                 <div className="size-10 shrink-0 rounded-full bg-gray-200"></div>
                 <div className="flex items-center">
