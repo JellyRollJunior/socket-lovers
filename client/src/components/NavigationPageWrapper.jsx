@@ -1,11 +1,15 @@
-import { Link } from 'react-router';
+import { Link, useLocation } from 'react-router';
 import { useLogout } from '../hooks/useLogout.js';
 import logoutIcon from '../assets/svgs/logout.svg';
 import homeIcon from '../assets/svgs/home.svg';
+import homeFilledIcon from '../assets/svgs/home-filled.svg';
 import accountIcon from '../assets/svgs/account.svg';
 
 const NavigationPageWrapper = ({ children }) => {
   const { logout } = useLogout();
+  const location = useLocation();
+
+  const path = location.pathname;
 
   return (
     <>
@@ -16,7 +20,11 @@ const NavigationPageWrapper = ({ children }) => {
         </button>
         <button>
           <Link to="/">
-            <img className="w-8" src={homeIcon} alt="Home icon" />
+            <img
+              className="w-8"
+              src={path == '/' ? homeFilledIcon : homeIcon}
+              alt="Home icon"
+            />
           </Link>
         </button>
         <button>

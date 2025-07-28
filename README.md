@@ -62,8 +62,8 @@
 
 - LATER
     - loading animations
-    - nav bar show which page you have selected
     - desktop
+    - error 404 page
 
 - more features
     - bio
