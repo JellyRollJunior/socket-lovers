@@ -5,10 +5,11 @@ import { useTokenErrorHandler } from '../hooks/useTokenErrorHandler.js';
 import { ToastContext } from '../contexts/ToastProvider.jsx';
 import { useNavigate } from 'react-router';
 import { LabelledInput } from './LabelledInput.jsx';
+import { CreateChatLoadingItems } from './CreateChatLoadingItems.jsx';
 
 const CreateChatForm = () => {
   const navigate = useNavigate();
-  const { users } = useUsers();
+  const { users, isLoading } = useUsers();
   const [filter, setFilter] = useState('');
   const [selectedUsers, setSelectedUsers] = useState('');
   const [name, setName] = useState('');
@@ -51,7 +52,9 @@ const CreateChatForm = () => {
         </span>
       </label>
       <ul className="scrollbar-thin mt-1 h-40 overflow-scroll">
-        {filteredUsers &&
+        {isLoading && <CreateChatLoadingItems numItems={4} />}
+        {!isLoading &&
+          filteredUsers &&
           filteredUsers.map((user) => (
             <li key={user.id}>
               <button

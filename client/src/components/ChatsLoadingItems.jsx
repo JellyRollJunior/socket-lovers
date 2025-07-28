@@ -9,7 +9,7 @@ const ChatLoadingItem = ({
   return (
     <motion.li
       style={{ backgroundColor: color }}
-      className="flex gap-2 bg-white px-4 py-2"
+      className="flex gap-2 px-4 py-2"
       animate={{ backgroundColor: transitionColor }}
       transition={{
         repeat: Infinity,
@@ -20,15 +20,15 @@ const ChatLoadingItem = ({
     >
       <div className="size-14 shrink-0 rounded-full bg-gray-200"></div>
       <div className="flex flex-col justify-center">
-        <h4 className="w-18 h-4 rounded-sm bg-gray-200 text-lg font-medium"></h4>
-        <p className="text-align w-30 mt-1 h-4 items-start justify-self-start rounded-sm bg-gray-200"></p>
+        <h4 className="w-18 h-4 rounded-sm bg-gray-200"></h4>
+        <p className="w-30 mt-1 h-4 items-start justify-self-start rounded-sm bg-gray-200"></p>
       </div>
     </motion.li>
   );
 };
 
 const ChatsLoadingItems = ({
-  numItems,
+  numItems = 1,
   color = '#FFFFFF',
   transitionColor = '#E5E7EB',
 }) => {
