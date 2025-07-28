@@ -62,6 +62,9 @@
 
 - LATER
     - loading animations
+        - chats
+        - users
+        - messages
     - desktop
     - error 404 page
 

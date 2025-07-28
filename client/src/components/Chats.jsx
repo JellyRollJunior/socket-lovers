@@ -1,11 +1,10 @@
 import { useContext, useState } from 'react';
-import { useChats } from '../hooks/useChats.js';
 import { Link } from 'react-router';
-import { CurrentContext } from '../contexts/CurrentProvider.jsx';
 import { format } from 'date-fns';
+import { useChats } from '../hooks/useChats.js';
+import { CurrentContext } from '../contexts/CurrentProvider.jsx';
+import { ChatsLoadingItems } from './ChatsLoadingItems.jsx';
 import newChatIcon from '../assets/svgs/edit-square.svg';
-import { ListLoadingElements } from './ListLoadingElements.jsx';
-
 
 const Chats = ({ openNewChatModal }) => {
   const { chats, isLoading } = useChats();
@@ -38,7 +37,7 @@ const Chats = ({ openNewChatModal }) => {
       </div>
       <h3 className="mt-5 pl-4 text-xl font-extrabold">Conversations</h3>
       <ul className="mt-2 h-auto flex-1 overflow-scroll">
-        {isLoading && <ListLoadingElements numElements={4} />}
+        {isLoading && <ChatsLoadingItems numItems={8} />}
         {!isLoading &&
           filteredChats &&
           filteredChats.map((chat) => (

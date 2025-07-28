@@ -2,7 +2,7 @@ import { Fragment } from 'react';
 // eslint-disable-next-line no-unused-vars
 import { motion } from 'motion/react';
 
-const ListLoadingElement = ({
+const ChatLoadingItem = ({
   color = '#FFFFFF',
   transitionColor = '#E5E7EB',
 }) => {
@@ -27,17 +27,17 @@ const ListLoadingElement = ({
   );
 };
 
-const ListLoadingElements = ({
-  numElements,
+const ChatsLoadingItems = ({
+  numItems,
   color = '#FFFFFF',
   transitionColor = '#E5E7EB',
 }) => {
-  return [...Array(numElements)].map((item, index) => (
+  return [...Array(numItems)].map((item, index) => (
     <Fragment key={index}>
-      <ListLoadingElement color={color} transitionColor={transitionColor} />
-      <ListLoadingElement color={transitionColor} transitionColor={color} />
+      <ChatLoadingItem color={color} transitionColor={transitionColor} />
+      <ChatLoadingItem color={transitionColor} transitionColor={color} />
     </Fragment>
   ));
 };
 
-export { ListLoadingElements };
+export { ChatsLoadingItems };
