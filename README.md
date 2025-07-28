@@ -59,7 +59,6 @@
 
 - client
     - display users in list instead of select (?)
-    - bug: chats latest message too long, will squish profile pic 
 
 - LATER
     - motion
