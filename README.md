@@ -46,6 +46,7 @@
     - Utilizing Socket.io-client to receive message updates
     - Extracting API logic away from components (My code is so clean now!)
     - vite default env variables!
+    - first time using tailwind! I like it :)
 
 ### Retrospective aka yapping
 
@@ -58,10 +59,22 @@
 - server
 
 - client
+    - search
 
 - LATER
+    - loading animations
     - motion
+        - notification fade
+        - page movement?? (maybe not)
+    - nav bar show which page you have selected
     - desktop
+
+- more features
+    - bio
+    - profile picture
+    - chats don't need a name
+    - group chats
+    - public chats (?)
 
 #### Data
 
