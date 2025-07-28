@@ -4,9 +4,11 @@ import { Link } from 'react-router';
 import { CurrentContext } from '../contexts/CurrentProvider.jsx';
 import { format } from 'date-fns';
 import newChatIcon from '../assets/svgs/edit-square.svg';
+import { ListLoadingElements } from './ListLoadingElements.jsx';
+
 
 const Chats = ({ openNewChatModal }) => {
-  const { chats } = useChats();
+  const { chats, isLoading } = useChats();
   const { username } = useContext(CurrentContext);
   const [filter, setFilter] = useState('');
 
@@ -36,7 +38,9 @@ const Chats = ({ openNewChatModal }) => {
       </div>
       <h3 className="mt-5 pl-4 text-xl font-extrabold">Conversations</h3>
       <ul className="mt-2 h-auto flex-1 overflow-scroll">
-        {filteredChats &&
+        {isLoading && <ListLoadingElements numElements={4} />}
+        {!isLoading &&
+          filteredChats &&
           filteredChats.map((chat) => (
             <li key={chat.id} className="px-4 py-2 hover:bg-gray-200">
               <Link className="flex gap-2" to={`/chats/${chat.id}`}>
