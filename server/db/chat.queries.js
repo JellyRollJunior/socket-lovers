@@ -70,6 +70,12 @@ const getChat = async (chatId, userId) => {
                         sendTime: 'asc',
                     },
                 },
+                users: {
+                    select: {
+                        id: true,
+                        username: true,
+                    },
+                },
             },
         });
         if (!chat) throw new Error();

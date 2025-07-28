@@ -36,8 +36,15 @@ const Chat = () => {
           <div className="size-12 rounded-full bg-gray-200"></div>
           <div className="flex flex-col">
             <h2 className="text-lg font-medium">{chat && chat.name}</h2>
-            <p className="text-align -mt-1 items-start justify-self-start">
-              chat participants username
+            <p className="text-align -mt-1 items-start justify-self-start text-sm">
+              {chat &&
+                chat.users &&
+                (chat.users.length == 1
+                  ? chat.users[0].username
+                  : chat.users
+                      .filter((user) => user.id != id)
+                      .map((user) => user.username)
+                      .join(', '))}
             </p>
           </div>
         </header>

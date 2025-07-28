@@ -14,7 +14,7 @@ const Chats = ({ openNewChatModal }) => {
       <header className="flex justify-between pl-5 pr-7">
         <h2 className="text-3xl font-bold">{username}</h2>
         <button className="mt-auto" onClick={openNewChatModal}>
-          <img className="w-7" src={newChatIcon} alt="Create new chat icon" />
+          <img className="w-7" src={newChatIcon} alt="Create new chat button" />
         </button>
       </header>
       <div className="px-3">
