@@ -65,8 +65,6 @@
         - messages
     - desktop
     - error 404 page
-    - extract
-        - users list item
 
 - more features
     - bio

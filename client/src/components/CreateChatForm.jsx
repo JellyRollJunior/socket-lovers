@@ -1,12 +1,12 @@
 import { Fragment, useContext, useState } from 'react';
+import { useNavigate } from 'react-router';
 import { useUsers } from '../hooks/useUsers.js';
 import { createChat } from '../services/chatApi.js';
 import { useTokenErrorHandler } from '../hooks/useTokenErrorHandler.js';
 import { ToastContext } from '../contexts/ToastProvider.jsx';
-import { useNavigate } from 'react-router';
-import { LabelledInput } from './LabelledInput.jsx';
-import { CreateChatLoadingItems } from './CreateChatLoading.jsx';
 import { CreateChatListItem } from './CreateChatListItem.jsx';
+import { CreateChatLoading } from './CreateChatLoading.jsx';
+import { LabelledInput } from './LabelledInput.jsx';
 
 const CreateChatForm = () => {
   const navigate = useNavigate();
@@ -53,7 +53,7 @@ const CreateChatForm = () => {
         </span>
       </label>
       <ul className="scrollbar-thin mt-1 h-40 overflow-scroll">
-        {isLoading && <CreateChatLoadingItems numItems={4} />}
+        {isLoading && <CreateChatLoading />}
         {!isLoading &&
           filteredUsers &&
           filteredUsers.map((user) => (
