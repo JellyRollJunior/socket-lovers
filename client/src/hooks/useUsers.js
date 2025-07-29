@@ -21,7 +21,7 @@ const useUsers = () => {
                 toast('Unable to fetch users');
                 console.log(error);
             } finally {
-                setIsLoading(false);
+                setIsLoading(true);
             }
         };
 

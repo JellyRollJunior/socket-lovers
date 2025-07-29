@@ -1,11 +1,12 @@
-import { useContext, useState } from 'react';
+import { Fragment, useContext, useState } from 'react';
 import { useUsers } from '../hooks/useUsers.js';
 import { createChat } from '../services/chatApi.js';
 import { useTokenErrorHandler } from '../hooks/useTokenErrorHandler.js';
 import { ToastContext } from '../contexts/ToastProvider.jsx';
 import { useNavigate } from 'react-router';
 import { LabelledInput } from './LabelledInput.jsx';
-import { CreateChatLoadingItems } from './CreateChatLoadingItems.jsx';
+import { CreateChatLoadingItems } from './CreateChatLoading.jsx';
+import { CreateChatListItem } from './CreateChatListItem.jsx';
 
 const CreateChatForm = () => {
   const navigate = useNavigate();
@@ -56,23 +57,14 @@ const CreateChatForm = () => {
         {!isLoading &&
           filteredUsers &&
           filteredUsers.map((user) => (
-            <li key={user.id}>
-              <button
-                className={`flex h-full w-full gap-2 rounded-sm px-2 py-1 hover:bg-gray-200`}
+            <Fragment key={user.id}>
+              <CreateChatListItem
+                userId={user.id}
+                username={user.username}
                 onClick={() => setSelectedUsers(user.id)}
-                type="button"
-              >
-                <div className="size-10 shrink-0 rounded-full bg-gray-200"></div>
-                <div className="flex items-center">
-                  <h4 className="text-lg font-medium">{user.username}</h4>
-                </div>
-                {selectedUsers == user.id && (
-                  <div className="ml-auto mr-2 flex items-center text-2xl">
-                    ☑
-                  </div>
-                )}
-              </button>
-            </li>
+                selected={selectedUsers == user.id}
+              />
+            </Fragment>
           ))}
       </ul>
       <input

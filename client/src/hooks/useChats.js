@@ -21,7 +21,7 @@ const useChats = () => {
                 toast('Unable to fetch chats')
                 console.log(error);
             } finally {
-                setIsLoading(true);
+                setIsLoading(false);
             }
         };
 
