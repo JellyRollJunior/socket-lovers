@@ -8,6 +8,13 @@ const Messages = ({ messages }) => {
   // if (last message time - current message time) >= 12hr, show timestamp element
   return (
     <ul className="flex flex-col gap-3">
+      {messages && messages.length == 0 && (
+        <li
+          className={`max-w-4/5 w-fit self-center rounded-3xl border-2 border-gray-100 bg-gray-50 px-5 py-2`}
+        >
+          Start the conversation with a message!
+        </li>
+      )}
       {messages &&
         messages.map((message, index) => (
           <Fragment key={`${message.id}-wrapper`}>
