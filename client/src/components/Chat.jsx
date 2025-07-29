@@ -8,7 +8,7 @@ import { Messages } from './Messages.jsx';
 const Chat = () => {
   const { chatId } = useParams();
   const { id, username } = useContext(CurrentContext);
-  const { chat, messages, sendMessage } = useChat(chatId);
+  const { chat, messages, isLoading, sendMessage } = useChat(chatId);
   const [text, setText] = useState('');
 
   const handleSendMessage = (event) => {
@@ -52,7 +52,7 @@ const Chat = () => {
           ref={scrollContainerRef}
           className="scrollbar-thin flex-1 overflow-scroll pl-3 pr-4 pt-3"
         >
-          <Messages messages={messages} />
+          <Messages messages={messages} isLoading={isLoading} />
         </main>
         <form
           className="mx-3 my-3 flex h-11 items-center gap-3 rounded-3xl border-2 border-gray-300 pl-3 pr-5"

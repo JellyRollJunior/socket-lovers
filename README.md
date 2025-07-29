@@ -61,8 +61,6 @@
 - client
 
 - LATER
-    - loading animations
-        - messages
     - desktop
     - error 404 page
 
