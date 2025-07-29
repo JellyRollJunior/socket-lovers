@@ -63,6 +63,8 @@
 - LATER
     - desktop
     - error 404 page
+        - if logged in (token) -> show error 404 page
+        - if not logged in -> redirect to /login
 
 - more features
     - bio
