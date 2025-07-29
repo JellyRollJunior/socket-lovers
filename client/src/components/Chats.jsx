@@ -1,10 +1,11 @@
-import { useContext, useState } from 'react';
-import { Link } from 'react-router';
-import { format } from 'date-fns';
+import { useContext, useState, Fragment } from 'react';
 import { useChats } from '../hooks/useChats.js';
 import { CurrentContext } from '../contexts/CurrentProvider.jsx';
-import { ChatsLoadingItems } from './ChatsLoadingItems.jsx';
+import { ChatsListItem } from './ChatsListItem.jsx';
+import { ChatsLoading } from './ChatsLoading.jsx';
 import newChatIcon from '../assets/svgs/edit-square.svg';
+// eslint-disable-next-line no-unused-vars
+import { motion } from 'motion/react';
 
 const Chats = ({ openNewChatModal }) => {
   const { chats, isLoading } = useChats();
@@ -36,26 +37,20 @@ const Chats = ({ openNewChatModal }) => {
         />
       </div>
       <h3 className="mt-5 pl-4 text-xl font-extrabold">Conversations</h3>
-      <ul className="mt-2 h-auto flex-1 overflow-scroll">
-        {isLoading && <ChatsLoadingItems numItems={8} />}
+      <motion.ul className="mt-2 h-auto flex-1 overflow-scroll">
+        {isLoading && <ChatsLoading />}
         {!isLoading &&
           filteredChats &&
           filteredChats.map((chat) => (
-            <li key={chat.id} className="px-4 py-2 hover:bg-gray-200">
-              <Link className="flex gap-2" to={`/chats/${chat.id}`}>
-                <div className="size-14 shrink-0 rounded-full bg-gray-200"></div>
-                <div className="flex flex-col">
-                  <h4 className="text-lg font-medium">{chat.name}</h4>
-                  <p className="text-align -mt-1 items-start justify-self-start">
-                    {chat.latestMessage
-                      ? `${chat.latestMessage.content} • ${format(new Date(chat.latestMessage.sendTime), 'MMM do • h:mmaaa')}`
-                      : 'start the conversation'}
-                  </p>
-                </div>
-              </Link>
-            </li>
+            <Fragment key={chat.id}>
+              <ChatsListItem
+                chatId={chat.id}
+                chatName={chat.name}
+                latestMessage={chat.latestMessage}
+              />
+            </Fragment>
           ))}
-      </ul>
+      </motion.ul>
     </div>
   );
 };

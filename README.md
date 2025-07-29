@@ -66,7 +66,6 @@
     - desktop
     - error 404 page
     - extract
-        - chats list item
         - users list item
 
 - more features
