@@ -47,6 +47,7 @@
     - Extracting API logic away from components (My code is so clean now!)
     - vite default env variables!
     - first time using tailwind! I like it :)
+    - Creating my own loading animations! 
 
 ### Retrospective aka yapping
 
@@ -62,9 +63,7 @@
 
 - LATER
     - desktop
-    - error 404 page
-        - if logged in (token) -> show error 404 page
-        - if not logged in -> redirect to /login
+    - chii styling
 
 - more features
     - bio

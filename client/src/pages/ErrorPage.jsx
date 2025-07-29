@@ -11,6 +11,8 @@ const ErrorPage = () => {
         <div className="border-10 mt-32 h-fit flex-col items-center rounded-3xl border-pink-200 bg-pink-100 px-8 py-12 text-xl font-medium text-yellow-800">
           <header className="text-center text-3xl font-bold">
             Ya... Ya.... YAAAA!
+            <br />
+            404
           </header>
           <main>
             <img src={scared} alt="Chiikawa and Hachiware startled" />
