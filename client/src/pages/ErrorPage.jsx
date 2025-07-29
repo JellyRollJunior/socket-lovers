@@ -15,7 +15,11 @@ const ErrorPage = () => {
             404
           </header>
           <main>
-            <img src={scared} alt="Chiikawa and Hachiware startled" />
+            <img
+              className="drop-shadow-pink-custom"
+              src={scared}
+              alt="Chiikawa and Hachiware startled"
+            />
             <p className="mt-2 text-center">
               Oops! We can't find the page you're looking for.
             </p>
