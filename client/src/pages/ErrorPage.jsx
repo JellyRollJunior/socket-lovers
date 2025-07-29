@@ -1,11 +1,14 @@
-import { Link } from 'react-router';
+import { Link, useNavigate } from 'react-router';
 import scared from '../assets/images/chii-hachi-scared.png';
 
 const ErrorPage = () => {
+  const navigate = useNavigate();
+  if (!localStorage.getItem('token')) navigate('/login');
+
   return (
     <>
       <div className="flex h-screen w-screen justify-center bg-blue-100">
-        <div className="mt-32 px-8 py-12 flex-col h-fit items-center rounded-3xl border-10 border-pink-200 bg-pink-100  text-yellow-800 text-xl font-medium">
+        <div className="border-10 mt-32 h-fit flex-col items-center rounded-3xl border-pink-200 bg-pink-100 px-8 py-12 text-xl font-medium text-yellow-800">
           <header className="text-center text-3xl font-bold">
             Ya... Ya.... YAAAA!
           </header>
