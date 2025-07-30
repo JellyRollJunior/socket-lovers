@@ -1,5 +1,5 @@
 import App from './App.jsx';
-import { Home } from './pages/Home.jsx';
+import { HomePage } from './pages/HomePage.jsx';
 import { ChatPage } from './pages/ChatPage.jsx';
 import { Login } from './pages/Login.jsx';
 import { Signup } from './pages/Signup.jsx';
@@ -10,7 +10,7 @@ const routes = [
     path: '/',
     element: <App />,
     children: [
-      { index: true, element: <Home /> },
+      { index: true, element: <HomePage /> },
       { path: '/chats/:chatId', element: <ChatPage /> },
     ],
     errorElement: <ErrorPage />,
