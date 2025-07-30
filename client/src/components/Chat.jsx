@@ -30,49 +30,47 @@ const Chat = () => {
   }, [messages]);
 
   return (
-    <>
-      <div className="flex h-full flex-col">
-        <header className="border-b-1 flex gap-2 border-gray-500 px-4 py-4">
-          <div className="size-12 rounded-full bg-gray-200"></div>
-          <div className="flex flex-col">
-            <h2 className="text-lg font-medium">{chat && chat.name}</h2>
-            <p className="text-align -mt-1 items-start justify-self-start text-sm">
-              {chat &&
-                chat.users &&
-                (chat.users.length == 1
-                  ? chat.users[0].username
-                  : chat.users
-                      .filter((user) => user.id != id)
-                      .map((user) => user.username)
-                      .join(', '))}
-            </p>
-          </div>
-        </header>
-        <main
-          ref={scrollContainerRef}
-          className="scrollbar-thin flex-1 overflow-scroll pl-3 pr-4 pt-3"
-        >
-          <Messages messages={messages} isLoading={isLoading} />
-        </main>
-        <form
-          className="mx-3 my-3 flex h-11 items-center gap-3 rounded-3xl border-2 border-gray-300 pl-3 pr-5"
-          onSubmit={handleSendMessage}
-        >
-          <input
-            className="h-7 w-full pl-1"
-            id="text"
-            type="text"
-            value={text}
-            onChange={(event) => setText(event.target.value)}
-            placeholder="Message..."
-            required
-          />
-          <button className="font-medium text-blue-500 hover:text-blue-400 hover:underline">
-            Send
-          </button>
-        </form>
-      </div>
-    </>
+    <div className="flex h-full flex-col">
+      <header className="border-b-1 flex gap-2 border-gray-500 px-4 py-4">
+        <div className="size-12 rounded-full bg-gray-200"></div>
+        <div className="flex flex-col">
+          <h2 className="text-lg font-medium">{chat && chat.name}</h2>
+          <p className="text-align -mt-1 items-start justify-self-start text-sm">
+            {chat &&
+              chat.users &&
+              (chat.users.length == 1
+                ? chat.users[0].username
+                : chat.users
+                    .filter((user) => user.id != id)
+                    .map((user) => user.username)
+                    .join(', '))}
+          </p>
+        </div>
+      </header>
+      <main
+        ref={scrollContainerRef}
+        className="scrollbar-thin flex-1 overflow-scroll pl-3 pr-4 pt-3"
+      >
+        <Messages messages={messages} isLoading={isLoading} />
+      </main>
+      <form
+        className="mx-3 my-3 flex h-11 items-center gap-3 rounded-3xl border-2 border-gray-300 pl-3 pr-5"
+        onSubmit={handleSendMessage}
+      >
+        <input
+          className="h-7 w-full pl-1"
+          id="text"
+          type="text"
+          value={text}
+          onChange={(event) => setText(event.target.value)}
+          placeholder="Message..."
+          required
+        />
+        <button className="font-medium text-blue-500 hover:text-blue-400 hover:underline">
+          Send
+        </button>
+      </form>
+    </div>
   );
 };
 
