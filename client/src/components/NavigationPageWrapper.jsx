@@ -13,8 +13,7 @@ const NavigationPageWrapper = ({ children }) => {
 
   return (
     <>
-      <div className="pb-13 h-screen">{children}</div>
-      <nav className="h-13 fixed bottom-0 flex w-full justify-around bg-gray-300">
+      <nav className="fixed bottom-0 flex h-12 w-full items-center justify-around bg-gray-300 md:top-0 md:pt-12 md:h-full md:w-12 md:flex-col md:justify-start md:gap-12">
         <button onClick={() => logout()}>
           <img className="w-8" src={logoutIcon} alt="Logout icon" />
         </button>
@@ -31,6 +30,7 @@ const NavigationPageWrapper = ({ children }) => {
           <img className="w-8" src={accountIcon} alt="Profile icon" />
         </button>
       </nav>
+      <div className="h-screen pb-12 md:pb-0 md:pl-12">{children}</div>
     </>
   );
 };

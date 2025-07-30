@@ -63,6 +63,9 @@
 
 - LATER
     - desktop
+        - NAV goes left on screen large
+        - chat page: show home on left side
+        - home page: show chat on right side (with nothing selected basically chat skeleton)
     - chii styling
 
 - more features
