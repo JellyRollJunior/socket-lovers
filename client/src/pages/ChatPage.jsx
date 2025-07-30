@@ -1,7 +1,17 @@
-import { Chat } from "../components/Chat.jsx";
+import { Chat } from '../components/Chat.jsx';
+import { Home } from './Home.jsx';
 
 const ChatPage = () => {
-  return <Chat />;
+  return (
+    <div className="flex h-full">
+      <div className="border-r-1 min-w-xs max-w-sm flex-3 hidden border-gray-500 md:block">
+        <Home />
+      </div>
+      <div className="flex-8">
+        <Chat />
+      </div>
+    </div>
+  );
 };
 
 export { ChatPage };

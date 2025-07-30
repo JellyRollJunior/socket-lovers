@@ -13,11 +13,11 @@ const NavigationPageWrapper = ({ children }) => {
 
   return (
     <>
-      <nav className="fixed bottom-0 flex h-12 w-full items-center justify-around bg-gray-300 md:top-0 md:pt-12 md:h-full md:w-12 md:flex-col md:justify-start md:gap-12">
+      <nav className="fixed bottom-0 flex h-12 w-full items-center justify-around bg-gray-300 md:top-0 md:pt-10 md:h-full md:w-12 md:flex-col md:justify-start md:gap-8">
         <button onClick={() => logout()}>
           <img className="w-8" src={logoutIcon} alt="Logout icon" />
         </button>
-        <button>
+        <button className='md:mt-10'>
           <Link to="/">
             <img
               className="w-8"
