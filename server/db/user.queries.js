@@ -67,4 +67,20 @@ const createUser = async (username, password) => {
     }
 };
 
-export { getUserByUsername, getUserById, getAllUsers, createUser };
+const updateBio = async (id, bio) => {
+    try {
+        const user = await prisma.user.update({
+            data: {
+                bio,
+            },
+            where: {
+                id,
+            },
+        });
+        return user;
+    } catch (error) {
+        throw new DatabaseError('Unable to update bio');
+    }
+};
+
+export { getUserByUsername, getUserById, getAllUsers, createUser, updateBio };

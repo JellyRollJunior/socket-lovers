@@ -25,6 +25,7 @@
 | POST   | /signup        | Create user        | N     | { username, password}               |       |
 | POST   | /login         | Login user         | N     | { username, password}               |       |
 | GET    | /users         | Retrieve all users | Y     |                                     |       |
+| PATCH  | /users/:userId | Update bio         | Y     | { bio }                             |       |
 | GET    | /chats         | Retrieve chats     | Y     |                                     |       |
 | POST   | /chats         | Create chat        | Y     | { name, userIds: ['id_1', 'id_2'] } |       |
 | GET    | /chats/:chatId | Retrieve chat      | Y     |                                     |       |
@@ -47,7 +48,7 @@
     - Extracting API logic away from components (My code is so clean now!)
     - vite default env variables!
     - first time using tailwind! I like it :)
-    - Creating my own loading animations! 
+    - Creating my own loading animations!
 
 ### Retrospective aka yapping
 
@@ -58,18 +59,21 @@
 ### TODO
 
 - server
-
+    - profile
+        - bio
+            - set bio endpoint
+                - patch /users/:userId
+        - profile picture
+            - set profile picture endpoint
+                - upload to supabase
+            - patch /users/:userId/avatar
 - client
 
-- LATER
-    - chii styling
-
 - more features
-    - bio
-    - profile picture
     - chats don't need a name
     - group chats
     - public chats (?)
+    - server 404 response
 
 #### Data
 
