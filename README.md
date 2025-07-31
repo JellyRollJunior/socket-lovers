@@ -49,6 +49,7 @@
     - vite default env variables!
     - first time using tailwind! I like it :)
     - Creating my own loading animations!
+    - Uploading photos with multer -> sharp image resizing -> supabase storage
 
 ### Retrospective aka yapping
 
@@ -65,6 +66,10 @@
                 - patch /users/:userId
         - profile picture
             - set profile picture endpoint
+                - multer to retrieve file from form
+                    - file filter
+                    - resize image with sharp
+                    - limit size
                 - upload to supabase
             - patch /users/:userId/avatar
 - client
