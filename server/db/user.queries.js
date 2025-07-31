@@ -22,6 +22,7 @@ const getUserById = async (id) => {
             select: {
                 id: true,
                 username: true,
+                avatar: true,
             },
             where: {
                 id,
@@ -39,6 +40,7 @@ const getAllUsers = async () => {
             select: {
                 id: true,
                 username: true,
+                avatar: true,
             },
             orderBy: {
                 username: 'asc',
@@ -83,4 +85,27 @@ const updateBio = async (id, bio) => {
     }
 };
 
-export { getUserByUsername, getUserById, getAllUsers, createUser, updateBio };
+const updateAvatar = async (id, avatarSrc) => {
+    try {
+        const user = await prisma.user.update({
+            data: {
+                avatar: avatarSrc,
+            },
+            where: {
+                id,
+            },
+        });
+        return user;
+    } catch (error) {
+        throw new DatabaseError('Unable to update avatar');
+    }
+};
+
+export {
+    getUserByUsername,
+    getUserById,
+    getAllUsers,
+    createUser,
+    updateBio,
+    updateAvatar,
+};
