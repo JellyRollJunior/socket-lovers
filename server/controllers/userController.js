@@ -1,6 +1,6 @@
 import * as userQueries from '../db/user.queries.js';
 import { AuthenticationError } from '../errors/AuthenticationError.js';
-import { AuthorizationError } from '../errors/AuthorizationError.js'
+import { AuthorizationError } from '../errors/AuthorizationError.js';
 
 const getCurrentUser = async (req, res, next) => {
     try {
@@ -21,10 +21,11 @@ const getAllUsers = async (req, res, next) => {
     }
 };
 
-const patchUser = async (req, res, next) => {
+const patchBio = async (req, res, next) => {
     try {
         const { userId } = req.params;
-        if (req.user.id != userId) throw new AuthorizationError('Unable to update bio');
+        if (req.user.id != userId)
+            throw new AuthorizationError('Unable to update bio');
         const bio = req.body.bio;
         const user = await userQueries.updateBio(req.user.id, bio);
         res.json(user);
@@ -33,4 +34,17 @@ const patchUser = async (req, res, next) => {
     }
 };
 
-export { getCurrentUser, getAllUsers, patchUser };
+const patchAvatar = async (req, res, next) => {
+    try {
+        const { userId } = req.params;
+        if (req.user.id != userId)
+            throw new AuthorizationError('Unable to update avatars');
+        // retrieve file
+        // upload to supabase
+        // insert supabase url into db
+    } catch (error) {
+        next(error);
+    }
+};
+
+export { getCurrentUser, getAllUsers, patchBio, patchAvatar };
