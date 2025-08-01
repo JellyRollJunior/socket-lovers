@@ -29,8 +29,15 @@ const getUserById = async (id) => {
                 id,
             },
         });
+        if (!user) throw new Error('404');
         return user;
     } catch (error) {
+        if (error.message == '404') {
+            const notFoundError = new Error('User not found');
+            notFoundError.status = 404;
+            notFoundError.name = 'QueryError';
+            throw notFoundError;
+        }
         throw new DatabaseError('Unable to fetch user');
     }
 };

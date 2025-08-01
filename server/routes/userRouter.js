@@ -6,6 +6,7 @@ import * as userController from '../controllers/userController.js';
 const userRouter = Router();
 
 userRouter.get('/', authenticateToken, userController.getAllUsers);
+userRouter.get('/:userId', authenticateToken, userController.getUser);
 userRouter.patch('/:userId', authenticateToken, userController.patchBio);
 userRouter.patch(
     '/:userId/avatar',

@@ -13,6 +13,16 @@ const getCurrentUser = async (req, res, next) => {
     }
 };
 
+const getUser = async (req, res, next) => {
+    try {
+        const { userId } = req.params;
+        const user = await userQueries.getUserById(userId);
+        res.json(user)
+    } catch (error) {
+        next(error);
+    }
+}
+
 const getAllUsers = async (req, res, next) => {
     try {
         const users = await userQueries.getAllUsers();
@@ -49,4 +59,4 @@ const patchAvatar = async (req, res, next) => {
     }
 };
 
-export { getCurrentUser, getAllUsers, patchBio, patchAvatar };
+export { getCurrentUser, getUser, getAllUsers, patchBio, patchAvatar };
