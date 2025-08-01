@@ -42,7 +42,7 @@ const patchAvatar = async (req, res, next) => {
             throw new AuthorizationError('Unable to update avatars');
         // upload to supabase & insert image url into DB
         const url = await uploadAvatar(req.user.id, req.file);
-        const user = await userQueries.updateAvatar(res.user.id, url);
+        const user = await userQueries.updateAvatar(req.user.id, url);
         res.json(user);
     } catch (error) {
         next(error);

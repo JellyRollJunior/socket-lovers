@@ -23,6 +23,7 @@ const getUserById = async (id) => {
                 id: true,
                 username: true,
                 avatar: true,
+                bio: true,
             },
             where: {
                 id,
@@ -93,6 +94,11 @@ const updateAvatar = async (id, avatarSrc) => {
             },
             where: {
                 id,
+            },
+            select: {
+                id: true,
+                username: true,
+                avatar: true,
             },
         });
         return user;

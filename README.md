@@ -63,21 +63,9 @@
 - server
     - profile
         - bio
-            - set bio endpoint
-                - patch /users/:userId
+            - retrieve bio endpoint (GET /users/:userId)
         - profile picture
-            - set profile picture endpoint
-                - multer to retrieve file from form
-                    - file filter
-                    - resize image with sharp
-                    - limit size
-                - upload to supabase
-                    - configure supabase project
-                        - project URL supabase
-                        - API KEY
-                    - configure supabase connection
-                    - upload to supabase
-            - patch /users/:userId/avatar
+            - resize image with sharp
 - client
 
 - more features
