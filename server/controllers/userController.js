@@ -1,6 +1,7 @@
 import * as userQueries from '../db/user.queries.js';
 import { AuthenticationError } from '../errors/AuthenticationError.js';
 import { AuthorizationError } from '../errors/AuthorizationError.js';
+import { uploadAvatar } from '../middleware/supabase.js';
 
 const getCurrentUser = async (req, res, next) => {
     try {
@@ -39,10 +40,8 @@ const patchAvatar = async (req, res, next) => {
         const { userId } = req.params;
         if (req.user.id != userId)
             throw new AuthorizationError('Unable to update avatars');
-        // retrieve file
-        // upload to supabase
-        const url = 'pretend this is the url to supabase';
-        // insert supabase url into db
+        // upload to supabase & insert image url into DB
+        const url = await uploadAvatar(req.user.id, req.file);
         const user = await userQueries.updateAvatar(res.user.id, url);
         res.json(user);
     } catch (error) {

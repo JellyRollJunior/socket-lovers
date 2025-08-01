@@ -50,6 +50,7 @@
     - first time using tailwind! I like it :)
     - Creating my own loading animations!
     - Uploading photos with multer -> sharp image resizing -> supabase storage
+        - supabase: create project -> get url + key -> create bucket policy -> go nuts
 
 ### Retrospective aka yapping
 
@@ -71,6 +72,11 @@
                     - resize image with sharp
                     - limit size
                 - upload to supabase
+                    - configure supabase project
+                        - project URL supabase
+                        - API KEY
+                    - configure supabase connection
+                    - upload to supabase
             - patch /users/:userId/avatar
 - client
 

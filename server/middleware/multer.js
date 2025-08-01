@@ -1,4 +1,4 @@
-import { multer } from 'multer';
+import multer from 'multer';
 
 const storage = multer.memoryStorage();
 
@@ -13,7 +13,7 @@ const photoFilter = (req, file, cb) => {
     allowedMimeTypes.includes(file.mimetype) ? cb(null, true) : cb(null, false);
 };
 
-const uploadAvatarMulter = multer({
+const retrieveAvatarMulter = multer({
     storage,
     fileFilter: photoFilter,
     limits: {
@@ -21,6 +21,6 @@ const uploadAvatarMulter = multer({
     },
 });
 
-const uploadAvatar = uploadAvatarMulter.single('avatar');
+const retrieveAvatar = retrieveAvatarMulter.single('avatar');
 
-export { uploadAvatar };
+export { retrieveAvatar };
