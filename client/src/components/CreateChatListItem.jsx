@@ -3,6 +3,7 @@ import { motion } from 'motion/react';
 
 const CreateChatListItem = ({
   userId,
+  avatar,
   username,
   onClick,
   selected = false,
@@ -35,7 +36,7 @@ const CreateChatListItem = ({
       </motion.li>
     );
   }
-  
+
   return (
     <li key={userId}>
       <button
@@ -43,7 +44,9 @@ const CreateChatListItem = ({
         onClick={onClick}
         type="button"
       >
-        <div className="size-10 shrink-0 rounded-full bg-gray-200"></div>
+        <div className="border-1 size-10 shrink-0 overflow-clip rounded-full border-gray-400 bg-gray-200">
+          <img className="h-full w-full object-cover" src={avatar} />
+        </div>
         <div className="flex items-center">
           <h4 className="text-lg font-medium">{username}</h4>
         </div>

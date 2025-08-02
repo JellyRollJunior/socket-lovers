@@ -69,14 +69,11 @@
 - server
 
 - client
-    - show avatars
-        - chats
-        - chat
-        - users create
     - View other user profiles modal
     - Profile page
         - edit bio
         - edit avatar
+    - extract avatar circle
 
 - more features
     - chats don't need a name

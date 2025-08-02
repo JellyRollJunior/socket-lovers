@@ -11,11 +11,11 @@ const ErrorPage = () => {
     <>
       <div
         style={{ backgroundImage: `url(${dottedLarge})` }}
-        className="flex h-screen w-screen justify-center bg-blue-100"
+        className="flex h-screen w-screen justify-center items-center bg-blue-100"
       >
         <div
           style={{ backgroundImage: `url(${dottedSmall})` }}
-          className="border-8 mt-32 h-fit flex-col items-center rounded-xl border-pink-200 bg-pink-100 px-4 py-3 text-xl font-medium text-yellow-800"
+          className="border-8 h-fit flex-col items-center rounded-xl border-pink-200 bg-pink-100 px-4 py-3 text-xl font-medium text-yellow-800"
         >
           <header className="inset-shadow-[2px_2px_3px] inset-shadow-white bg-linear-to-b rounded-lg border-2 border-yellow-100 from-orange-50 to-yellow-50 py-2 text-center text-3xl font-bold shadow-[3px_3px_1px] shadow-pink-200">
             Ya... Ya.... YAAAA!

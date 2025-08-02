@@ -47,9 +47,9 @@ const CreateChatForm = () => {
       <h2 className="mb-1 self-center text-lg font-bold">New Conversation</h2>
       <hr className="mb-4" />
       <label className="font-medium text-gray-500">
-        Users{' '}
+        Users
         <span className="text-red-400">
-          {isSelectErrorShown && '— Please select a chat partner'}
+          {isSelectErrorShown && ' — Please select a chat partner'}
         </span>
       </label>
       <ul className="scrollbar-thin mt-1 h-40 overflow-scroll">
@@ -60,6 +60,7 @@ const CreateChatForm = () => {
             <Fragment key={user.id}>
               <CreateChatListItem
                 userId={user.id}
+                avatar={user.avatar}
                 username={user.username}
                 onClick={() => setSelectedUsers(user.id)}
                 selected={selectedUsers == user.id}

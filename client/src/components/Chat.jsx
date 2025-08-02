@@ -29,10 +29,23 @@ const Chat = () => {
     }
   }, [messages]);
 
+  const getChatAvatar = (users) => {
+    let src = '';
+    // use first avatar of chatter id != current id
+    users.forEach((user) => {
+      if (user.avatar && user.id != id) src = user.avatar;
+    });
+    // else if self chat, use avatar from current id
+    if (users.length == 1 && users[0].avatar) src = users[0].avatar;
+    return src;
+  };
+
   return (
     <div className="flex h-full flex-col">
       <header className="border-b-1 flex gap-2 border-gray-500 px-4 py-4">
-        <div className="size-12 rounded-full bg-gray-200"></div>
+        <div className="border-1 size-12 shrink-0 overflow-clip rounded-full border-gray-400 bg-gray-200">
+          <img className="h-full w-full object-cover" src={chat && chat.users ? getChatAvatar(chat.users) : null} />
+        </div>
         <div className="flex flex-col">
           <h2 className="text-lg font-medium">{chat && chat.name}</h2>
           <p className="text-align -mt-1 items-start justify-self-start text-sm">
