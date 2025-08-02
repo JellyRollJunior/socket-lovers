@@ -4,6 +4,7 @@ import {
   Children,
   isValidElement,
   cloneElement,
+  useRef,
 } from 'react';
 import dotMenu from '../assets/svgs/three-dots.svg';
 
@@ -11,13 +12,21 @@ const HeaderMenu = ({ children }) => {
   const [isOpen, setIsOpen] = useState(false);
   const toggleMenu = () => setIsOpen(!isOpen);
   const closeMenu = () => setIsOpen(false);
+  const menuRef = useRef();
 
+  // close menu on click outside
   useEffect(() => {
-    // register listener to close menu if clicking outside menu
+    const handleClickOutside = (event) => {
+      if (menuRef.current && !menuRef.current.contains(event.target)) {
+        closeMenu();
+      }
+    };
+    document.addEventListener('mousedown', handleClickOutside);
+    return () => document.removeEventListener('mousedown', handleClickOutside);
   }, []);
 
   return (
-    <div className="relative ml-auto mt-1 self-center">
+    <div className="relative ml-auto mt-1 self-center" ref={menuRef}>
       <button
         className="rounded-lg py-1 hover:bg-gray-200"
         onClick={toggleMenu}
