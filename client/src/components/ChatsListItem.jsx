@@ -2,6 +2,9 @@ import { format } from 'date-fns';
 import { Link } from 'react-router';
 // eslint-disable-next-line no-unused-vars
 import { motion } from 'motion/react';
+import defaultAvatar from '../assets/images/chii-default-avatar.png';
+import { useContext } from 'react';
+import { CurrentContext } from '../contexts/CurrentProvider.jsx';
 
 const ChatsListItem = ({
   chatId,
@@ -11,6 +14,8 @@ const ChatsListItem = ({
   isLoading = false,
   delay = 0,
 }) => {
+  const { id } = useContext(CurrentContext);
+
   if (isLoading) {
     return (
       <motion.li
@@ -34,16 +39,25 @@ const ChatsListItem = ({
     );
   }
 
-  let src = null;
-  users.forEach((user) => {
-    if (user.avatar) src = user.avatar;
-  });
+  const getChatAvatar = () => {
+    let src = defaultAvatar;
+    // if self chat, use avatar from current id
+    if (users.length == 1 && users[0].avatar) src = users[0].avatar;
+    // else use first avatar of chatter id != current id
+    users.forEach((user) => {
+      if (user.avatar && user.id != id) src = user.avatar;
+    });
+    return src;
+  };
 
   return (
     <li className="px-4 py-2 hover:bg-gray-200">
       <Link className="flex gap-2" to={`/chats/${chatId}`}>
-        <div className="size-14 shrink-0 overflow-clip rounded-full bg-gray-200">
-          {src && <img className="h-full w-full object-cover " src={src} alt="" />}
+        <div className="border-1 size-14 shrink-0 overflow-clip rounded-full border-gray-400 bg-gray-200">
+          <img
+            className="h-full w-full object-cover"
+            src={getChatAvatar()}
+          />
         </div>
         <div className="flex flex-col">
           <h4 className="text-lg font-medium">{chatName}</h4>
