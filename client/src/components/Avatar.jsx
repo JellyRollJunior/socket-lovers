@@ -1,7 +1,7 @@
 import { useContext } from 'react';
 import { CurrentContext } from '../contexts/CurrentProvider.jsx';
 
-const Avatar = ({ users, avatar, size = 14 }) => {
+const Avatar = ({ users, avatar, size = 3 }) => {
   const { id } = useContext(CurrentContext);
 
   let src = null;
@@ -16,7 +16,8 @@ const Avatar = ({ users, avatar, size = 14 }) => {
 
   return (
     <div
-      className={`border-1 size-${size} shrink-0 overflow-clip rounded-full border-gray-400 bg-gray-200`}
+      style={{ height: `${size}rem`, width: `${size}rem` }}
+      className={`border-1 shrink-0 overflow-clip rounded-full border-gray-400 bg-gray-200`}
     >
       <img className="h-full w-full object-cover" src={avatar ? avatar : src} />
     </div>

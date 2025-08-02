@@ -43,7 +43,7 @@ const Chat = () => {
   return (
     <div className="flex h-full flex-col">
       <header className="border-b-1 flex gap-2 border-gray-500 px-4 py-4">
-        <Avatar users={chat ? chat.users : null} size={12} />
+        <Avatar users={chat ? chat.users : null} size={3} />
         <div className="flex flex-col">
           <h2 className="text-lg font-medium">{chat && chat.name}</h2>
           <p className="text-align -mt-1 items-start justify-self-start text-sm">
@@ -74,7 +74,7 @@ const Chat = () => {
           Send
         </button>
       </form>
-      <ProfileModal isOpen={false} closeFunction={() => {}} userId={chatters[0] && chatters[0].id} />
+      <ProfileModal isOpen={true} closeFunction={() => {}} userId={chatters[0] ? chatters[0].id : null} />
     </div>
   );
 };

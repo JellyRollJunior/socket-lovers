@@ -38,7 +38,7 @@ const ChatsListItem = ({
   return (
     <li className="px-4 py-2 hover:bg-gray-200">
       <Link className="flex gap-2" to={`/chats/${chatId}`}>
-        <Avatar users={users} size={14} />
+        <Avatar users={users} />
         <div className="flex flex-col">
           <h4 className="text-lg font-medium">{chatName}</h4>
           <p className="text-align -mt-1 items-start justify-self-start">

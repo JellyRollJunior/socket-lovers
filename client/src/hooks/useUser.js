@@ -10,6 +10,7 @@ const useUser = (userId) => {
     const { toast } = useContext(ToastContext);
 
     useEffect(() => {
+        if (!userId) return;
         const abortController = new AbortController();
 
         const fetchUserData = async () => {
