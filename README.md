@@ -73,6 +73,8 @@
     - Profile page
         - edit bio
         - edit avatar
+    - close create chat on creating chat
+    - refresh aside on create chat
 
 - more features
     - chats don't need a name

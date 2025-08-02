@@ -5,6 +5,7 @@ import { CurrentContext } from '../contexts/CurrentProvider.jsx';
 import { useJoinRoom } from '../hooks/useJoinRoom.js';
 import { Avatar } from './Avatar.jsx';
 import { Messages } from './Messages.jsx';
+import { ProfileModal } from './ProfileModal.jsx';
 
 const Chat = () => {
   const { chatId } = useParams();
@@ -30,6 +31,14 @@ const Chat = () => {
     }
   }, [messages]);
 
+  // get other chatters
+  let chatters = [];
+  if (chat && chat.users) {
+    chatters =
+      chat.users.length == 1
+        ? [chat.users[0]]
+        : chat.users.filter((user) => user.id != id);
+  }
 
   return (
     <div className="flex h-full flex-col">
@@ -38,14 +47,7 @@ const Chat = () => {
         <div className="flex flex-col">
           <h2 className="text-lg font-medium">{chat && chat.name}</h2>
           <p className="text-align -mt-1 items-start justify-self-start text-sm">
-            {chat &&
-              chat.users &&
-              (chat.users.length == 1
-                ? chat.users[0].username
-                : chat.users
-                    .filter((user) => user.id != id)
-                    .map((user) => user.username)
-                    .join(', '))}
+            {chatters.map((user) => user.username).join(', ')}
           </p>
         </div>
       </header>
@@ -72,6 +74,7 @@ const Chat = () => {
           Send
         </button>
       </form>
+      <ProfileModal isOpen={false} closeFunction={() => {}} userId={chatters[0] && chatters[0].id} />
     </div>
   );
 };
