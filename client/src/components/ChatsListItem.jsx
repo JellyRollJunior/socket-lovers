@@ -1,10 +1,9 @@
+import { useContext } from 'react';
 import { format } from 'date-fns';
 import { Link } from 'react-router';
+import { CurrentContext } from '../contexts/CurrentProvider.jsx';
 // eslint-disable-next-line no-unused-vars
 import { motion } from 'motion/react';
-import defaultAvatar from '../assets/images/chii-default-avatar.png';
-import { useContext } from 'react';
-import { CurrentContext } from '../contexts/CurrentProvider.jsx';
 
 const ChatsListItem = ({
   chatId,
@@ -40,13 +39,13 @@ const ChatsListItem = ({
   }
 
   const getChatAvatar = () => {
-    let src = defaultAvatar;
-    // if self chat, use avatar from current id
-    if (users.length == 1 && users[0].avatar) src = users[0].avatar;
-    // else use first avatar of chatter id != current id
+    let src = '';
+    // use first avatar of chatter id != current id
     users.forEach((user) => {
       if (user.avatar && user.id != id) src = user.avatar;
     });
+    // else if self chat, use avatar from current id
+    if (users.length == 1 && users[0].avatar) src = users[0].avatar;
     return src;
   };
 
