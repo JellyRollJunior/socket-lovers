@@ -20,6 +20,7 @@ const getChats = async (userId) => {
                     select: {
                         id: true,
                         username: true,
+                        avatar: true,
                     },
                 },
                 latestMessage: {
@@ -63,6 +64,7 @@ const getChat = async (chatId, userId) => {
                             select: {
                                 id: true,
                                 username: true,
+                                avatar: true,
                             },
                         },
                     },

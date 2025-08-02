@@ -6,6 +6,7 @@ import { motion } from 'motion/react';
 const ChatsListItem = ({
   chatId,
   chatName,
+  users,
   latestMessage,
   isLoading = false,
   delay = 0,
@@ -33,10 +34,17 @@ const ChatsListItem = ({
     );
   }
 
+  let src = null;
+  users.forEach((user) => {
+    if (user.avatar) src = user.avatar;
+  });
+
   return (
     <li className="px-4 py-2 hover:bg-gray-200">
       <Link className="flex gap-2" to={`/chats/${chatId}`}>
-        <div className="size-14 shrink-0 rounded-full bg-gray-200"></div>
+        <div className="size-14 shrink-0 overflow-clip rounded-full bg-gray-200">
+          {src && <img className="h-full w-full object-cover " src={src} alt="" />}
+        </div>
         <div className="flex flex-col">
           <h4 className="text-lg font-medium">{chatName}</h4>
           <p className="text-align -mt-1 items-start justify-self-start">

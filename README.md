@@ -20,15 +20,18 @@
 
 ### Endpoints
 
-| Method | URI            | Function           | Token | Body                                | Notes |
-| ------ | -------------- | ------------------ | ----- | ----------------------------------- | ----- |
-| POST   | /signup        | Create user        | N     | { username, password}               |       |
-| POST   | /login         | Login user         | N     | { username, password}               |       |
-| GET    | /users         | Retrieve all users | Y     |                                     |       |
-| PATCH  | /users/:userId | Update bio         | Y     | { bio }                             |       |
-| GET    | /chats         | Retrieve chats     | Y     |                                     |       |
-| POST   | /chats         | Create chat        | Y     | { name, userIds: ['id_1', 'id_2'] } |       |
-| GET    | /chats/:chatId | Retrieve chat      | Y     |                                     |       |
+| Method | URI                   | Function               | Token | Body                                | Notes |
+| ------ | --------------------- | ---------------------- | ----- | ----------------------------------- | ----- |
+| POST   | /signup               | Create user            | N     | { username, password}               |       |
+| POST   | /login                | Login user             | N     | { username, password}               |       |
+| GET    | /current              | Retrieve current user  | Y     |                                     |       |
+| GET    | /users                | Retrieve all users     | Y     |                                     |       |
+| GET    | /users/:userId        | Retrieve user data     | Y     |                                     |       |
+| PATCH  | /users/:userId        | Update bio             | Y     | { bio }                             |       |
+| PATCH  | /users/:userId/avatar | Update profile picture | Y     | { avatar }                          |       |
+| GET    | /chats                | Retrieve chats         | Y     |                                     |       |
+| POST   | /chats                | Create chat            | Y     | { name, userIds: ['id_1', 'id_2'] } |       |
+| GET    | /chats/:chatId        | Retrieve chat          | Y     |                                     |       |
 
 | Socket Event    | Arguments      | Use                           |
 | --------------- | -------------- | ----------------------------- |
@@ -42,9 +45,9 @@
 
 - Backend
     - Utilizing Socket.io to implement real time chatting
-    - Uploading profile pictures 
+    - Uploading profile pictures
         - Retrieve photo from form with multer
-        - Resize, compress, and reformat the image to webp with sharp 
+        - Resize, compress, and reformat the image to webp with sharp
         - Store on supabase with supabase storage
             - supabase: create project -> get url + key -> create bucket policy -> go nuts
 
@@ -64,10 +67,13 @@
 ### TODO
 
 - server
-    - profile
-        - profile picture
-            - resize image with sharp
+
 - client
+    - show avatars
+    - View other user profiles modal
+    - Profile page
+        - edit bio
+        - edit avatar
 
 - more features
     - chats don't need a name
