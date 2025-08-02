@@ -1,3 +1,4 @@
+import { Avatar } from './Avatar.jsx';
 // eslint-disable-next-line no-unused-vars
 import { motion } from 'motion/react';
 
@@ -44,9 +45,7 @@ const CreateChatListItem = ({
         onClick={onClick}
         type="button"
       >
-        <div className="border-1 size-10 shrink-0 overflow-clip rounded-full border-gray-400 bg-gray-200">
-          <img className="h-full w-full object-cover" src={avatar} />
-        </div>
+        <Avatar avatar={avatar} size={14} />
         <div className="flex items-center">
           <h4 className="text-lg font-medium">{username}</h4>
         </div>

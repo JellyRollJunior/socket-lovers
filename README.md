@@ -73,7 +73,6 @@
     - Profile page
         - edit bio
         - edit avatar
-    - extract avatar circle
 
 - more features
     - chats don't need a name
