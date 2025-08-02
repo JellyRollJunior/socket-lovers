@@ -7,6 +7,7 @@ import { Avatar } from './Avatar.jsx';
 import { Messages } from './Messages.jsx';
 import { ProfileModal } from './ProfileModal.jsx';
 import { HeaderMenu } from './HeaderMenu.jsx';
+import { HeaderMenuItem } from './HeaderMenuItem.jsx';
 
 const Chat = () => {
   const { chatId } = useParams();
@@ -57,7 +58,7 @@ const Chat = () => {
           </p>
         </div>
         <HeaderMenu>
-          
+          <HeaderMenuItem label='View profile' onClick={openProfileModal} />
         </HeaderMenu>
       </header>
       <main

@@ -1,9 +1,20 @@
-import { useState } from 'react';
+import {
+  useEffect,
+  useState,
+  Children,
+  isValidElement,
+  cloneElement,
+} from 'react';
 import dotMenu from '../assets/svgs/three-dots.svg';
 
 const HeaderMenu = ({ children }) => {
   const [isOpen, setIsOpen] = useState(false);
   const toggleMenu = () => setIsOpen(!isOpen);
+  const closeMenu = () => setIsOpen(false);
+
+  useEffect(() => {
+    // register listener to close menu if clicking outside menu
+  }, []);
 
   return (
     <div className="relative ml-auto mt-1 self-center">
@@ -14,8 +25,11 @@ const HeaderMenu = ({ children }) => {
         <img src={dotMenu} />
       </button>
       {isOpen && (
-        <ul className="border-1 top-1/1 absolute right-0 border-black bg-gray-200">
-          {children}
+        <ul className="top-1/1 absolute right-0">
+          {/* Pass close menu prop to children */}
+          {Children.map(children, (child) =>
+            isValidElement(child) ? cloneElement(child, { closeMenu }) : child
+          )}
         </ul>
       )}
     </div>
