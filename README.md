@@ -42,6 +42,11 @@
 
 - Backend
     - Utilizing Socket.io to implement real time chatting
+    - Uploading profile pictures 
+        - Retrieve photo from form with multer
+        - Resize, compress, and reformat the image to webp with sharp 
+        - Store on supabase with supabase storage
+            - supabase: create project -> get url + key -> create bucket policy -> go nuts
 
 - Frontend
     - Utilizing Socket.io-client to receive message updates
@@ -49,8 +54,6 @@
     - vite default env variables!
     - first time using tailwind! I like it :)
     - Creating my own loading animations!
-    - Uploading photos with multer -> sharp image resizing -> supabase storage
-        - supabase: create project -> get url + key -> create bucket policy -> go nuts
 
 ### Retrospective aka yapping
 
@@ -62,8 +65,6 @@
 
 - server
     - profile
-        - bio
-            - retrieve bio endpoint (GET /users/:userId)
         - profile picture
             - resize image with sharp
 - client

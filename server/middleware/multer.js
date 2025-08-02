@@ -17,7 +17,7 @@ const retrieveAvatarMulter = multer({
     storage,
     fileFilter: photoFilter,
     limits: {
-        fileSize: 1024 * 200, // 200kb limit
+        fileSize: 1024 * 250, // 200kb limit
     },
 });
 
