@@ -6,6 +6,7 @@ import { useJoinRoom } from '../hooks/useJoinRoom.js';
 import { Avatar } from './Avatar.jsx';
 import { Messages } from './Messages.jsx';
 import { ProfileModal } from './ProfileModal.jsx';
+import { HeaderMenu } from './HeaderMenu.jsx';
 
 const Chat = () => {
   const { chatId } = useParams();
@@ -40,6 +41,11 @@ const Chat = () => {
         : chat.users.filter((user) => user.id != id);
   }
 
+  // profile modal
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const openProfileModal = () => setIsModalOpen(true);
+  const closeProfileModal = () => setIsModalOpen(false);
+
   return (
     <div className="flex h-full flex-col">
       <header className="border-b-1 flex gap-2 border-gray-500 px-4 py-4">
@@ -50,6 +56,9 @@ const Chat = () => {
             {chatters.map((user) => user.username).join(', ')}
           </p>
         </div>
+        <HeaderMenu>
+          
+        </HeaderMenu>
       </header>
       <main
         ref={scrollContainerRef}
@@ -74,7 +83,11 @@ const Chat = () => {
           Send
         </button>
       </form>
-      <ProfileModal isOpen={true} closeFunction={() => {}} userId={chatters[0] ? chatters[0].id : null} />
+      <ProfileModal
+        isOpen={isModalOpen}
+        closeFunction={closeProfileModal}
+        userId={chatters[0] ? chatters[0].id : null}
+      />
     </div>
   );
 };
