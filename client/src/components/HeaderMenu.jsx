@@ -34,7 +34,7 @@ const HeaderMenu = ({ children }) => {
         <img src={dotMenu} />
       </button>
       {isOpen && (
-        <ul className="top-1/1 absolute right-0">
+        <ul className="top-1/1 border-1 absolute right-0 overflow-clip rounded-md border-gray-400">
           {/* Pass close menu prop to children */}
           {Children.map(children, (child) =>
             isValidElement(child) ? cloneElement(child, { closeMenu }) : child
