@@ -32,4 +32,20 @@ const fetchUsers = async (signal) => {
     return data;
 };
 
-export { fetchCurrent, fetchUsers };
+const fetchUser = async (signal, userId) => {
+    const data = await request(
+        `/users/${userId}`,
+        {
+            mode: 'cors',
+            method: 'GET',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            signal,
+        },
+        true
+    );
+    return data;
+};
+
+export { fetchCurrent, fetchUsers, fetchUser };

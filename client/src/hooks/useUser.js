@@ -1,35 +1,36 @@
 import { useContext, useEffect, useState } from 'react';
+import { fetchUser } from '../services/userApi.js';
 import { ToastContext } from '../contexts/ToastProvider.jsx';
-import { fetchChats } from '../services/chatApi.js';
 import { useTokenErrorHandler } from './useTokenErrorHandler.js';
 
-const useChats = () => {
-    const [chats, setChats] = useState([]);
+const useUser = (userId) => {
+    const [user, setUser] = useState(null);
     const [isLoading, setIsLoading] = useState(false);
-    const { handleTokenErrors } = useTokenErrorHandler();
+    const { handleTokenError } = useTokenErrorHandler();
     const { toast } = useContext(ToastContext);
 
     useEffect(() => {
         const abortController = new AbortController();
-        const getChats = async () => {
+
+        const fetchUserData = async () => {
             try {
                 setIsLoading(true);
-                const data = await fetchChats(abortController.signal);
-                setChats(data);
+                const data = await fetchUser(abortController.signal, userId);
+                setUser(data);
             } catch (error) {
-                handleTokenErrors(error);
-                toast('Unable to fetch chats')
+                handleTokenError(error);
+                toast('Unable to fetch user data');
             } finally {
                 setIsLoading(false);
             }
         };
 
-        getChats();
+        fetchUserData();
 
         return () => abortController.abort();
-    }, [handleTokenErrors, toast]);
+    }, [userId, handleTokenError, toast]);
 
-    return { chats, isLoading };
+    return { user, isLoading };
 };
 
-export { useChats };
+export { useUser };

@@ -1,6 +1,9 @@
-import { ModalDialog } from "./ModalDialog.jsx";
+import { useUser } from '../hooks/useUser.js';
+import { ModalDialog } from './ModalDialog.jsx';
 
-const ProfileModal = ({isOpen, closeFunction, userId }) => {
+const ProfileModal = ({ isOpen, closeFunction, userId }) => {
+  const { user, isLoading } = useUser(userId);
+  
   return (
     <ModalDialog isOpen={isOpen} closeFunction={closeFunction}>
       <div className="min-w-2xs flex flex-col">
@@ -11,4 +14,4 @@ const ProfileModal = ({isOpen, closeFunction, userId }) => {
   );
 };
 
-export { ProfileModal }
+export { ProfileModal };
