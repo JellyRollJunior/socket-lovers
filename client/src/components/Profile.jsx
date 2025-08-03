@@ -3,6 +3,7 @@ import { Avatar } from './Avatar.jsx';
 import { motion } from 'motion/react';
 
 const Profile = ({
+  id,
   username,
   bio,
   avatar,
@@ -49,7 +50,8 @@ const Profile = ({
       </div>
     );
   }
-  
+
+  // id == current user id, allow editing
   return (
     <div className="min-w-2xs flex flex-col items-center justify-center">
       <div>
