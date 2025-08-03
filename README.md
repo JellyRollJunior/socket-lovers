@@ -69,7 +69,6 @@
 - server
 
 - client
-    - View other user profiles modal
     - Profile page
         - edit bio
         - edit avatar
