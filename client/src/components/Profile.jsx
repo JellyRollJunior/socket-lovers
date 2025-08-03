@@ -4,6 +4,7 @@ import { Avatar } from './Avatar.jsx';
 // eslint-disable-next-line no-unused-vars
 import { motion } from 'motion/react';
 import editIcon from '../assets/svgs/edit.svg';
+import editOffIcon from '../assets/svgs/edit-off.svg';
 
 const Profile = ({
   userId,
@@ -15,6 +16,8 @@ const Profile = ({
 }) => {
   const { id } = useContext(CurrentContext);
   const [isEditingBio, setIsEditingBio] = useState(false);
+  // id == current user id, allow editing
+  const allowEdit = userId == id;
 
   if (isLoading) {
     return (
@@ -57,27 +60,28 @@ const Profile = ({
     );
   }
 
-  // id == current user id, allow editing
-  const allowEdit = userId == id;
   return (
     <div className="min-w-2xs flex flex-col items-center justify-center">
       <div>
-        <Avatar avatar={avatar} size={avatarSize} />
+        <Avatar avatar={avatar ? avatar : null} size={avatarSize} />
       </div>
       <h2 className="mt-1 self-center text-xl font-bold">{username}</h2>
       <div className="mt-2 flex w-full items-center self-start font-medium">
         <h3>Bio</h3>
         {allowEdit && (
-          <button className="ml-auto" onClick={() => setIsEditingBio(true)}>
+          <button
+            className="ml-auto"
+            onClick={() => setIsEditingBio(!isEditingBio)}
+          >
             <img
               className="w-7 rounded-xl px-1 py-1 hover:bg-gray-300"
-              src={editIcon}
+              src={!isEditingBio ? editIcon : editOffIcon}
               alt="edit"
             />
           </button>
         )}
       </div>
-      <p>{bio}</p>
+      {!isEditingBio ? <p>{bio}</p> : <p>editing</p>}
     </div>
   );
 };
