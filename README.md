@@ -72,8 +72,10 @@
     - Profile page
         - edit bio
         - edit avatar
+        - put bio, avatar in current context
     - close create chat on creating chat
     - refresh aside on create chat
+    - extract two column layout :)
 
 - more features
     - chats don't need a name
