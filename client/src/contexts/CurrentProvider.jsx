@@ -15,6 +15,7 @@ const CurrentProvider = ({ children }) => {
   const [username, setUsername] = useState(null);
   const [bio, setBio] = useState(null);
   const [avatar, setAvatar] = useState(null);
+  const [isLoading, setIsLoading] = useState(false);
   const { handleTokenError } = useTokenErrorHandler();
   const { toastTemp } = useContext(ToastContext)
 
@@ -22,6 +23,7 @@ const CurrentProvider = ({ children }) => {
     const abortController = new AbortController();
     const getCurrent = async () => {
       try {
+        setIsLoading(true);
         const current = await fetchCurrent(abortController.signal);
         setId(current.id);
         setUsername(current.username);
@@ -31,6 +33,8 @@ const CurrentProvider = ({ children }) => {
         // error notification
         handleTokenError(error)
         toastTemp('unable to fetch user data')
+      } finally {
+        setIsLoading(false);
       }
     };
 
@@ -40,7 +44,7 @@ const CurrentProvider = ({ children }) => {
   }, [handleTokenError, toastTemp]);
 
   return (
-    <CurrentContext.Provider value={{ id, username, bio, avatar }}>
+    <CurrentContext.Provider value={{ id, username, bio, avatar, isLoading }}>
       {children}
     </CurrentContext.Provider>
   );

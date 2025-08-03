@@ -4,7 +4,7 @@ import { Profile } from '../components/Profile.jsx';
 import { CurrentContext } from '../contexts/CurrentProvider.jsx';
 
 const ProfilePage = () => {
-  const { username, bio, avatar } = useContext(CurrentContext);
+  const { username, bio, avatar, isLoading } = useContext(CurrentContext);
 
   return (
     <div className="flex h-full">
@@ -16,7 +16,7 @@ const ProfilePage = () => {
           username={username}
           bio={bio}
           avatar={avatar}
-          // isLoading={isLoading}
+          isLoading={isLoading}
         />
       </div>
     </div>
