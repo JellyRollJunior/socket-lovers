@@ -9,7 +9,7 @@ const ProfileModal = ({ isOpen, closeFunction, userId }) => {
     <ModalDialog isOpen={isOpen} closeFunction={closeFunction}>
       {user && (
         <Profile
-          id={user.id}
+          userId={user.id}
           username={user.username}
           bio={user.bio}
           avatar={user.avatar}

@@ -10,7 +10,7 @@ const ProfilePage = () => {
     <HomeAsideLayout>
       <div className="mt-12 px-4">
         <Profile
-          id={id}
+          userId={id}
           username={username}
           bio={bio}
           avatar={avatar}
