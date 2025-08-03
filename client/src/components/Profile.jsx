@@ -16,6 +16,7 @@ const Profile = ({
 }) => {
   const { id } = useContext(CurrentContext);
   const [isEditingBio, setIsEditingBio] = useState(false);
+  const [bioTextarea, setBioTextarea] = useState(bio);
   // id == current user id, allow editing
   const allowEdit = userId == id;
 
@@ -71,7 +72,10 @@ const Profile = ({
         {allowEdit && (
           <button
             className="ml-auto"
-            onClick={() => setIsEditingBio(!isEditingBio)}
+            onClick={() => {
+              setIsEditingBio(!isEditingBio);
+              setBioTextarea(bio);
+            }}
           >
             <img
               className="w-7 rounded-xl px-1 py-1 hover:bg-gray-300"
@@ -81,7 +85,22 @@ const Profile = ({
           </button>
         )}
       </div>
-      {!isEditingBio ? <p>{bio}</p> : <p>editing</p>}
+      <section className="w-full px-7">
+        {!isEditingBio ? (
+          <p className="px-1.5 py-0.5">{bio}</p>
+        ) : (
+          <form>
+            <textarea
+              className="border-3 min-h-36 w-full rounded-lg border-gray-500 px-1"
+              autoFocus
+              name="bio"
+              id="bio"
+              value={bioTextarea}
+              onChange={(event) => setBioTextarea(event.target.value)}
+            />
+          </form>
+        )}
+      </section>
     </div>
   );
 };
