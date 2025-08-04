@@ -1,9 +1,7 @@
 import { useContext, useState } from 'react';
-import { patchUserBio } from '../services/userApi.js';
 import { CurrentContext } from '../contexts/CurrentProvider.jsx';
-import { ToastContext } from '../contexts/ToastProvider.jsx';
-import { useTokenErrorHandler } from '../hooks/useTokenErrorHandler.js';
 import { Avatar } from './Avatar.jsx';
+import { ProfileEditBio } from './ProfileEditBio.jsx';
 import editIcon from '../assets/svgs/edit.svg';
 import editOffIcon from '../assets/svgs/edit-off.svg';
 // eslint-disable-next-line no-unused-vars
@@ -17,13 +15,10 @@ const Profile = ({
   isLoading = false,
   avatarSize = 8,
 }) => {
-  const { id, setBio } = useContext(CurrentContext);
-  const { toast } = useContext(ToastContext);
-  const { handleTokenErrors } = useTokenErrorHandler();
-  const [isEditingBio, setIsEditingBio] = useState(false);
-  const [bioTextarea, setBioTextarea] = useState(bio);
+  const { id } = useContext(CurrentContext);
   // id == current user id, allow editing
   const allowEdit = userId == id;
+  const [isEditingBio, setIsEditingBio] = useState(false);
 
   if (isLoading) {
     return (
@@ -66,20 +61,9 @@ const Profile = ({
     );
   }
 
-  const handleEditBio = async (event) => {
-    event.preventDefault();
-    // DISABLE BUTTONS WHILE LOADING
-    try {
-      const data = await patchUserBio(id, bioTextarea);
-      if (data && data.bio) {
-        setIsEditingBio(false);
-        setBio(data.bio);
-      }
-    } catch (error) {
-      handleTokenErrors(error);
-      toast('Unable to edit bio');
-    }
-  };
+  const closeEditMode = () => {
+    setIsEditingBio(false);
+  }
 
   return (
     <div className="min-w-2xs flex flex-col items-center justify-center">
@@ -92,10 +76,7 @@ const Profile = ({
         {allowEdit && (
           <button
             className="ml-auto"
-            onClick={() => {
-              setIsEditingBio(!isEditingBio);
-              setBioTextarea(bio);
-            }}
+            onClick={() => setIsEditingBio(!isEditingBio)}
           >
             <img
               className="w-7 rounded-xl px-1 py-1 hover:bg-gray-300"
@@ -106,22 +87,10 @@ const Profile = ({
         )}
       </div>
       <section className="w-full px-7">
-        {!isEditingBio ? (
-          <p className="px-1.5 py-0.5">{bio}</p>
+        {isEditingBio ? (
+          <ProfileEditBio onSubmit={closeEditMode} />
         ) : (
-          <form onSubmit={handleEditBio}>
-            <textarea
-              className="border-3 mt-3 min-h-36 w-full rounded-lg border-gray-500 px-1"
-              autoFocus
-              name="bio"
-              id="bio"
-              value={bioTextarea}
-              onChange={(event) => setBioTextarea(event.target.value)}
-            />
-            <button className="w-full rounded-md bg-blue-400 px-5 py-1.5 text-white hover:bg-blue-500">
-              Edit
-            </button>
-          </form>
+          <p className="px-1.5 py-0.5">{bio}</p>
         )}
       </section>
     </div>
