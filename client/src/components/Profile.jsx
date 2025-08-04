@@ -1,10 +1,13 @@
 import { useContext, useState } from 'react';
+import { patchUserBio } from '../services/userApi.js';
 import { CurrentContext } from '../contexts/CurrentProvider.jsx';
 import { Avatar } from './Avatar.jsx';
-// eslint-disable-next-line no-unused-vars
-import { motion } from 'motion/react';
 import editIcon from '../assets/svgs/edit.svg';
 import editOffIcon from '../assets/svgs/edit-off.svg';
+// eslint-disable-next-line no-unused-vars
+import { motion } from 'motion/react';
+import { useTokenErrorHandler } from '../hooks/useTokenErrorHandler.js';
+import { ToastContext } from '../contexts/ToastProvider.jsx';
 
 const Profile = ({
   userId,
@@ -15,6 +18,8 @@ const Profile = ({
   avatarSize = 8,
 }) => {
   const { id } = useContext(CurrentContext);
+  const { toast } = useContext(ToastContext);
+  const { handleTokenErrors } = useTokenErrorHandler();
   const [isEditingBio, setIsEditingBio] = useState(false);
   const [bioTextarea, setBioTextarea] = useState(bio);
   // id == current user id, allow editing
@@ -61,6 +66,23 @@ const Profile = ({
     );
   }
 
+  const handleEditBio = async (event) => {
+    event.preventDefault();
+    // DISABLE BUTTONS WHILE LOADING
+    try {
+      const data = await patchUserBio(id, bioTextarea);
+      if (data && data.bio) {
+        setBioTextarea(data.bio);
+        setIsEditingBio(false);
+
+        // refetch current user data / refresh page?
+      }
+    } catch (error) {
+      handleTokenErrors(error);
+      toast('Unable to edit bio');
+    }
+  };
+
   return (
     <div className="min-w-2xs flex flex-col items-center justify-center">
       <div>
@@ -89,15 +111,18 @@ const Profile = ({
         {!isEditingBio ? (
           <p className="px-1.5 py-0.5">{bio}</p>
         ) : (
-          <form>
+          <form onSubmit={handleEditBio}>
             <textarea
-              className="border-3 min-h-36 w-full rounded-lg border-gray-500 px-1"
+              className="border-3 mt-3 min-h-36 w-full rounded-lg border-gray-500 px-1"
               autoFocus
               name="bio"
               id="bio"
               value={bioTextarea}
               onChange={(event) => setBioTextarea(event.target.value)}
             />
+            <button className="w-full rounded-md bg-blue-400 px-5 py-1.5 text-white hover:bg-blue-500">
+              Edit
+            </button>
           </form>
         )}
       </section>

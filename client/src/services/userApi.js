@@ -48,4 +48,22 @@ const fetchUser = async (signal, userId) => {
     return data;
 };
 
-export { fetchCurrent, fetchUsers, fetchUser };
+const patchUserBio = async (userId, bio) => {
+    const data = await request(
+        `/users/${userId}`,
+        {
+            mode: 'cors',
+            method: 'PATCH',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({
+                bio,
+            }),
+        },
+        true
+    );
+    return data;
+};
+
+export { fetchCurrent, fetchUsers, fetchUser, patchUserBio };
