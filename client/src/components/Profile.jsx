@@ -19,6 +19,7 @@ const Profile = ({
   // id == current user id, allow editing
   const allowEdit = userId == id;
   const [isEditingBio, setIsEditingBio] = useState(false);
+  const [isEditingAvatar, setIsEditingAvatar] = useState(false);
 
   if (isLoading) {
     return (
@@ -67,15 +68,16 @@ const Profile = ({
 
   return (
     <div className="min-w-2xs flex flex-col items-center justify-center">
-      <header className="relative">
+      <div
+        className="relative"
+        onMouseEnter={() => setIsEditingAvatar(true)}
+        onMouseLeave={() => setIsEditingAvatar(false)}
+      >
         <Avatar avatar={avatar ? avatar : null} size={avatarSize} />
-        {allowEdit && (
-          <button
-            className="absolute left-0 right-0 top-1/2 mx-auto flex h-full w-full translate-y-[-50%] flex-col items-center justify-center rounded-full bg-gray-300/70"
-            onClick={() => setIsEditingBio(!isEditingBio)}
-          >
+        {allowEdit && isEditingAvatar && (
+          <button className="absolute left-0 right-0 top-1/2 mx-auto flex h-full w-full translate-y-[-50%] flex-col items-center justify-center rounded-full bg-gray-300/70">
             <img
-              className="w-7 rounded-xl px-1 py-1 hover:bg-gray-300"
+              className="mt-2 w-7 rounded-xl px-1 py-1 hover:bg-gray-300"
               src={editIcon}
               alt="edit"
             />
@@ -83,7 +85,7 @@ const Profile = ({
             <br /> picture
           </button>
         )}
-      </header>
+      </div>
       <h2 className="mt-1 self-center text-xl font-bold">{username}</h2>
       <div className="mt-2 flex w-full items-center self-start font-medium">
         <h3>Bio</h3>

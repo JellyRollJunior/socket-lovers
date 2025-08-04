@@ -68,10 +68,13 @@
 
 - server
     - bio validations
+    - avatar validation?
 
 - client
     - Profile page
         - edit avatar
+            - create button
+            - make button appear only on hover avatar
     - close create chat on creating chat
     - refresh aside on create chat
 
