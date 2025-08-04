@@ -1,13 +1,13 @@
 import { useContext, useState } from 'react';
 import { patchUserBio } from '../services/userApi.js';
 import { CurrentContext } from '../contexts/CurrentProvider.jsx';
+import { ToastContext } from '../contexts/ToastProvider.jsx';
+import { useTokenErrorHandler } from '../hooks/useTokenErrorHandler.js';
 import { Avatar } from './Avatar.jsx';
 import editIcon from '../assets/svgs/edit.svg';
 import editOffIcon from '../assets/svgs/edit-off.svg';
 // eslint-disable-next-line no-unused-vars
 import { motion } from 'motion/react';
-import { useTokenErrorHandler } from '../hooks/useTokenErrorHandler.js';
-import { ToastContext } from '../contexts/ToastProvider.jsx';
 
 const Profile = ({
   userId,
@@ -17,7 +17,7 @@ const Profile = ({
   isLoading = false,
   avatarSize = 8,
 }) => {
-  const { id } = useContext(CurrentContext);
+  const { id, setBio } = useContext(CurrentContext);
   const { toast } = useContext(ToastContext);
   const { handleTokenErrors } = useTokenErrorHandler();
   const [isEditingBio, setIsEditingBio] = useState(false);
@@ -72,10 +72,8 @@ const Profile = ({
     try {
       const data = await patchUserBio(id, bioTextarea);
       if (data && data.bio) {
-        setBioTextarea(data.bio);
         setIsEditingBio(false);
-
-        // refetch current user data / refresh page?
+        setBio(data.bio);
       }
     } catch (error) {
       handleTokenErrors(error);

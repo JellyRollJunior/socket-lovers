@@ -71,6 +71,7 @@
 - client
     - Profile page
         - edit bio
+            - disable button while loading
         - edit avatar
     - close create chat on creating chat
     - refresh aside on create chat

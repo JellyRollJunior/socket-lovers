@@ -44,7 +44,7 @@ const CurrentProvider = ({ children }) => {
   }, [handleTokenErrors, toast]);
 
   return (
-    <CurrentContext.Provider value={{ id, username, bio, avatar, isLoading }}>
+    <CurrentContext.Provider value={{ id, username, bio, avatar, isLoading, setBio, setAvatar }}>
       {children}
     </CurrentContext.Provider>
   );
