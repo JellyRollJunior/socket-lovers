@@ -63,13 +63,27 @@ const Profile = ({
 
   const closeEditMode = () => {
     setIsEditingBio(false);
-  }
+  };
 
   return (
     <div className="min-w-2xs flex flex-col items-center justify-center">
-      <div>
+      <header className="relative">
         <Avatar avatar={avatar ? avatar : null} size={avatarSize} />
-      </div>
+        {allowEdit && (
+          <button
+            className="absolute left-0 right-0 top-1/2 mx-auto flex h-full w-full translate-y-[-50%] flex-col items-center justify-center rounded-full bg-gray-300/70"
+            onClick={() => setIsEditingBio(!isEditingBio)}
+          >
+            <img
+              className="w-7 rounded-xl px-1 py-1 hover:bg-gray-300"
+              src={editIcon}
+              alt="edit"
+            />
+            Change profile
+            <br /> picture
+          </button>
+        )}
+      </header>
       <h2 className="mt-1 self-center text-xl font-bold">{username}</h2>
       <div className="mt-2 flex w-full items-center self-start font-medium">
         <h3>Bio</h3>
