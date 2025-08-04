@@ -73,8 +73,11 @@
 - client
     - Profile page
         - edit avatar
-            - create button
-            - make button appear only on hover avatar
+            - upload avatar
+            - disable on loading?
+            - input accept
+            
+
     - close create chat on creating chat
     - refresh aside on create chat
 

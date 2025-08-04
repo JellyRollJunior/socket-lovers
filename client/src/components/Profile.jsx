@@ -75,7 +75,7 @@ const Profile = ({
         onMouseLeave={() => setIsEditingAvatar(false)}
       >
         <Avatar avatar={avatar ? avatar : null} size={avatarSize} />
-        {allowEdit && isEditingAvatar && <ProfileEditAvatar />}
+        {allowEdit && <ProfileEditAvatar isOpen={isEditingAvatar} />}
       </div>
       <h2 className="mt-1 self-center text-xl font-bold">{username}</h2>
       <div className="mt-2 flex w-full items-center self-start font-medium">
