@@ -6,6 +6,7 @@ import editIcon from '../assets/svgs/edit.svg';
 import editOffIcon from '../assets/svgs/edit-off.svg';
 // eslint-disable-next-line no-unused-vars
 import { motion } from 'motion/react';
+import { ProfileEditAvatar } from './ProfileEditAvatar.jsx';
 
 const Profile = ({
   userId,
@@ -74,17 +75,7 @@ const Profile = ({
         onMouseLeave={() => setIsEditingAvatar(false)}
       >
         <Avatar avatar={avatar ? avatar : null} size={avatarSize} />
-        {allowEdit && isEditingAvatar && (
-          <button className="absolute left-0 right-0 top-1/2 mx-auto flex h-full w-full translate-y-[-50%] flex-col items-center justify-center rounded-full bg-gray-300/70">
-            <img
-              className="mt-2 w-7 rounded-xl px-1 py-1 hover:bg-gray-300"
-              src={editIcon}
-              alt="edit"
-            />
-            Change profile
-            <br /> picture
-          </button>
-        )}
+        {allowEdit && isEditingAvatar && <ProfileEditAvatar />}
       </div>
       <h2 className="mt-1 self-center text-xl font-bold">{username}</h2>
       <div className="mt-2 flex w-full items-center self-start font-medium">
