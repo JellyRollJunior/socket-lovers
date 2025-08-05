@@ -81,6 +81,7 @@
 
     - change all submits to hooks?
     - what to display if cannot react img src?
+    - notifications behind profile avatar
 
 
 - more features

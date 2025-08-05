@@ -32,7 +32,7 @@ const ProfileEditAvatar = ({ isOpen }) => {
       }
     } catch (error) {
       handleTokenErrors(error);
-      toast('Unable to upload profile picture');
+      toast('Unable to upload image');
     } finally {
       setIsLoading(false);
     }
@@ -64,6 +64,7 @@ const ProfileEditAvatar = ({ isOpen }) => {
         ref={fileInputRef}
         className="hidden"
         onChange={handleAvatarUpload}
+        accept="image/jpg, image/jpeg, image/png, image/gif, image/webp"
       />
     </>
   );
