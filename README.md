@@ -73,13 +73,15 @@
 - client
     - Profile page
         - edit avatar
-            - upload avatar
             - disable on loading?
-            - input accept
-            
+            - input accept only specified types
+            - uploading loading message from upload avatar button
+    
 
     - close create chat on creating chat
     - refresh aside on create chat
+
+    - change all submits to hooks?
 
 
 - more features

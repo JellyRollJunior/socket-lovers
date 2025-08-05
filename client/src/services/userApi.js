@@ -66,4 +66,17 @@ const patchUserBio = async (userId, bio) => {
     return data;
 };
 
-export { fetchCurrent, fetchUsers, fetchUser, patchUserBio };
+const patchUserAvatar = async (userId, fileFormData) => {
+    const data = await request(
+        `/users/${userId}/avatar`,
+        {
+            mode: 'cors',
+            method: 'PATCH',
+            body: fileFormData,
+        },
+        true
+    );
+    return data;
+};
+
+export { fetchCurrent, fetchUsers, fetchUser, patchUserBio, patchUserAvatar };

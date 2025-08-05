@@ -9,11 +9,11 @@ const ProfileEditBio = ({ onSubmit }) => {
   const { toast } = useContext(ToastContext);
   const { handleTokenErrors } = useTokenErrorHandler();
   const [bioTextarea, setBioTextarea] = useState(bio);
-  const [isBioConfirmDisabled, setIsBioConfirmDisabled] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
 
   const handleEditBio = async (event) => {
     event.preventDefault();
-    setIsBioConfirmDisabled(true);
+    setIsLoading(true);
     try {
       const data = await patchUserBio(id, bioTextarea);
       if (data && data.bio) {
@@ -23,7 +23,7 @@ const ProfileEditBio = ({ onSubmit }) => {
       handleTokenErrors(error);
       toast('Unable to edit bio');
     } finally {
-      setIsBioConfirmDisabled(false);
+      setIsLoading(false);
       onSubmit();
     }
   };
@@ -43,7 +43,7 @@ const ProfileEditBio = ({ onSubmit }) => {
       />
       <button
         className="w-full rounded-md bg-blue-400 px-5 py-1.5 text-white hover:bg-blue-500 disabled:bg-gray-500 disabled:text-gray-100"
-        disabled={isBioConfirmDisabled}
+        disabled={isLoading}
       >
         Edit
       </button>
