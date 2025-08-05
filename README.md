@@ -72,17 +72,21 @@
     - add uuid to avatar
         - need to delete / clear folder before uploading new file supabase (can no longer just upsert)
 
-- client
-    - Profile page
-        - edit avatar
-            - input accept only specified types
+- client            
     - close create chat on creating chat
     - refresh aside on create chat
 
     - change all submits to hooks?
+        - upload avatar
+        - create chat
+        - login
+        - edit bio
+        - signup
     - what to display if cannot react img src?
     - notifications behind profile avatar
 
+- test 
+    - test avatar upload still works
 
 - more features
     - chats don't need a name

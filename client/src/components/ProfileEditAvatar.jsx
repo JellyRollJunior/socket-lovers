@@ -1,15 +1,9 @@
-import { useContext, useRef, useState } from 'react';
+import { useRef } from 'react';
 import editIcon from '../assets/svgs/edit.svg';
-import { patchUserAvatar } from '../services/userApi.js';
-import { CurrentContext } from '../contexts/CurrentProvider.jsx';
-import { useTokenErrorHandler } from '../hooks/useTokenErrorHandler.js';
-import { ToastContext } from '../contexts/ToastProvider.jsx';
+import { useUploadAvatar } from '../hooks/useUploadAvatar.js';
 
 const ProfileEditAvatar = ({ isOpen }) => {
-  const { id, setAvatar } = useContext(CurrentContext);
-  const { toast } = useContext(ToastContext);
-  const { handleTokenErrors } = useTokenErrorHandler();
-  const [isLoading, setIsLoading] = useState(false);
+  const { uploadAvatar, isLoading } = useUploadAvatar();
   const fileInputRef = useRef(null);
 
   const handleClickChangeAvatar = () => {
@@ -18,23 +12,12 @@ const ProfileEditAvatar = ({ isOpen }) => {
     }
   };
 
-  const handleAvatarUpload = async (event) => {
-    setIsLoading(true);
-    try {
-      const file = event.target.files[0];
-      if (file) {
-        const formData = new FormData();
-        formData.append('avatar', file);
-        const data = await patchUserAvatar(id, formData);
-        if (data.avatar) {
-          setAvatar(data.avatar);
-        }
-      }
-    } catch (error) {
-      handleTokenErrors(error);
-      toast('Unable to upload image');
-    } finally {
-      setIsLoading(false);
+  const handleUploadAvatar = (event) => {
+    const file = event.target.files[0];
+    if (file) {
+      const formData = new FormData();
+      formData.append('avatar', file);
+      uploadAvatar(formData);
     }
   };
 
@@ -63,7 +46,7 @@ const ProfileEditAvatar = ({ isOpen }) => {
         type="file"
         ref={fileInputRef}
         className="hidden"
-        onChange={handleAvatarUpload}
+        onChange={handleUploadAvatar}
         accept="image/jpg, image/jpeg, image/png, image/gif, image/webp"
       />
     </>
