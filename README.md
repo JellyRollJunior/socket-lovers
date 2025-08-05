@@ -69,19 +69,18 @@
 - server
     - bio validations
     - avatar validation?
+    - add uuid to avatar
+        - need to delete / clear folder before uploading new file supabase (can no longer just upsert)
 
 - client
     - Profile page
         - edit avatar
-            - disable on loading?
             - input accept only specified types
-            - uploading loading message from upload avatar button
-    
-
     - close create chat on creating chat
     - refresh aside on create chat
 
     - change all submits to hooks?
+    - what to display if cannot react img src?
 
 
 - more features
