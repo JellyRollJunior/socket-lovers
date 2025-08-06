@@ -72,10 +72,6 @@
     - close create chat on creating chat
     - refresh aside on create chat
 
-    - change all submits to hooks?
-        - login
-        - edit bio
-        - signup
     - what to display if cannot react img src?
     - notifications behind profile avatar
 

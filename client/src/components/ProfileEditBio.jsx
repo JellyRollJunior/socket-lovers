@@ -1,31 +1,19 @@
 import { useContext, useState } from 'react';
 import { CurrentContext } from '../contexts/CurrentProvider.jsx';
-import { ToastContext } from '../contexts/ToastProvider.jsx';
-import { useTokenErrorHandler } from '../hooks/useTokenErrorHandler.js';
-import { patchUserBio } from '../services/userApi.js';
+import { useEditBio } from '../hooks/useEditBio.js';
 
 const ProfileEditBio = ({ onSubmit }) => {
+  const { editBio, isLoading } = useEditBio();
   const { id, bio, setBio } = useContext(CurrentContext);
-  const { toast } = useContext(ToastContext);
-  const { handleTokenErrors } = useTokenErrorHandler();
   const [bioTextarea, setBioTextarea] = useState(bio);
-  const [isLoading, setIsLoading] = useState(false);
 
   const handleEditBio = async (event) => {
     event.preventDefault();
-    setIsLoading(true);
-    try {
-      const data = await patchUserBio(id, bioTextarea);
-      if (data && data.bio) {
-        setBio(data.bio);
-      }
-    } catch (error) {
-      handleTokenErrors(error);
-      toast('Unable to edit bio');
-    } finally {
-      setIsLoading(false);
-      onSubmit();
+    const data = await editBio(id, bioTextarea);
+    if (data && data.bio) {
+      setBio(data.bio);
     }
+    onSubmit();
   };
 
   return (

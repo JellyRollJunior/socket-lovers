@@ -3,6 +3,7 @@ import { useNavigate } from 'react-router';
 import { signup } from '../services/authApi.js';
 import { ToastContext } from '../contexts/ToastProvider.jsx';
 import { LabelledInput } from './LabelledInput.jsx';
+
 const SignupForm = () => {
   const navigate = useNavigate();
   const [username, setUsername] = useState('');
@@ -19,7 +20,6 @@ const SignupForm = () => {
       navigate('/login');
     } catch (error) {
       toastTemp(error.message);
-      console.log(error);
     }
   };
 
