@@ -5,6 +5,7 @@ const EMPTY_ERROR = 'must not be empty.';
 const CREDENTIAL_LENGTH_ERROR = 'must be between 6 and 24 characters';
 const ARRAY_ERROR = 'must be an array of user ids.';
 const UUID_ERROR = 'must be a user id.';
+const LENGTH_ERROR_350 = 'must be between 1 and 350 characters'
 
 const userValidation = [
     check('username').trim()
@@ -27,12 +28,10 @@ const chatValidations = [
         .isUUID().withMessage(`userIds array contents ${UUID_ERROR}`),
 ]
 
-// incorporate this one into the socket message creation?
-const MESSAGE_LENGTH_ERROR = 'must be between 1 and 250 characters';
-const messageValidations = [
-    check('content').trim()
-        .notEmpty().withMessage(`content ${EMPTY_ERROR}`)
-        .isLength({ min: 1, max: 250 }).withMessage(`content ${MESSAGE_LENGTH_ERROR}`),
+const bioValidations = [
+    check('bio').trim()
+        .notEmpty().withMessage(`Username ${EMPTY_ERROR}`)
+        .isString().isLength({min: 1, max: 350}).withMessage(`Bio ${LENGTH_ERROR_350}`),
 ]
 
 const validateInput = (req) => {
@@ -46,6 +45,6 @@ export {
     userValidation, 
     chatIdValidations, 
     chatValidations, 
-    messageValidations,
+    bioValidations,
     validateInput,
 };

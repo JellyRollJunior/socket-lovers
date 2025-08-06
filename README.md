@@ -69,6 +69,7 @@
 - server
     - bio validations
     - avatar validation?
+    - message len validation?
     - add uuid to avatar
         - need to delete / clear folder before uploading new file supabase (can no longer just upsert)
 

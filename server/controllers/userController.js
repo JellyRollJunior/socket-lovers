@@ -1,4 +1,5 @@
 import * as userQueries from '../db/user.queries.js';
+import { validateInput } from '../middleware/validations.js';
 import { AuthenticationError } from '../errors/AuthenticationError.js';
 import { AuthorizationError } from '../errors/AuthorizationError.js';
 import { uploadAvatar } from '../middleware/supabase.js';
@@ -34,6 +35,7 @@ const getAllUsers = async (req, res, next) => {
 
 const patchBio = async (req, res, next) => {
     try {
+        validateInput(req);
         const { userId } = req.params;
         if (req.user.id != userId)
             throw new AuthorizationError('Unable to update bio');

@@ -38,7 +38,7 @@ const ProfileEditBio = ({ onSubmit }) => {
         value={bioTextarea}
         onChange={(event) => setBioTextarea(event.target.value)}
         minLength={1}
-        maxLength={500}
+        maxLength={350}
         required
       />
       <button
