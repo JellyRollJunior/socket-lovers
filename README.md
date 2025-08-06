@@ -67,8 +67,6 @@
 ### TODO
 
 - server
-    - add uuid to avatar
-        - need to delete / clear folder before uploading new file supabase (can no longer just upsert)
 
 - client            
     - close create chat on creating chat
