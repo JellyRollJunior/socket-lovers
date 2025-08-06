@@ -73,8 +73,6 @@
     - refresh aside on create chat
 
     - change all submits to hooks?
-        - upload avatar
-        - create chat
         - login
         - edit bio
         - signup

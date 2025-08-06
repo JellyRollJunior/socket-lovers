@@ -1,9 +1,7 @@
-import { Fragment, useContext, useState } from 'react';
+import { Fragment, useState } from 'react';
 import { useNavigate } from 'react-router';
 import { useUsers } from '../hooks/useUsers.js';
-import { createChat } from '../services/chatApi.js';
-import { useTokenErrorHandler } from '../hooks/useTokenErrorHandler.js';
-import { ToastContext } from '../contexts/ToastProvider.jsx';
+import { useCreateChat } from '../hooks/useCreateChat.js';
 import { CreateChatListItem } from './CreateChatListItem.jsx';
 import { CreateChatLoading } from './CreateChatLoading.jsx';
 import { LabelledInput } from './LabelledInput.jsx';
@@ -11,12 +9,11 @@ import { LabelledInput } from './LabelledInput.jsx';
 const CreateChatForm = () => {
   const navigate = useNavigate();
   const { users, isLoading } = useUsers();
+  const { createChat, isLoading: isCreatingChat } = useCreateChat();
   const [filter, setFilter] = useState('');
+  const [isSelectErrorShown, setIsSelectErrorShown] = useState(false);
   const [selectedUsers, setSelectedUsers] = useState('');
   const [name, setName] = useState('');
-  const [isSelectErrorShown, setIsSelectErrorShown] = useState(false);
-  const { handleTokenErrors } = useTokenErrorHandler();
-  const { toastTemp } = useContext(ToastContext);
 
   // search filter
   const filteredUsers = users
@@ -27,19 +24,12 @@ const CreateChatForm = () => {
 
   const handleCreateChat = async (event) => {
     event.preventDefault();
-    if (!selectedUsers || selectedUsers == '')
+    if (!selectedUsers || selectedUsers == '') {
       return setIsSelectErrorShown(true);
-    try {
-      // currently only support selecting one user, so put selected user in an array
-      const data = await createChat(name, [selectedUsers]);
-      // Move user to messages with new chat!
-      setName('');
-      setIsSelectErrorShown(false);
-      navigate(`/chats/${data.id}`);
-    } catch (error) {
-      handleTokenErrors(error);
-      toastTemp('Unable to create chat', true);
     }
+    // currently only support selecting one user, so put selected user in an array
+    const data = await createChat(name, [selectedUsers]);
+    navigate(`/chats/${data.id}`);
   };
 
   return (
@@ -83,7 +73,10 @@ const CreateChatForm = () => {
         maxLength={24}
       />
       <footer className="mt-3">
-        <button className="w-full rounded-md bg-blue-400 px-5 py-1.5 text-white hover:bg-blue-500">
+        <button
+          className="w-full rounded-md bg-blue-400 px-5 py-1.5 text-white hover:bg-blue-500 disabled:bg-gray-500 disabled:text-gray-100"
+          disabled={isCreatingChat}
+        >
           Chat
         </button>
       </footer>

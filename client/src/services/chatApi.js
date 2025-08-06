@@ -24,7 +24,7 @@ const fetchChat = async (chatId, signal) => {
     return data;
 };
 
-const createChat = async (name, userIds) => {
+const postChat = async (name, userIds) => {
     const data = await request('/chats', {
         mode: 'cors',
         method: 'POST',
@@ -39,4 +39,4 @@ const createChat = async (name, userIds) => {
     return data;
 };
 
-export { fetchChats, fetchChat, createChat };
+export { fetchChats, fetchChat, postChat };
