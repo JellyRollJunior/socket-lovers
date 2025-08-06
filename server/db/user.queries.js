@@ -86,6 +86,12 @@ const updateBio = async (id, bio) => {
             where: {
                 id,
             },
+            select: {
+                id: true,
+                username: true,
+                avatar: true,
+                bio: true,
+            },
         });
         return user;
     } catch (error) {

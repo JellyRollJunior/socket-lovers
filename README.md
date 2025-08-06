@@ -67,9 +67,6 @@
 ### TODO
 
 - server
-    - bio validations
-    - avatar validation?
-    - message len validation?
     - add uuid to avatar
         - need to delete / clear folder before uploading new file supabase (can no longer just upsert)
 
@@ -85,9 +82,6 @@
         - signup
     - what to display if cannot react img src?
     - notifications behind profile avatar
-
-- test 
-    - test avatar upload still works
 
 - more features
     - chats don't need a name
