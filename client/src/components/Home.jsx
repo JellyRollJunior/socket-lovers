@@ -13,7 +13,7 @@ const Home = () => {
     <>
       <Chats openNewChatModal={openNewChatModal} />
       <ModalDialog isOpen={isModalOpen} closeFunction={closeNewChatModal}>
-        <CreateChatForm />
+        <CreateChatForm onSubmit={closeNewChatModal} />
       </ModalDialog>
     </>
   );

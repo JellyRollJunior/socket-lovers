@@ -69,7 +69,6 @@
 - server
 
 - client            
-    - close create chat on creating chat
     - refresh aside on create chat
 
     - what to display if cannot react img src?

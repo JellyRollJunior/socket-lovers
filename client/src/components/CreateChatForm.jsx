@@ -6,7 +6,7 @@ import { CreateChatListItem } from './CreateChatListItem.jsx';
 import { CreateChatLoading } from './CreateChatLoading.jsx';
 import { LabelledInput } from './LabelledInput.jsx';
 
-const CreateChatForm = () => {
+const CreateChatForm = ( {onSubmit}) => {
   const navigate = useNavigate();
   const { users, isLoading } = useUsers();
   const { createChat, isLoading: isCreatingChat } = useCreateChat();
@@ -29,6 +29,7 @@ const CreateChatForm = () => {
     }
     // currently only support selecting one user, so put selected user in an array
     const data = await createChat(name, [selectedUsers]);
+    onSubmit();
     navigate(`/chats/${data.id}`);
   };
 
