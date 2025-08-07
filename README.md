@@ -67,14 +67,16 @@
 ### TODO
 
 - server
+    - order chats by some ordering
 
 - client
 
 - more features
     - 1 chat per user / group (?)
-        - make call to retrieve chats with given users
-        - if chat already exists -> return this existing chat id
-        - client will just navigate to this new chat id
+        - user signature
+            - setup user signature on chat create [a, b, c] => sort().join(:)
+        - on chat create, query user signature to see if chat already exist
+            - if exists, return this chat instead, else create
     - group chats
     - public chats (?)
 

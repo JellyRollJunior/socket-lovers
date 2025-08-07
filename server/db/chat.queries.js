@@ -82,7 +82,7 @@ const getChat = async (chatId, userId) => {
         if (!chat) throw new Error();
         return chat;
     } catch (error) {
-        throw new DatabaseError('Unable to retrieve messages');
+        throw new DatabaseError('Unable to retrieve chat');
     }
 };
 
