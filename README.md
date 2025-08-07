@@ -69,10 +69,12 @@
 - server
 
 - client
-    - deselect user on create chat modal on chat create
 
 - more features
     - 1 chat per user / group (?)
+        - make call to retrieve chats with given users
+        - if chat already exists -> return this existing chat id
+        - client will just navigate to this new chat id
     - group chats
     - public chats (?)
 

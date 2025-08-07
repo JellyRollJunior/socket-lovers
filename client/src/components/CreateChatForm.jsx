@@ -29,6 +29,10 @@ const CreateChatForm = ({ onSubmit }) => {
     }
     // currently only support selecting one user, so put selected user in an array
     const data = await createChat(name, [selectedUsers]);
+    // reset form
+    setSelectedUsers('');
+    setName('');
+    // handle chat creation
     onSubmit();
     navigate(`/chats/${data.id}`);
   };
