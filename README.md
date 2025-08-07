@@ -69,7 +69,6 @@
 - server
 
 - client            
-    - notifications behind profile avatar
 
 - more features
     - 1 chat per user / group (?)

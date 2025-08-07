@@ -18,7 +18,7 @@ const Avatar = ({ users, avatar, size = 3 }) => {
   return (
     <div
       style={{ height: `${size}rem`, width: `${size}rem` }}
-      className={`border-1 shrink-0 overflow-clip rounded-full border-gray-400 bg-gray-200`}
+      className="border-1 shrink-0 overflow-clip rounded-full border-gray-400 bg-gray-200"
     >
       {!error && (
         <img
