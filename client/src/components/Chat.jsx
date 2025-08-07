@@ -41,6 +41,7 @@ const Chat = () => {
         ? [chat.users[0]]
         : chat.users.filter((user) => user.id != id);
   }
+  const chatterNames = chatters.map((user) => user.username).join(', ');
 
   // profile modal
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -52,13 +53,15 @@ const Chat = () => {
       <header className="border-b-1 flex gap-2 border-gray-500 px-4 py-4">
         <Avatar users={chat ? chat.users : null} size={3} />
         <div className="flex flex-col">
-          <h2 className="text-lg font-medium">{chat && chat.name}</h2>
+          <h2 className="text-lg font-medium">
+            {chat && chat.name ? chat.name : chatterNames}
+          </h2>
           <p className="text-align -mt-1 items-start justify-self-start text-sm">
-            {chatters.map((user) => user.username).join(', ')}
+            {chatterNames}
           </p>
         </div>
         <HeaderMenu>
-          <HeaderMenuItem label='View profile' onClick={openProfileModal} />
+          <HeaderMenuItem label="View profile" onClick={openProfileModal} />
         </HeaderMenu>
       </header>
       <main
