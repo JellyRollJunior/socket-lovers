@@ -69,10 +69,10 @@
 - server
 
 - client            
-    - what to display if cannot react img src?
     - notifications behind profile avatar
 
 - more features
+    - 1 chat per user / group (?)
     - chats don't need a name
     - group chats
     - public chats (?)
