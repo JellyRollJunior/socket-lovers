@@ -1,4 +1,4 @@
-import { useContext, useEffect, useState } from 'react';
+import { useCallback, useContext, useEffect, useState } from 'react';
 import { ToastContext } from '../contexts/ToastProvider.jsx';
 import { fetchChats } from '../services/chatApi.js';
 import { useTokenErrorHandler } from './useTokenErrorHandler.js';
@@ -9,27 +9,36 @@ const useChats = () => {
     const { handleTokenErrors } = useTokenErrorHandler();
     const { toast } = useContext(ToastContext);
 
-    useEffect(() => {
-        const abortController = new AbortController();
-        const getChats = async () => {
+    const getChats = useCallback(
+        async (signal) => {
             try {
                 setIsLoading(true);
-                const data = await fetchChats(abortController.signal);
+                const data = await fetchChats(signal);
                 setChats(data);
             } catch (error) {
                 handleTokenErrors(error);
-                toast('Unable to fetch chats')
+                toast('Unable to fetch chats');
             } finally {
                 setIsLoading(false);
             }
-        };
+        },
+        [handleTokenErrors, toast]
+    );
 
-        getChats();
+    const refetch = async () => {
+        const abortController = new AbortController();
+        getChats(abortController.signal);
+    };
+
+    useEffect(() => {
+        const abortController = new AbortController();
+
+        getChats(abortController.signal);
 
         return () => abortController.abort();
-    }, [handleTokenErrors, toast]);
+    }, [getChats]);
 
-    return { chats, isLoading };
+    return { chats, isLoading, refetch };
 };
 
 export { useChats };

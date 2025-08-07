@@ -1,20 +1,17 @@
 import { useContext, useState, Fragment } from 'react';
-import { useChats } from '../hooks/useChats.js';
 import { CurrentContext } from '../contexts/CurrentProvider.jsx';
 import { ChatsListItem } from './ChatsListItem.jsx';
 import { ChatsLoading } from './ChatsLoading.jsx';
 import newChatIcon from '../assets/svgs/edit-square.svg';
 
-const Chats = ({ openNewChatModal }) => {
-  const { chats, isLoading } = useChats();
+const Chats = ({ chats, isLoading, openNewChatModal }) => {
   const { username } = useContext(CurrentContext);
   const [filter, setFilter] = useState('');
 
   // search filter
+  const normalizedFilter = filter.trim().toLowerCase();
   const filteredChats = chats
-    ? chats.filter((chat) =>
-        chat.name.toLowerCase().includes(filter.trim().toLowerCase())
-      )
+    ? chats.filter((chat) => chat.name.toLowerCase().includes(normalizedFilter))
     : [];
 
   return (
@@ -39,7 +36,6 @@ const Chats = ({ openNewChatModal }) => {
         <ul>
           {isLoading && <ChatsLoading />}
           {!isLoading &&
-            filteredChats &&
             filteredChats.map((chat) => (
               <Fragment key={chat.id}>
                 <ChatsListItem

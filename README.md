@@ -69,8 +69,6 @@
 - server
 
 - client            
-    - refresh aside on create chat
-
     - what to display if cannot react img src?
     - notifications behind profile avatar
 

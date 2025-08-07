@@ -6,7 +6,7 @@ import { CreateChatListItem } from './CreateChatListItem.jsx';
 import { CreateChatLoading } from './CreateChatLoading.jsx';
 import { LabelledInput } from './LabelledInput.jsx';
 
-const CreateChatForm = ( {onSubmit}) => {
+const CreateChatForm = ({ onSubmit }) => {
   const navigate = useNavigate();
   const { users, isLoading } = useUsers();
   const { createChat, isLoading: isCreatingChat } = useCreateChat();
