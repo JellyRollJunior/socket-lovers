@@ -15,6 +15,8 @@ const createChat = async (req, res, next) => {
     try {
         validateInput(req);
         const userIdArray = [...req.body.userIds, req.user.id];
+        const existingChat = await chatQueries.getChatBySignature(userIdArray);
+        if (existingChat) return res.json(existingChat);
         const name = req.body.name ? req.body.name : null;
         const chat = await chatQueries.createChat(name, userIdArray);
         res.json(chat);

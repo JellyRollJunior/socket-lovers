@@ -75,9 +75,6 @@
     - static chat item height -> make overflow ...
 
 - more features
-    - 1 chat per user / group (?)
-        - on chat create, query user signature to see if chat already exist
-            - if exists, return this chat instead, else create
     - group chats
     - public chats (?)
 

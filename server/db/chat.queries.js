@@ -86,6 +86,21 @@ const getChat = async (chatId, userId) => {
     }
 };
 
+const getChatBySignature = async (userIdArray) => {
+    try {
+        if (!userIdArray || !Array.isArray(userIdArray)) return null;
+        const signature = userIdArray.sort().join(':');
+        const chat = await prisma.chat.findFirst({
+            where: {
+                signature,
+            },
+        });
+        return chat;
+    } catch (error) {
+        throw new DatabaseError('Unable to create chat');
+    }
+};
+
 const createChat = async (name, userIdArray) => {
     try {
         const sortedIds = userIdArray.sort();
@@ -114,4 +129,4 @@ const createChat = async (name, userIdArray) => {
     }
 };
 
-export { getChats, getChat, createChat };
+export { getChats, getChat, getChatBySignature, createChat };
