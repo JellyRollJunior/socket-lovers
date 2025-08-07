@@ -56,7 +56,7 @@
     - Extracting API logic away from components (My code is so clean now!)
     - vite default env variables!
     - first time using tailwind! I like it :)
-    - Creating my own loading animations!
+    - Creating my own loading animations (more elaborate and fitting the UI)!
 
 ### Retrospective aka yapping
 
@@ -75,7 +75,6 @@
     - chats don't need a name
     - group chats
     - public chats (?)
-    - server 404 response
 
 #### Data
 

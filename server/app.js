@@ -17,7 +17,7 @@ app.use('/users', userRouter);
 app.use('/chats', chatRouter);
 
 // errors
+app.use(/(.*)/, error404Handler);
 app.use(errorHandler);
-app.use(error404Handler);
 
 export { app };
