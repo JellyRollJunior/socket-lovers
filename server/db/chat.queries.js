@@ -44,14 +44,6 @@ const getChat = async (chatId, userId) => {
     // Retrieve messages
     try {
         const chat = await prisma.chat.findFirst({
-            where: {
-                id: chatId,
-                users: {
-                    some: {
-                        id: userId,
-                    },
-                },
-            },
             select: {
                 id: true,
                 name: true,
@@ -78,6 +70,14 @@ const getChat = async (chatId, userId) => {
                     },
                 },
             },
+            where: {
+                id: chatId,
+                users: {
+                    some: {
+                        id: userId,
+                    },
+                },
+            },
         });
         if (!chat) throw new Error();
         return chat;
@@ -88,10 +88,13 @@ const getChat = async (chatId, userId) => {
 
 const createChat = async (name, userIdArray) => {
     try {
-        const userIdObjectArray = userIdArray.map((id) => ({ id }));
+        const sortedIds = userIdArray.sort();
+        const signature = sortedIds.join(':');
+        const userIdObjectArray = sortedIds.map((id) => ({ id }));
         const chat = await prisma.chat.create({
             data: {
                 name,
+                signature,
                 users: {
                     connect: userIdObjectArray,
                 },

@@ -70,11 +70,12 @@
     - order chats by some ordering
 
 - client
+    - visiting URL without a real chat -> redirect to index
+        - ex: http://localhost:5173/chats/fake-ID
+    - static chat item height -> make overflow ...
 
 - more features
     - 1 chat per user / group (?)
-        - user signature
-            - setup user signature on chat create [a, b, c] => sort().join(:)
         - on chat create, query user signature to see if chat already exist
             - if exists, return this chat instead, else create
     - group chats
