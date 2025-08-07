@@ -46,7 +46,6 @@ const CreateChatForm = ({ onSubmit }) => {
       <ul className="scrollbar-thin mt-1 h-40 overflow-scroll">
         {isLoading && <CreateChatLoading />}
         {!isLoading &&
-          filteredUsers &&
           filteredUsers.map((user) => (
             <Fragment key={user.id}>
               <CreateChatListItem
@@ -67,11 +66,12 @@ const CreateChatForm = ({ onSubmit }) => {
         placeholder="Search"
       />
       <LabelledInput
-        id="Conversation name"
+        id="Conversation name (optional)"
         value={name}
         onChange={(event) => setName(event.target.value)}
         minLength={1}
         maxLength={24}
+        isRequired={false}
       />
       <footer className="mt-3">
         <button

@@ -68,11 +68,11 @@
 
 - server
 
-- client            
+- client
+    - deselect user on create chat modal on chat create
 
 - more features
     - 1 chat per user / group (?)
-    - chats don't need a name
     - group chats
     - public chats (?)
 

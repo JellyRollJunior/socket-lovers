@@ -6,6 +6,7 @@ const LabelledInput = ({
   maxLength,
   type = 'text',
   placeholder = '',
+  isRequired = true,
 }) => {
   return (
     <>
@@ -22,7 +23,7 @@ const LabelledInput = ({
         minLength={minlength}
         maxLength={maxLength}
         placeholder={placeholder}
-        required
+        required={isRequired}
       />
     </>
   );
