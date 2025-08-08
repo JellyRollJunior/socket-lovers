@@ -50,6 +50,7 @@
         - Resize, compress, and reformat the image to webp with sharp
         - Store on supabase with supabase storage
             - supabase: create project -> get url + key -> create bucket policy -> go nuts
+    - chat signatures to enforce one chat for each unique group of users
 
 - Frontend
     - Utilizing Socket.io-client to receive message updates
@@ -67,7 +68,6 @@
 ### TODO
 
 - server
-    - order chats by some ordering
 
 - client
     - visiting URL without a real chat -> redirect to index
