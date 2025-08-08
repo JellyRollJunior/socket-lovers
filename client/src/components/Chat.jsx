@@ -47,6 +47,11 @@ const Chat = () => {
   const openProfileModal = () => setIsProfileModalOpen(true);
   const closeProfileModal = () => setIsProfileModalOpen(false);
 
+  // rename chat modal
+  const [isRenameModalOpen, setIsRenameModalOpen] = useState(false);
+  const openRenameModal = () => setIsRenameModalOpen(true);
+  const closeRenameModal = () => setIsRenameModalOpen(false);
+
   return (
     <div className="flex h-full flex-col">
       <header className="border-b-1 flex gap-2 border-gray-500 px-4 py-4">
@@ -61,7 +66,7 @@ const Chat = () => {
         </div>
         <HeaderMenu>
           <HeaderMenuItem label="View profile" onClick={openProfileModal} />
-          <HeaderMenuItem label="Rename conversation" />
+          <HeaderMenuItem label="Rename conversation" onClick={openRenameModal} />
         </HeaderMenu>
       </header>
       <main
@@ -77,7 +82,8 @@ const Chat = () => {
         userId={chatters[0] ? chatters[0].id : null}
       />
       <ChatRenameModal
-        isOpen={true}
+        isOpen={isRenameModalOpen}
+        closeFunction={closeRenameModal}
         chatName={chat && chat.name ? chat.name : ''}
       />
     </div>
