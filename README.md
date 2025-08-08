@@ -68,7 +68,6 @@
 ### TODO
 
 - server
-    - chat name validations
 
 - client
     - chats/chatId route fakeChatId as real uuid could result in non validation error

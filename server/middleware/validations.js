@@ -3,6 +3,7 @@ import { validationResult } from 'express-validator';
 import { ValidationError } from '../errors/ValidationError.js';
 const EMPTY_ERROR = 'must not be empty.';
 const CREDENTIAL_LENGTH_ERROR = 'must be between 6 and 24 characters';
+const CHAT_NAME_LENGTH_ERROR = 'must be a maximum of 32 characters';
 const ARRAY_ERROR = 'must be an array of user ids.';
 const UUID_ERROR = 'must be a user id.';
 const LENGTH_ERROR_350 = 'must be between 1 and 350 characters'
@@ -20,6 +21,11 @@ const chatIdValidations = [
     check('chatId')
         .isUUID().withMessage(`chat id ${UUID_ERROR}`),
 ];
+
+const chatNameValidations = [
+    check('name').optional().trim()
+        .isLength({ min: 0, max: 32 }).withMessage(`Chat name ${CHAT_NAME_LENGTH_ERROR}`)
+]
 
 const chatValidations = [
     check('userIds')
@@ -44,6 +50,7 @@ const validateInput = (req) => {
 export {
     userValidation, 
     chatIdValidations, 
+    chatNameValidations,
     chatValidations, 
     bioValidations,
     validateInput,
