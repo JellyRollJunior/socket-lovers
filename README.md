@@ -71,6 +71,10 @@
 
 - client
 
+- more features
+    - rename chat
+    - delete chat
+
 #### Data
 
 users:
