@@ -1,5 +1,5 @@
 import { useContext, useEffect, useRef, useState } from 'react';
-import { useParams } from 'react-router';
+import { useNavigate, useParams } from 'react-router';
 import { useChat } from '../hooks/useChat.js';
 import { CurrentContext } from '../contexts/CurrentProvider.jsx';
 import { useJoinRoom } from '../hooks/useJoinRoom.js';
@@ -10,10 +10,14 @@ import { HeaderMenu } from './HeaderMenu.jsx';
 import { HeaderMenuItem } from './HeaderMenuItem.jsx';
 
 const Chat = () => {
+  const navigate = useNavigate();
   const { chatId } = useParams();
   const { id, username } = useContext(CurrentContext);
-  const { chat, messages, isLoading, sendMessage } = useChat(chatId);
+  const { chat, messages, sendMessage, isLoading, error } = useChat(chatId);
   const [text, setText] = useState('');
+
+  // if invalid chatId, go to index
+  if (error == 'Chat Id error') navigate('/');
 
   const handleSendMessage = (event) => {
     event.preventDefault();

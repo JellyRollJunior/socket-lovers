@@ -23,6 +23,7 @@ const useChat = (chatId) => {
     const [chat, setChat] = useState([]);
     const [messages, setMessages] = useState([]);
     const [isLoading, setIsLoading] = useState(false);
+    const [error, setError] = useState(null);
     const { handleTokenErrors } = useTokenErrorHandler();
     const { toast } = useContext(ToastContext);
     const { socketErrorHandler } = useSocketErrorHandler();
@@ -37,10 +38,11 @@ const useChat = (chatId) => {
                 const chat = await fetchChat(chatId, abortController.signal);
                 setChat({ id: chat.id, name: chat.name, users: chat.users });
                 setMessages(chat.messages);
+                setError(null)
             } catch (error) {
                 handleTokenErrors(error);
                 toast('Unable to fetch chat');
-                console.log(error);
+                if (error.name == 'Validation Error') setError('Chat Id error');
             } finally {
                 setIsLoading(false);
             }
@@ -70,7 +72,7 @@ const useChat = (chatId) => {
         setMessages((prev) => [...prev, createMessage(id, username, text)]);
     };
 
-    return { chat, messages, sendMessage, isLoading };
+    return { chat, messages, sendMessage, isLoading, error };
 };
 
 export { useChat };

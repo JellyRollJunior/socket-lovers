@@ -70,8 +70,6 @@
 - server
 
 - client
-    - visiting URL without a real chat -> redirect to index
-        - ex: http://localhost:5173/chats/fake-ID
     - static chat item height -> make overflow ...
 
 - more features
