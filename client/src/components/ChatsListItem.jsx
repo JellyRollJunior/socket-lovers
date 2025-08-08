@@ -45,9 +45,9 @@ const ChatsListItem = ({
     <li className="px-4 py-2 hover:bg-gray-200">
       <Link className="flex gap-2" to={`/chats/${chatId}`}>
         <Avatar users={users} />
-        <div className="flex min-w-0 flex-col">
+        <div className="-mt-0.5 flex min-w-0 flex-col self-center leading-[1.2]">
           <h4 className="truncate text-lg font-medium">{chatName}</h4>
-          <p className="-mt-0.5 truncate">{latestMessageContent}</p>
+          <p className="-mt-1 truncate">{latestMessageContent}</p>
           <p className="text-sm text-gray-700">{formattedDate}</p>
         </div>
       </Link>

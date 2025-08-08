@@ -20,18 +20,19 @@
 
 ### Endpoints
 
-| Method | URI                   | Function               | Token | Body                                | Notes |
-| ------ | --------------------- | ---------------------- | ----- | ----------------------------------- | ----- |
-| POST   | /signup               | Create user            | N     | { username, password}               |       |
-| POST   | /login                | Login user             | N     | { username, password}               |       |
-| GET    | /current              | Retrieve current user  | Y     |                                     |       |
-| GET    | /users                | Retrieve all users     | Y     |                                     |       |
-| GET    | /users/:userId        | Retrieve user data     | Y     |                                     |       |
-| PATCH  | /users/:userId        | Update bio             | Y     | { bio }                             |       |
-| PATCH  | /users/:userId/avatar | Update profile picture | Y     | { avatar }                          |       |
-| GET    | /chats                | Retrieve chats         | Y     |                                     |       |
-| POST   | /chats                | Create chat            | Y     | { name, userIds: ['id_1', 'id_2'] } |       |
-| GET    | /chats/:chatId        | Retrieve chat          | Y     |                                     |       |
+| Method | URI                   | Function               | Token | Body                                | Notes         |
+| ------ | --------------------- | ---------------------- | ----- | ----------------------------------- | ------------- |
+| POST   | /signup               | Create user            | N     | { username, password}               |               |
+| POST   | /login                | Login user             | N     | { username, password}               |               |
+| GET    | /current              | Retrieve current user  | Y     |                                     |               |
+| GET    | /users                | Retrieve all users     | Y     |                                     |               |
+| GET    | /users/:userId        | Retrieve user data     | Y     |                                     |               |
+| PATCH  | /users/:userId        | Update bio             | Y     | { bio }                             |               |
+| PATCH  | /users/:userId/avatar | Update profile picture | Y     | { avatar }                          |               |
+| GET    | /chats                | Retrieve chats         | Y     |                                     |               |
+| POST   | /chats                | Create chat            | Y     | { name, userIds: ['id_1', 'id_2'] } |               |
+| GET    | /chats/:chatId        | Retrieve chat          | Y     |                                     |               |
+| PATCH  | /chats/:chatId        | Update chat name       | Y     | { name}                             | name optional |
 
 | Socket Event    | Arguments      | Use                           |
 | --------------- | -------------- | ----------------------------- |
