@@ -8,7 +8,7 @@ import { HeaderMenu } from './HeaderMenu.jsx';
 import { HeaderMenuItem } from './HeaderMenuItem.jsx';
 import { Messages } from './Messages.jsx';
 import { ChatMessageInput } from './ChatMessageInput.jsx';
-import { ProfileModal } from './ProfileModal.jsx';
+import { ChatProfileModal } from './ChatProfileModal.jsx';
 
 const Chat = () => {
   const navigate = useNavigate();
@@ -60,7 +60,7 @@ const Chat = () => {
         </div>
         <HeaderMenu>
           <HeaderMenuItem label="View profile" onClick={openProfileModal} />
-          <HeaderMenuItem label="Edit chat name" />
+          <HeaderMenuItem label="Rename chat" />
         </HeaderMenu>
       </header>
       <main
@@ -70,7 +70,7 @@ const Chat = () => {
         <Messages messages={messages} isLoading={isLoading} />
       </main>
       <ChatMessageInput sendMessage={sendMessage} />
-      <ProfileModal
+      <ChatProfileModal
         isOpen={isProfileModalOpen}
         closeFunction={closeProfileModal}
         userId={chatters[0] ? chatters[0].id : null}

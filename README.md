@@ -71,9 +71,7 @@
 - server
 
 - client
-    - extract message form input
     - refactor: chats/chatId route fakeChatId as real uuid could result in non validation error
-    - truncate chat page chat name
     - menu
         - open modal on menu click
     - edit name modal

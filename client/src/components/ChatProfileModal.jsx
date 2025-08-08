@@ -2,7 +2,7 @@ import { useUser } from '../hooks/useUser.js';
 import { ModalDialog } from './ModalDialog.jsx';
 import { Profile } from './Profile.jsx';
 
-const ProfileModal = ({ isOpen, closeFunction, userId }) => {
+const ChatProfileModal = ({ isOpen, closeFunction, userId }) => {
   const { user, isLoading } = useUser(userId);
 
   return (
@@ -20,4 +20,4 @@ const ProfileModal = ({ isOpen, closeFunction, userId }) => {
   );
 };
 
-export { ProfileModal };
+export { ChatProfileModal };
