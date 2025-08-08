@@ -1,7 +1,7 @@
 import { useContext, useState } from 'react';
 import { CurrentContext } from '../contexts/CurrentProvider.jsx';
 
-const Avatar = ({ users, avatar, size = 3 }) => {
+const Avatar = ({ users, avatar, size = 4.5 }) => {
   const { id } = useContext(CurrentContext);
   const [error, setError] = useState(false);
 

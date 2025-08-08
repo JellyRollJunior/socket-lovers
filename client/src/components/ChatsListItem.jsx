@@ -35,17 +35,20 @@ const ChatsListItem = ({
     );
   }
 
+  const latestMessageContent = latestMessage
+    ? latestMessage.content
+    : 'start the conversation';
+  const formattedDate = latestMessage
+    ? format(new Date(latestMessage.sendTime), 'MMM do • h:mmaaa')
+    : '';
   return (
     <li className="px-4 py-2 hover:bg-gray-200">
       <Link className="flex gap-2" to={`/chats/${chatId}`}>
         <Avatar users={users} />
-        <div className="flex flex-col">
-          <h4 className="text-lg font-medium">{chatName}</h4>
-          <p className="text-align -mt-1 items-start justify-self-start">
-            {latestMessage
-              ? `${latestMessage.content} • ${format(new Date(latestMessage.sendTime), 'MMM do • h:mmaaa')}`
-              : 'start the conversation'}
-          </p>
+        <div className="flex min-w-0 flex-col">
+          <h4 className="truncate text-lg font-medium">{chatName}</h4>
+          <p className="-mt-0.5 truncate">{latestMessageContent}</p>
+          <p className="text-sm text-gray-700">{formattedDate}</p>
         </div>
       </Link>
     </li>
