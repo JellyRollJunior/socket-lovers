@@ -8,5 +8,6 @@ const chatRouter = Router();
 chatRouter.get('/', authenticateToken, chatController.getChats);
 chatRouter.post('/', authenticateToken, chatValidations, chatController.createChat);
 chatRouter.get('/:chatId', authenticateToken, chatIdValidations, chatController.getChat);
+chatRouter.patch('/:chatId', authenticateToken, chatIdValidations, chatController.updateChatName);
 
 export { chatRouter };

@@ -68,8 +68,14 @@
 ### TODO
 
 - server
+    - chat name validations
 
 - client
+    - chats/chatId route fakeChatId as real uuid could result in non validation error
+    - truncate chat page chat name
+    - menu
+    - modal
+    - update chats on submit
 
 - more features
     - rename chat

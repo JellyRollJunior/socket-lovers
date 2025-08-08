@@ -11,6 +11,17 @@ const getChats = async (req, res, next) => {
     }
 };
 
+const getChat = async (req, res, next) => {
+    try {
+        validateInput(req);
+        const { chatId } = req.params;
+        const chat = await chatQueries.getChat(chatId, req.user.id);
+        res.json(chat);
+    } catch (error) {
+        next(error);
+    }
+};
+
 const createChat = async (req, res, next) => {
     try {
         validateInput(req);
@@ -25,15 +36,16 @@ const createChat = async (req, res, next) => {
     }
 };
 
-const getChat = async (req, res, next) => {
+const updateChatName = async (req, res, next) => {
     try {
         validateInput(req);
         const { chatId } = req.params;
-        const chat = await chatQueries.getChat(chatId, req.user.id);
+        const name = req.body.name ? req.body.name : null;
+        const chat = await chatQueries.updateChatName(chatId, name, req.user.id);
         res.json(chat);
     } catch (error) {
         next(error);
     }
 };
 
-export { getChats, createChat, getChat };
+export { getChats, getChat, createChat, updateChatName };
