@@ -73,8 +73,7 @@ const CreateChatForm = ({ onSubmit }) => {
         id="Conversation name (optional)"
         value={name}
         onChange={(event) => setName(event.target.value)}
-        minLength={1}
-        maxLength={24}
+        maxLength={32}
         isRequired={false}
       />
       <footer className="mt-3">

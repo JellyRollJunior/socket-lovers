@@ -9,6 +9,7 @@ import { HeaderMenuItem } from './HeaderMenuItem.jsx';
 import { Messages } from './Messages.jsx';
 import { ChatMessageInput } from './ChatMessageInput.jsx';
 import { ChatProfileModal } from './ChatProfileModal.jsx';
+import { ChatRenameModal } from './ChatRenameModal.jsx';
 
 const Chat = () => {
   const navigate = useNavigate();
@@ -60,7 +61,7 @@ const Chat = () => {
         </div>
         <HeaderMenu>
           <HeaderMenuItem label="View profile" onClick={openProfileModal} />
-          <HeaderMenuItem label="Rename chat" />
+          <HeaderMenuItem label="Rename conversation" />
         </HeaderMenu>
       </header>
       <main
@@ -74,6 +75,10 @@ const Chat = () => {
         isOpen={isProfileModalOpen}
         closeFunction={closeProfileModal}
         userId={chatters[0] ? chatters[0].id : null}
+      />
+      <ChatRenameModal
+        isOpen={true}
+        chatName={chat && chat.name ? chat.name : ''}
       />
     </div>
   );
