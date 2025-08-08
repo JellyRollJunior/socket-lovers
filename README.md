@@ -71,10 +71,13 @@
 - server
 
 - client
-    - chats/chatId route fakeChatId as real uuid could result in non validation error
+    - extract message form input
+    - refactor: chats/chatId route fakeChatId as real uuid could result in non validation error
     - truncate chat page chat name
     - menu
-    - modal
+        - open modal on menu click
+    - edit name modal
+        - extract from create chat form
     - update chats on submit
 
 - more features

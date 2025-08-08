@@ -4,26 +4,20 @@ import { useChat } from '../hooks/useChat.js';
 import { CurrentContext } from '../contexts/CurrentProvider.jsx';
 import { useJoinRoom } from '../hooks/useJoinRoom.js';
 import { Avatar } from './Avatar.jsx';
-import { Messages } from './Messages.jsx';
-import { ProfileModal } from './ProfileModal.jsx';
 import { HeaderMenu } from './HeaderMenu.jsx';
 import { HeaderMenuItem } from './HeaderMenuItem.jsx';
+import { Messages } from './Messages.jsx';
+import { ChatMessageInput } from './ChatMessageInput.jsx';
+import { ProfileModal } from './ProfileModal.jsx';
 
 const Chat = () => {
   const navigate = useNavigate();
   const { chatId } = useParams();
-  const { id, username } = useContext(CurrentContext);
+  const { id } = useContext(CurrentContext);
   const { chat, messages, sendMessage, isLoading, error } = useChat(chatId);
-  const [text, setText] = useState('');
 
   // if invalid chatId, go to index
   if (error == 'Chat Id error') navigate('/');
-
-  const handleSendMessage = (event) => {
-    event.preventDefault();
-    sendMessage(id, username, text);
-    setText('');
-  };
 
   // join room on mount
   useJoinRoom(chatId);
@@ -48,9 +42,9 @@ const Chat = () => {
   const chatterNames = chatters.map((user) => user.username).join(', ');
 
   // profile modal
-  const [isModalOpen, setIsModalOpen] = useState(false);
-  const openProfileModal = () => setIsModalOpen(true);
-  const closeProfileModal = () => setIsModalOpen(false);
+  const [isProfileModalOpen, setIsProfileModalOpen] = useState(false);
+  const openProfileModal = () => setIsProfileModalOpen(true);
+  const closeProfileModal = () => setIsProfileModalOpen(false);
 
   return (
     <div className="flex h-full flex-col">
@@ -66,6 +60,7 @@ const Chat = () => {
         </div>
         <HeaderMenu>
           <HeaderMenuItem label="View profile" onClick={openProfileModal} />
+          <HeaderMenuItem label="Edit chat name" />
         </HeaderMenu>
       </header>
       <main
@@ -74,25 +69,9 @@ const Chat = () => {
       >
         <Messages messages={messages} isLoading={isLoading} />
       </main>
-      <form
-        className="mx-3 my-3 flex h-11 items-center gap-3 rounded-3xl border-2 border-gray-300 pl-3 pr-5"
-        onSubmit={handleSendMessage}
-      >
-        <input
-          className="h-7 w-full pl-1"
-          id="text"
-          type="text"
-          value={text}
-          onChange={(event) => setText(event.target.value)}
-          placeholder="Message..."
-          required
-        />
-        <button className="font-medium text-blue-500 hover:text-blue-400 hover:underline">
-          Send
-        </button>
-      </form>
+      <ChatMessageInput sendMessage={sendMessage} />
       <ProfileModal
-        isOpen={isModalOpen}
+        isOpen={isProfileModalOpen}
         closeFunction={closeProfileModal}
         userId={chatters[0] ? chatters[0].id : null}
       />
