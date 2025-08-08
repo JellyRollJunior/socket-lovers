@@ -12,19 +12,7 @@ const fetchChats = async (signal) => {
     return data.chats;
 };
 
-const fetchChat = async (chatId, signal) => {
-    const data = await request(`/chats/${chatId}`, {
-        mode: 'cors',
-        method: 'GET',
-        headers: {
-            'Content-Type': 'application/json',
-        },
-        signal,
-    });
-    return data;
-};
-
-const postChat = async (name, userIds) => {
+const postChats = async (name, userIds) => {
     const data = await request('/chats', {
         mode: 'cors',
         method: 'POST',
@@ -39,4 +27,30 @@ const postChat = async (name, userIds) => {
     return data;
 };
 
-export { fetchChats, fetchChat, postChat };
+const fetchChat = async (chatId, signal) => {
+    const data = await request(`/chats/${chatId}`, {
+        mode: 'cors',
+        method: 'GET',
+        headers: {
+            'Content-Type': 'application/json',
+        },
+        signal,
+    });
+    return data;
+};
+
+const patchChat = async (chatId, name) => {
+    const data = await request(`/chats/${chatId}`, {
+        mode: 'cors',
+        method: 'PATCH',
+        headers: {
+            'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+            name,
+        }),
+    })
+    return data;
+}
+
+export { fetchChats, postChats, fetchChat, patchChat };

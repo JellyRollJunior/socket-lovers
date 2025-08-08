@@ -1,15 +1,24 @@
 import { useEffect, useState } from 'react';
 import { ModalDialog } from './ModalDialog.jsx';
 import { LabelledInput } from './LabelledInput.jsx';
+import { useRenameChat } from '../hooks/useRenameChat.js';
+import { useParams } from 'react-router';
 
 const ChatRenameModal = ({ isOpen, closeFunction, chatName }) => {
+  const { chatId } = useParams();
+  const { renameChat, isLoading } = useRenameChat(chatId);
   const [name, setName] = useState('');
-  
+
   useEffect(() => {
     setName(chatName);
   }, [chatName]);
 
-  const handleRenameChat = () => {};
+  const handleRenameChat = async (event) => {
+    event.preventDefault();
+    const chat = await renameChat(name);
+
+    // refetch chat stuff (for home and for chats (could have to turn chats into a context atp))
+  };
 
   return (
     <ModalDialog isOpen={isOpen} closeFunction={closeFunction}>
@@ -28,7 +37,7 @@ const ChatRenameModal = ({ isOpen, closeFunction, chatName }) => {
         <footer className="mt-6">
           <button
             className="w-full rounded-md bg-blue-400 px-5 py-1.5 text-white hover:bg-blue-500 disabled:bg-gray-500 disabled:text-gray-100"
-            // disabled={isLoading}
+            disabled={isLoading}
           >
             Rename
           </button>
