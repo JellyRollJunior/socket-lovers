@@ -77,21 +77,28 @@
 ### TODO
 
 - server
-    - delete chat
-        - controller
-        - route
 
 - client
-    - delete chat
+    - initiate delete chat
         - menu
         - confirmation modal
-        - refetch chats on delte
-        - redirect to index
+        - refetch chats on delete (or manually update)
+        - redirect to index 
+    - receive delete chat
+        - if user is on /:chatId and tries to send message on deleted chat
+            - redirect to index
+            - toast chat.name has been deleted
+        - else, do nothing
+        - if user tries to click a deleted chat
+            - Change error Message: chat is unavailable or has been deleted 
+                - if unreachable server, unavailable
+                - if 404, chat does not exist
 
 - more features
     - turn create chat into socket event  
         - server: send chatId 
         - client: immediately add to chats on event received
+    - refresh button(?)
 
 - questions
     - what happens on sending message to invalid chatId that was deleted?
