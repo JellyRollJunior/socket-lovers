@@ -78,10 +78,8 @@
 
 - server
     - delete chat
-        - db
         - controller
         - route
-        - socket event -> display chat is deleted -> move used to index
 
 - client
     - delete chat
@@ -91,6 +89,9 @@
         - redirect to index
 
 - more features
+    - turn create chat into socket event  
+        - server: send chatId 
+        - client: immediately add to chats on event received
 
 - questions
     - what happens on sending message to invalid chatId that was deleted?

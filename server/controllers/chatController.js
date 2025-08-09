@@ -41,11 +41,26 @@ const updateChatName = async (req, res, next) => {
         validateInput(req);
         const { chatId } = req.params;
         const name = req.body.name ? req.body.name : null;
-        const chat = await chatQueries.updateChatName(chatId, name, req.user.id);
+        const chat = await chatQueries.updateChatName(
+            chatId,
+            name,
+            req.user.id
+        );
         res.json(chat);
     } catch (error) {
         next(error);
     }
 };
 
-export { getChats, getChat, createChat, updateChatName };
+const deleteChat = async (req, res, next) => {
+    try {
+        validateInput(req);
+        const { chatId } = req.params;
+        const chat = await chatQueries.deleteChat(chatId, req.user.id);
+        res.json(chat);
+    } catch (error) {
+        next(error);
+    }
+};
+
+export { getChats, getChat, createChat, updateChatName, deleteChat };

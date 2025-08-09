@@ -170,6 +170,14 @@ const deleteChat = async (chatId, userId) => {
                     },
                 },
             },
+            include: {
+                users: {
+                    select: {
+                        id: true,
+                        username: true,
+                    },
+                },
+            },
         });
         return data;
     } catch (error) {
