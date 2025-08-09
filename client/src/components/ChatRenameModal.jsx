@@ -4,7 +4,7 @@ import { LabelledInput } from './LabelledInput.jsx';
 import { useRenameChat } from '../hooks/useRenameChat.js';
 import { useParams } from 'react-router';
 
-const ChatRenameModal = ({ isOpen, closeFunction, chatName }) => {
+const ChatRenameModal = ({ isOpen, closeFunction, chatName, onSubmit }) => {
   const { chatId } = useParams();
   const { renameChat, isLoading } = useRenameChat(chatId);
   const [name, setName] = useState('');
@@ -16,8 +16,9 @@ const ChatRenameModal = ({ isOpen, closeFunction, chatName }) => {
   const handleRenameChat = async (event) => {
     event.preventDefault();
     const chat = await renameChat(name);
-
-    // refetch chat stuff (for home and for chats (could have to turn chats into a context atp))
+    onSubmit(chat.name);
+    // home -> update listed chats
+    closeFunction();
   };
 
   return (

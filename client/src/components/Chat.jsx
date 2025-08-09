@@ -15,7 +15,7 @@ const Chat = () => {
   const navigate = useNavigate();
   const { chatId } = useParams();
   const { id } = useContext(CurrentContext);
-  const { chat, messages, sendMessage, isLoading, error } = useChat(chatId);
+  const { chat, messages, sendMessage, updateChatName, isLoading, error } = useChat(chatId);
 
   // if invalid chatId, go to index
   if (error == 'Chat Id error') navigate('/');
@@ -51,6 +51,9 @@ const Chat = () => {
   const [isRenameModalOpen, setIsRenameModalOpen] = useState(false);
   const openRenameModal = () => setIsRenameModalOpen(true);
   const closeRenameModal = () => setIsRenameModalOpen(false);
+  const onSubmitRenameChat = (name) => {
+    updateChatName(name);
+  }
 
   return (
     <div className="flex h-full flex-col">
@@ -85,6 +88,7 @@ const Chat = () => {
         isOpen={isRenameModalOpen}
         closeFunction={closeRenameModal}
         chatName={chat && chat.name ? chat.name : ''}
+        onSubmit={onSubmitRenameChat}
       />
     </div>
   );

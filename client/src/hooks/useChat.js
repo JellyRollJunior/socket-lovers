@@ -72,7 +72,14 @@ const useChat = (chatId) => {
         setMessages((prev) => [...prev, createMessage(id, username, text)]);
     };
 
-    return { chat, messages, sendMessage, isLoading, error };
+    const updateChatName = (name) => {
+        setChat((prev) => {
+            prev.name = name;
+            return prev;
+        })
+    }
+
+    return { chat, messages, sendMessage, updateChatName, isLoading, error };
 };
 
 export { useChat };
