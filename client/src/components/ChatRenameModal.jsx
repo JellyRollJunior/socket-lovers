@@ -1,11 +1,13 @@
-import { useEffect, useState } from 'react';
+import { useContext, useEffect, useState } from 'react';
 import { ModalDialog } from './ModalDialog.jsx';
 import { LabelledInput } from './LabelledInput.jsx';
 import { useRenameChat } from '../hooks/useRenameChat.js';
 import { useParams } from 'react-router';
+import { ChatsContext } from '../contexts/ChatsProvider.jsx';
 
 const ChatRenameModal = ({ isOpen, closeFunction, chatName, onSubmit }) => {
   const { chatId } = useParams();
+  const { refetchChats } = useContext(ChatsContext);
   const { renameChat, isLoading } = useRenameChat(chatId);
   const [name, setName] = useState('');
 
@@ -17,7 +19,7 @@ const ChatRenameModal = ({ isOpen, closeFunction, chatName, onSubmit }) => {
     event.preventDefault();
     const chat = await renameChat(name);
     onSubmit(chat.name);
-    // home -> update listed chats
+    refetchChats();
     closeFunction();
   };
 

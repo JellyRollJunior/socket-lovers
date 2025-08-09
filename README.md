@@ -72,15 +72,10 @@
 
 - client
     - refactor: chats/chatId route fakeChatId as real uuid could result in non validation error
-    - update chats on submit
-        - move chats to a context
-        - make everything compatable with chats context
-        - refetch on submit
     - extract to hook
         - fetch current
 
 - more features
-    - rename chat
     - delete chat
 
 #### Data

@@ -1,13 +1,15 @@
-import { Fragment, useState } from 'react';
+import { Fragment, useContext, useState } from 'react';
 import { useNavigate } from 'react-router';
 import { useUsers } from '../hooks/useUsers.js';
 import { useCreateChat } from '../hooks/useCreateChat.js';
 import { CreateChatListItem } from './CreateChatListItem.jsx';
 import { CreateChatLoading } from './CreateChatLoading.jsx';
 import { LabelledInput } from './LabelledInput.jsx';
+import { ChatsContext } from '../contexts/ChatsProvider.jsx';
 
-const CreateChatForm = ({ onSubmit }) => {
+const CreateChatForm = ({ closeForm }) => {
   const navigate = useNavigate();
+  const { refetchChats } = useContext(ChatsContext);
   const { users, isLoading } = useUsers();
   const { createChat, isLoading: isCreatingChat } = useCreateChat();
   const [filter, setFilter] = useState('');
@@ -32,8 +34,8 @@ const CreateChatForm = ({ onSubmit }) => {
     // reset form
     setSelectedUsers('');
     setName('');
-    // handle chat creation
-    onSubmit();
+    closeForm();
+    refetchChats();
     navigate(`/chats/${data.id}`);
   };
 
