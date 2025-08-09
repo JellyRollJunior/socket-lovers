@@ -159,4 +159,29 @@ const updateChatName = async (chatId, name, userId) => {
     }
 };
 
-export { getChats, getChat, getChatBySignature, createChat, updateChatName };
+const deleteChat = async (chatId, userId) => {
+    try {
+        const data = await prisma.chat.delete({
+            where: {
+                id: chatId,
+                users: {
+                    some: {
+                        id: userId,
+                    },
+                },
+            },
+        });
+        return data;
+    } catch (error) {
+        throw new DatabaseError('Unable to delete chat');
+    }
+};
+
+export {
+    getChats,
+    getChat,
+    getChatBySignature,
+    createChat,
+    updateChatName,
+    deleteChat,
+};

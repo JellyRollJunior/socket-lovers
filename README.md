@@ -8,6 +8,14 @@
 
 ### Features
 
+- users
+    - username, bio, avatar
+    - edit bio, edit avatar
+
+- chats
+    - create, rename, delete
+    - send messages (realtime messaging with socket)
+
 ### App Showcase
 
 |                             |
@@ -69,11 +77,26 @@
 ### TODO
 
 - server
+    - delete chat
+        - db
+        - controller
+        - route
+        - socket event -> display chat is deleted -> move used to index
 
 - client
+    - delete chat
+        - menu
+        - confirmation modal
+        - refetch chats on delte
+        - redirect to index
 
 - more features
-    - delete chat
+
+- questions
+    - what happens on sending message to invalid chatId that was deleted?
+    - take a look at the socket error handling
+- login -> failed to fetch error
+- bug -> invalid id shit is broken
 
 #### Data
 
