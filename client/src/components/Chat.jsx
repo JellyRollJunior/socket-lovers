@@ -15,10 +15,15 @@ const Chat = () => {
   const navigate = useNavigate();
   const { chatId } = useParams();
   const { id } = useContext(CurrentContext);
-  const { chat, messages, sendMessage, updateChatName, isLoading, error } = useChat(chatId);
+  const { chat, messages, sendMessage, updateChatName, isLoading } =
+    useChat(chatId);
 
   // if invalid chatId, go to index
-  if (error == 'Chat Id error') navigate('/');
+  useEffect(() => {
+    if (!isLoading && !chat) {
+      navigate('/');
+    }
+  }, [isLoading, chat, navigate]);
 
   // join room on mount
   useJoinRoom(chatId);
@@ -51,9 +56,7 @@ const Chat = () => {
   const [isRenameModalOpen, setIsRenameModalOpen] = useState(false);
   const openRenameModal = () => setIsRenameModalOpen(true);
   const closeRenameModal = () => setIsRenameModalOpen(false);
-  const onSubmitRenameChat = (name) => {
-    updateChatName(name);
-  }
+  const onSubmitRenameChat = (name) => updateChatName(name);
 
   return (
     <div className="flex h-full flex-col">
@@ -69,7 +72,10 @@ const Chat = () => {
         </div>
         <HeaderMenu>
           <HeaderMenuItem label="View profile" onClick={openProfileModal} />
-          <HeaderMenuItem label="Rename conversation" onClick={openRenameModal} />
+          <HeaderMenuItem
+            label="Rename conversation"
+            onClick={openRenameModal}
+          />
         </HeaderMenu>
       </header>
       <main

@@ -71,9 +71,6 @@
 - server
 
 - client
-    - refactor: chats/chatId route fakeChatId as real uuid could result in non validation error
-    - extract to hook
-        - fetch current
 
 - more features
     - delete chat
