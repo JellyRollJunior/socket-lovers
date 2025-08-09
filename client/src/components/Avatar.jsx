@@ -2,7 +2,7 @@ import { useContext, useState } from 'react';
 import { CurrentContext } from '../contexts/CurrentProvider.jsx';
 
 const Avatar = ({ users, avatar, size = 4 }) => {
-  const { id } = useContext(CurrentContext);
+  const { id, avatar: myAvatar } = useContext(CurrentContext);
   const [error, setError] = useState(false);
 
   let src = null;
@@ -12,7 +12,7 @@ const Avatar = ({ users, avatar, size = 4 }) => {
       if (user.avatar && user.id != id) src = user.avatar;
     });
     // else if self chat, use avatar from current id
-    if (users.length == 1 && users[0].avatar) src = users[0].avatar;
+    if (users.length == 1 && users[0].avatar) src = myAvatar;
   }
 
   return (
