@@ -1,7 +1,5 @@
-import { createContext, useContext, useEffect, useState } from 'react';
-import { fetchCurrent } from '../services/userApi.js';
-import { ToastContext } from './ToastProvider.jsx';
-import { useTokenErrorHandler } from '../hooks/useTokenErrorHandler.js';
+import { createContext } from 'react';
+import { useCurrent } from '../hooks/useCurrent.js';
 
 const CurrentContext = createContext({
   id: null,
@@ -11,37 +9,8 @@ const CurrentContext = createContext({
 });
 
 const CurrentProvider = ({ children }) => {
-  const [id, setId] = useState(null);
-  const [username, setUsername] = useState(null);
-  const [bio, setBio] = useState(null);
-  const [avatar, setAvatar] = useState(null);
-  const [isLoading, setIsLoading] = useState(false);
-  const { handleTokenErrors } = useTokenErrorHandler();
-  const { toast } = useContext(ToastContext);
-
-  useEffect(() => {
-    const abortController = new AbortController();
-    const getCurrent = async () => {
-      try {
-        setIsLoading(true);
-        const current = await fetchCurrent(abortController.signal);
-        setId(current.id);
-        setUsername(current.username);
-        setBio(current.bio);
-        setAvatar(current.avatar);
-      } catch (error) {
-        // error notification
-        handleTokenErrors(error);
-        toast('unable to fetch user data');
-      } finally {
-        setIsLoading(false);
-      }
-    };
-
-    getCurrent();
-
-    return () => abortController.abort();
-  }, [handleTokenErrors, toast]);
+  const { id, username, bio, avatar, isLoading, setBio, setAvatar } =
+    useCurrent();
 
   return (
     <CurrentContext.Provider
