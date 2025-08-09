@@ -72,11 +72,12 @@
 
 - client
     - refactor: chats/chatId route fakeChatId as real uuid could result in non validation error
-    - menu
-        - open modal on menu click
-    - edit name modal
-        - extract from create chat form
     - update chats on submit
+        - move chats to a context
+        - make everything compatable with chats context
+        - refetch on submit
+    - extract to hook
+        - fetch current
 
 - more features
     - rename chat
