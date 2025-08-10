@@ -81,7 +81,9 @@
     - send this over on retrieve chat as well -> 
 - client
     - initiate delete chat
-        - confirmation modal
+        - api
+        - hook
+        - delete on confirm
         - refetch chats on delete (or manually update)
         - redirect to index 
     - receive delete chat

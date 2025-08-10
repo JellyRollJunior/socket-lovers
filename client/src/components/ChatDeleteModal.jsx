@@ -1,7 +1,7 @@
 import { ModalDialog } from './ModalDialog.jsx';
 import warning from '../assets/svgs/warning.svg';
 
-const ChatDeleteModal = ({ isOpen, closeFunction, chatId }) => {
+const ChatDeleteModal = ({ isOpen, closeFunction }) => {
   return (
     <ModalDialog isOpen={isOpen} closeFunction={closeFunction}>
       <form className="min-w-2xs flex flex-col">

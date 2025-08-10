@@ -4,9 +4,6 @@ const fetchChats = async (signal) => {
     const data = await request('/chats', {
         mode: 'cors',
         method: 'GET',
-        headers: {
-            'Content-Type': 'application/json',
-        },
         signal,
     });
     return data.chats;
@@ -31,9 +28,6 @@ const fetchChat = async (chatId, signal) => {
     const data = await request(`/chats/${chatId}`, {
         mode: 'cors',
         method: 'GET',
-        headers: {
-            'Content-Type': 'application/json',
-        },
         signal,
     });
     return data;
@@ -49,8 +43,16 @@ const patchChat = async (chatId, name) => {
         body: JSON.stringify({
             name,
         }),
-    })
+    });
     return data;
-}
+};
 
-export { fetchChats, postChats, fetchChat, patchChat };
+const deleteChat = async (chatId) => {
+    const data = await request(`/chats/${chatId}`, {
+        mode: 'cors',
+        method: 'DELETE',
+    });
+    return data;
+};
+
+export { fetchChats, postChats, fetchChat, patchChat, deleteChat };
