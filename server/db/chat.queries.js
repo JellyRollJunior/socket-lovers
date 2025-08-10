@@ -88,9 +88,12 @@ const getChat = async (chatId, userId) => {
                 },
             },
         });
-        if (!chat) throw new Error();
+        if (!chat) throw new Error('404');
         return chat;
     } catch (error) {
+        if (error.message == '404') {
+            throw new DatabaseError('Unable to retrieve chat', 404);
+        }
         throw new DatabaseError('Unable to retrieve chat');
     }
 };
@@ -183,7 +186,7 @@ const deleteChat = async (chatId, userId) => {
     } catch (error) {
         if (error.code == 'P2025') {
             // P2025: An operation failed because it depends on one or more records that were required but not found
-            throw new DatabaseError('Chat does not exist', 404);
+            throw new DatabaseError('Unable to delete chat', 404);
         }
         throw new DatabaseError('Unable to delete chat');
     }

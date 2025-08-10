@@ -77,7 +77,8 @@
 ### TODO
 
 - server
-
+    - p2025 error on create message -> send this over on create message
+    - send this over on retrieve chat as well -> 
 - client
     - initiate delete chat
         - menu
@@ -100,11 +101,12 @@
         - client: immediately add to chats on event received
     - refresh button(?)
 
+- todo
+    - bug: chats scroll x + scroll y
+
 - questions
     - what happens on sending message to invalid chatId that was deleted?
-    - take a look at the socket error handling
-- login -> failed to fetch error
-- bug -> invalid id shit is broken
+    - take a look at the socket error handling`
 
 #### Data
 

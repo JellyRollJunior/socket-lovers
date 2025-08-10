@@ -15,15 +15,16 @@ const Chat = () => {
   const navigate = useNavigate();
   const { chatId } = useParams();
   const { id } = useContext(CurrentContext);
-  const { chat, messages, sendMessage, updateChatName, isLoading } =
-    useChat(chatId);
+  const {
+    chat,
+    messages,
+    isLoading,
+    errorStatus,
+    sendMessage,
+    updateChatName,
+  } = useChat(chatId);
 
-  // if invalid chatId, go to index
-  useEffect(() => {
-    if (!isLoading && !chat) {
-      navigate('/');
-    }
-  }, [isLoading, chat, navigate]);
+  if (errorStatus == 400 || errorStatus == 404) navigate('/');
 
   // join room on mount
   useJoinRoom(chatId);

@@ -23,6 +23,7 @@ const useChat = (chatId) => {
     const [chat, setChat] = useState(null);
     const [messages, setMessages] = useState([]);
     const [isLoading, setIsLoading] = useState(false);
+    const [errorStatus, setErrorStatus] = useState(null);
     const { handleTokenErrors } = useTokenErrorHandler();
     const { toast } = useContext(ToastContext);
     const { socketErrorHandler } = useSocketErrorHandler();
@@ -37,8 +38,10 @@ const useChat = (chatId) => {
                 const chat = await fetchChat(chatId, abortController.signal);
                 setChat({ id: chat.id, name: chat.name, users: chat.users });
                 setMessages(chat.messages);
+                setErrorStatus(null);
             } catch (error) {
                 handleTokenErrors(error);
+                setErrorStatus(error.status);
                 toast('Unable to fetch chat');
             } finally {
                 setIsLoading(false);
@@ -73,10 +76,17 @@ const useChat = (chatId) => {
         setChat((prev) => {
             prev.name = name;
             return prev;
-        })
-    }
+        });
+    };
 
-    return { chat, messages, sendMessage, updateChatName, isLoading };
+    return {
+        chat,
+        messages,
+        sendMessage,
+        updateChatName,
+        isLoading,
+        errorStatus,
+    };
 };
 
 export { useChat };
