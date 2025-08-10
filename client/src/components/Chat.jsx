@@ -10,6 +10,7 @@ import { Messages } from './Messages.jsx';
 import { ChatMessageInput } from './ChatMessageInput.jsx';
 import { ChatProfileModal } from './ChatProfileModal.jsx';
 import { ChatRenameModal } from './ChatRenameModal.jsx';
+import { ChatDeleteModal } from './ChatDeleteModal.jsx';
 
 const Chat = () => {
   const navigate = useNavigate();
@@ -23,7 +24,6 @@ const Chat = () => {
     sendMessage,
     updateChatName,
   } = useChat(chatId);
-
   if (errorStatus == 400 || errorStatus == 404) navigate('/');
 
   // join room on mount
@@ -59,6 +59,12 @@ const Chat = () => {
   const closeRenameModal = () => setIsRenameModalOpen(false);
   const onSubmitRenameChat = (name) => updateChatName(name);
 
+  // rename chat modal
+  const [isDeleteModalOpen, setIsDeleteModalOpen] = useState(false);
+  const openDeleteModal = () => setIsDeleteModalOpen(true);
+  const closeDeleteModal = () => setIsDeleteModalOpen(false);
+  // const onSubmitDeleteChat = (chatId) => deleteChat(chatId);
+
   return (
     <div className="flex h-full flex-col">
       <header className="border-b-1 flex gap-2 border-gray-500 px-4 py-4">
@@ -76,6 +82,10 @@ const Chat = () => {
           <HeaderMenuItem
             label="Rename conversation"
             onClick={openRenameModal}
+          />
+          <HeaderMenuItem
+            label="Delete converstation"
+            onClick={openDeleteModal}
           />
         </HeaderMenu>
       </header>
@@ -96,6 +106,11 @@ const Chat = () => {
         closeFunction={closeRenameModal}
         chatName={chat && chat.name ? chat.name : ''}
         onSubmit={onSubmitRenameChat}
+      />
+      <ChatDeleteModal
+        isOpen={isDeleteModalOpen}
+        closeFunction={closeDeleteModal}
+        chatId={chatId}
       />
     </div>
   );

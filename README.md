@@ -81,7 +81,6 @@
     - send this over on retrieve chat as well -> 
 - client
     - initiate delete chat
-        - menu
         - confirmation modal
         - refetch chats on delete (or manually update)
         - redirect to index 
@@ -89,11 +88,6 @@
         - if user is on /:chatId and tries to send message on deleted chat
             - redirect to index
             - toast chat.name has been deleted
-        - else, do nothing
-        - if user tries to click a deleted chat
-            - Change error Message: chat is unavailable or has been deleted 
-                - if unreachable server, unavailable
-                - if 404, chat does not exist
 
 - more features
     - turn create chat into socket event  
