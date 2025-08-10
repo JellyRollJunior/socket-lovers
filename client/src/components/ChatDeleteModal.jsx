@@ -1,10 +1,26 @@
+import { useContext } from 'react';
+import { useNavigate } from 'react-router';
+import { ChatsContext } from '../contexts/ChatsProvider.jsx';
+import { useDeleteChat } from '../hooks/useDeleteChat.js';
 import { ModalDialog } from './ModalDialog.jsx';
 import warning from '../assets/svgs/warning.svg';
 
-const ChatDeleteModal = ({ isOpen, closeFunction }) => {
+const ChatDeleteModal = ({ isOpen, closeFunction, chatId }) => {
+  const navigate = useNavigate();
+  const { refetchChats } = useContext(ChatsContext);
+  const { deleteChat, isLoading } = useDeleteChat();
+
+  const handleDeleteChat = async (event) => {
+    event.preventDefault();
+    await deleteChat(chatId);
+    closeFunction();
+    refetchChats();
+    navigate('/');
+  };
+
   return (
     <ModalDialog isOpen={isOpen} closeFunction={closeFunction}>
-      <form className="min-w-2xs flex flex-col">
+      <form className="min-w-2xs flex flex-col" onSubmit={handleDeleteChat}>
         <h2 className="mb-1 self-center text-lg font-bold">
           Delete Conversation
         </h2>
@@ -27,7 +43,7 @@ const ChatDeleteModal = ({ isOpen, closeFunction }) => {
           </button>
           <button
             className="rounded-md bg-red-400 px-5 py-1.5 text-white hover:bg-blue-500 disabled:bg-gray-500 disabled:text-gray-100"
-            // disabled={isLoading}
+            disabled={isLoading}
           >
             Delete
           </button>

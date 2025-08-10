@@ -6,9 +6,6 @@ const fetchCurrent = async (signal) => {
         {
             mode: 'cors',
             method: 'GET',
-            headers: {
-                'Content-Type': 'application/json',
-            },
             signal,
         },
         true
@@ -22,9 +19,6 @@ const fetchUsers = async (signal) => {
         {
             mode: 'cors',
             method: 'GET',
-            headers: {
-                'Content-Type': 'application/json',
-            },
             signal,
         },
         true
@@ -38,9 +32,6 @@ const fetchUser = async (signal, userId) => {
         {
             mode: 'cors',
             method: 'GET',
-            headers: {
-                'Content-Type': 'application/json',
-            },
             signal,
         },
         true

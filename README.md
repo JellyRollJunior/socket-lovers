@@ -80,12 +80,6 @@
     - p2025 error on create message -> send this over on create message
     - send this over on retrieve chat as well -> 
 - client
-    - initiate delete chat
-        - api
-        - hook
-        - delete on confirm
-        - refetch chats on delete (or manually update)
-        - redirect to index 
     - receive delete chat
         - if user is on /:chatId and tries to send message on deleted chat
             - redirect to index
@@ -99,6 +93,7 @@
 
 - todo
     - bug: chats scroll x + scroll y
+    - bug: rename chat -> refetch chat?
 
 - questions
     - what happens on sending message to invalid chatId that was deleted?
