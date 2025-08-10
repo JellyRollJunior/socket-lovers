@@ -61,11 +61,7 @@ const getChat = async (chatId, userId) => {
                         id: true,
                         content: true,
                         sendTime: true,
-                        sender: {
-                            select: {
-                                id: true,
-                            },
-                        },
+                        senderId: true,
                     },
                     orderBy: {
                         sendTime: 'asc',

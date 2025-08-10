@@ -81,15 +81,16 @@
     - send this over on retrieve chat as well -> 
 - client
     - receive delete chat
+        - see what happens when sending message to invalid chat ID
+            - send error code of 404 if chat not found (or whatever code)
+            - if code, redirect to index chat has been delted toast 
         - if user is on /:chatId and tries to send message on deleted chat
             - redirect to index
             - toast chat.name has been deleted
 
 - more features
-    - turn create chat into socket event  
-        - server: send chatId 
-        - client: immediately add to chats on event received
     - refresh button(?)
+    - display avatar on message
 
 - todo
     - bug: chats scroll x + scroll y
