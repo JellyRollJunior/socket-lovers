@@ -1,5 +1,6 @@
 import { useContext, useState, Fragment } from 'react';
 import { CurrentContext } from '../contexts/CurrentProvider.jsx';
+import { ChatsContext } from '../contexts/ChatsProvider.jsx'
 import { ChatsListItem } from './ChatsListItem.jsx';
 import { ChatsLoading } from './ChatsLoading.jsx';
 import newChatIcon from '../assets/svgs/edit-square.svg';
@@ -9,6 +10,7 @@ import { motion } from 'motion/react';
 
 const Chats = ({ chats, isLoading, openNewChatModal }) => {
   const { id, username } = useContext(CurrentContext);
+  const { refetchChats } = useContext(ChatsContext)
   const [filter, setFilter] = useState('');
 
   // add chat names to null chat names
@@ -68,6 +70,7 @@ const Chats = ({ chats, isLoading, openNewChatModal }) => {
             },
           }}
           className="mr-6.5 rounded-2xl px-1 py-1 hover:bg-gray-200"
+          onClick={refetchChats}
         >
           <img src={refreshIcon} alt="Refresh icon" />
         </motion.button>
