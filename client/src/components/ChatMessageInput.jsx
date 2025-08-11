@@ -1,7 +1,7 @@
 import { useContext, useState } from 'react';
 import { CurrentContext } from '../contexts/CurrentProvider.jsx';
 
-const ChatMessageInput = ({ sendMessage }) => {
+const ChatMessageInput = ({ sendMessage, isDisabled = false }) => {
   const { id, username } = useContext(CurrentContext);
   const [text, setText] = useState('');
 
@@ -25,7 +25,10 @@ const ChatMessageInput = ({ sendMessage }) => {
         placeholder="Message..."
         required
       />
-      <button className="font-medium text-blue-500 hover:text-blue-400 hover:underline">
+      <button
+        className="font-medium text-blue-500 hover:text-blue-400 hover:underline disabled:text-gray-400"
+        disabled={isDisabled}
+      >
         Send
       </button>
     </form>

@@ -36,7 +36,7 @@ const MessagesLoadingAnimation = () => {
   );
 };
 
-const Messages = ({ messages, isLoading = false }) => {
+const ChatMessages = ({ messages, isLoading = false }) => {
   const { id } = useContext(CurrentContext);
 
   // if (last message time - current message time) >= 12hr, show timestamp element
@@ -75,4 +75,4 @@ const Messages = ({ messages, isLoading = false }) => {
   );
 };
 
-export { Messages };
+export { ChatMessages };

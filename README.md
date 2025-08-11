@@ -84,9 +84,6 @@
     - refresh button(?)
     - display avatar on message
 
-- todo
-    - disable send message on loading
-
 #### Data
 
 users:

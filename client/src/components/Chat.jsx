@@ -6,7 +6,7 @@ import { useJoinRoom } from '../hooks/useJoinRoom.js';
 import { Avatar } from './Avatar.jsx';
 import { HeaderMenu } from './HeaderMenu.jsx';
 import { HeaderMenuItem } from './HeaderMenuItem.jsx';
-import { Messages } from './Messages.jsx';
+import { ChatMessages } from './ChatMessages.jsx';
 import { ChatMessageInput } from './ChatMessageInput.jsx';
 import { ChatProfileModal } from './ChatProfileModal.jsx';
 import { ChatRenameModal } from './ChatRenameModal.jsx';
@@ -59,11 +59,10 @@ const Chat = () => {
   const closeRenameModal = () => setIsRenameModalOpen(false);
   const onSubmitRenameChat = (name) => updateChatName(name);
 
-  // rename chat modal
+  // delete chat modal
   const [isDeleteModalOpen, setIsDeleteModalOpen] = useState(false);
   const openDeleteModal = () => setIsDeleteModalOpen(true);
   const closeDeleteModal = () => setIsDeleteModalOpen(false);
-  // const onSubmitDeleteChat = (chatId) => deleteChat(chatId);
 
   return (
     <div className="flex h-full flex-col">
@@ -93,9 +92,9 @@ const Chat = () => {
         ref={scrollContainerRef}
         className="scrollbar-thin flex-1 overflow-y-scroll pl-3 pr-4 pt-3"
       >
-        <Messages messages={messages} isLoading={isLoading} />
+        <ChatMessages messages={messages} isLoading={isLoading} />
       </main>
-      <ChatMessageInput sendMessage={sendMessage} />
+      <ChatMessageInput sendMessage={sendMessage} isDisabled={isLoading} />
       <ChatProfileModal
         isOpen={isProfileModalOpen}
         closeFunction={closeProfileModal}
