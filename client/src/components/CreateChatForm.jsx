@@ -49,7 +49,7 @@ const CreateChatForm = ({ closeForm }) => {
           {isSelectErrorShown && ' — Please select a chat partner'}
         </span>
       </label>
-      <ul className="scrollbar-thin mt-1 h-40 overflow-scroll">
+      <ul className="scrollbar-thin mt-1 h-40 overflow-y-scroll">
         {isLoading && <CreateChatLoading />}
         {!isLoading &&
           filteredUsers.map((user) => (

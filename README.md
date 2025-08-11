@@ -40,7 +40,7 @@
 | GET    | /chats                | Retrieve chats         | Y     |                                     |               |
 | POST   | /chats                | Create chat            | Y     | { name, userIds: ['id_1', 'id_2'] } |               |
 | GET    | /chats/:chatId        | Retrieve chat          | Y     |                                     |               |
-| PATCH  | /chats/:chatId        | Update chat name       | Y     | { name}                             | name optional |
+| PATCH  | /chats/:chatId        | Update chat name       | Y     | { name }                            | name optional |
 
 | Socket Event    | Arguments      | Use                           |
 | --------------- | -------------- | ----------------------------- |
@@ -85,8 +85,6 @@
     - display avatar on message
 
 - todo
-    - bug: chats scroll x + scroll y
-    - bug: rename chat -> refetch chat?
     - disable send message on loading
 
 #### Data

@@ -50,8 +50,8 @@ const Chats = ({ chats, isLoading, openNewChatModal }) => {
         />
       </div>
       <h3 className="mt-5 pl-4 text-xl font-extrabold">Conversations</h3>
-      <main className="mt-2 flex-1 overflow-scroll">
-        <ul>
+      <main className="scrollbar-thin scrollbar-thumb-rounded-full scrollbar-track-rounded-full mt-2 flex-1 overflow-y-scroll">
+        <ul className="scrollbar-track-black">
           {isLoading && <ChatsLoading />}
           {!isLoading &&
             filteredChats.map((chat) => (
