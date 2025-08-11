@@ -92,7 +92,11 @@ const Chat = () => {
         ref={scrollContainerRef}
         className="scrollbar-thin flex-1 overflow-y-scroll pl-3 pr-4 pt-3"
       >
-        <ChatMessages messages={messages} isLoading={isLoading} />
+        <ChatMessages
+          users={chat ? chat.user : null}
+          messages={messages}
+          isLoading={isLoading}
+        />
       </main>
       <ChatMessageInput sendMessage={sendMessage} isDisabled={isLoading} />
       <ChatProfileModal

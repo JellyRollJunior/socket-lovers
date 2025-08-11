@@ -1,6 +1,7 @@
 import { format } from 'date-fns';
 import { Fragment, useContext } from 'react';
 import { CurrentContext } from '../contexts/CurrentProvider.jsx';
+import { Avatar } from './Avatar.jsx';
 // eslint-disable-next-line no-unused-vars
 import { motion } from 'motion/react';
 
@@ -36,7 +37,7 @@ const MessagesLoadingAnimation = () => {
   );
 };
 
-const ChatMessages = ({ messages, isLoading = false }) => {
+const ChatMessages = ({ users, messages, isLoading = false }) => {
   const { id } = useContext(CurrentContext);
 
   // if (last message time - current message time) >= 12hr, show timestamp element
@@ -60,14 +61,20 @@ const ChatMessages = ({ messages, isLoading = false }) => {
             )}
             <li
               key={message.id}
-              className={`max-w-4/5 w-fit rounded-3xl border-2 border-gray-200 px-5 py-2 ${message.senderId == id && 'self-end bg-gray-200'}`}
+              className={`max-w-4/5 flex items-start gap-2 ${message.senderId == id && 'flex-row-reverse self-end'}`}
             >
-              <h3>{message.content}</h3>
-              <p
-                className={`text-sm text-gray-500 ${message.senderId == id && 'justify-self-end'}`}
+              <Avatar size={2.5} />
+
+              <div
+                className={`w-fit min-w-26 rounded-3xl border-2 border-gray-200 px-5 py-2 ${message.senderId == id ? 'rounded-tr-sm bg-gray-200' : 'rounded-tl-sm'}`}
               >
-                {format(new Date(message.sendTime), 'h:mmaaa')}
-              </p>
+                <h3>{message.content}</h3>
+                <p
+                  className={`text-sm text-gray-500 ${message.senderId == id && 'justify-self-end'}`}
+                >
+                  {format(new Date(message.sendTime), 'h:mmaaa')}
+                </p>
+              </div>
             </li>
           </Fragment>
         ))}
