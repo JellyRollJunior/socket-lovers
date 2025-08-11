@@ -71,6 +71,7 @@ const createUser = async (username, password) => {
         return user;
     } catch (error) {
         if (error.code == 'P2002') {
+            // P2002: a unique constraint failed error
             throw new DatabaseError('Username is already taken.', 409);
         }
         throw new DatabaseError('Unable to insert user');

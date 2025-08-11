@@ -77,16 +77,8 @@
 ### TODO
 
 - server
-    - p2025 error on create message -> send this over on create message
-    - send this over on retrieve chat as well -> 
+
 - client
-    - receive delete chat
-        - see what happens when sending message to invalid chat ID
-            - send error code of 404 if chat not found (or whatever code)
-            - if code, redirect to index chat has been delted toast 
-        - if user is on /:chatId and tries to send message on deleted chat
-            - redirect to index
-            - toast chat.name has been deleted
 
 - more features
     - refresh button(?)
@@ -95,10 +87,7 @@
 - todo
     - bug: chats scroll x + scroll y
     - bug: rename chat -> refetch chat?
-
-- questions
-    - what happens on sending message to invalid chatId that was deleted?
-    - take a look at the socket error handling`
+    - disable send message on loading
 
 #### Data
 

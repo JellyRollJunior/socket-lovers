@@ -1,16 +1,18 @@
 import { useContext, useEffect } from 'react';
 import { SocketContext } from '../contexts/SocketProvider.jsx';
-import { useSocketErrorHandler } from './useSocketErrorHandler.js';
+import { ToastContext } from '../contexts/ToastProvider.jsx';
 
 const useJoinRoom = (chatId) => {
     const socket = useContext(SocketContext);
-    const { socketErrorHandler } = useSocketErrorHandler();
+    const { toast } = useContext(ToastContext);
 
     // Join chat room
     useEffect(() => {
         if (!socket) return;
-        socket.emit('join_room', chatId, socketErrorHandler);
-    }, [socket, chatId, socketErrorHandler]);
+        socket.emit('join_room', chatId, (error) => {
+            toast(error.message);
+        });
+    }, [socket, chatId, toast]);
 };
 
 export { useJoinRoom };

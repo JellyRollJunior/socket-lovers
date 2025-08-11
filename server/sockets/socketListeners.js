@@ -27,7 +27,7 @@ const handleSendMessage = async (socket, chatId, content, callback) => {
             console.log(`Emiting message to room: ${room}`);
         });
     } catch (error) {
-        return callback(createSocketError('Unable to send message. Please refresh page'));
+        return callback(error);
     }
 };
 

@@ -3,7 +3,8 @@ import { ToastContext } from '../contexts/ToastProvider.jsx';
 import { fetchChat } from '../services/chatApi.js';
 import { useTokenErrorHandler } from './useTokenErrorHandler.js';
 import { SocketContext } from '../contexts/SocketProvider.jsx';
-import { useSocketErrorHandler } from './useSocketErrorHandler.js';
+import { useNavigate } from 'react-router';
+import { ChatsContext } from '../contexts/ChatsProvider.jsx';
 
 const createMessage = (senderId, username, content) => {
     const now = new Date().toISOString();
@@ -19,6 +20,7 @@ const createMessage = (senderId, username, content) => {
 };
 
 const useChat = (chatId) => {
+    const navigate = useNavigate();
     const socket = useContext(SocketContext);
     const [chat, setChat] = useState(null);
     const [messages, setMessages] = useState([]);
@@ -26,7 +28,7 @@ const useChat = (chatId) => {
     const [errorStatus, setErrorStatus] = useState(null);
     const { handleTokenErrors } = useTokenErrorHandler();
     const { toast } = useContext(ToastContext);
-    const { socketErrorHandler } = useSocketErrorHandler();
+    const { refetchChats } = useContext(ChatsContext);
 
     // retrieve initial chat
     useEffect(() => {
@@ -66,7 +68,15 @@ const useChat = (chatId) => {
     const sendMessage = (id, username, text) => {
         if (!socket) return;
         // emit message to server
-        socket.emit('send_message', chatId, text, socketErrorHandler);
+        socket.emit('send_message', chatId, text, (error) => {
+            if (error.status == 404) {
+                toast('Chat is unavailable and may have been deleted');
+                refetchChats();
+                navigate('/');
+            } else {
+                toast('Unable to send message. Please try again later');
+            }
+        });
 
         // display message on client
         setMessages((prev) => [...prev, createMessage(id, username, text)]);
