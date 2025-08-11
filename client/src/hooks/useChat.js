@@ -6,16 +6,13 @@ import { SocketContext } from '../contexts/SocketProvider.jsx';
 import { useNavigate } from 'react-router';
 import { ChatsContext } from '../contexts/ChatsProvider.jsx';
 
-const createMessage = (senderId, username, content) => {
+const createMessage = (senderId, content) => {
     const now = new Date().toISOString();
     return {
         id: now,
         content,
         sendTime: now,
-        sender: {
-            id: senderId,
-            username,
-        },
+        senderId,
     };
 };
 
@@ -65,7 +62,7 @@ const useChat = (chatId) => {
         return () => socket.off('receive_message');
     }, [socket, chatId]);
 
-    const sendMessage = (id, username, text) => {
+    const sendMessage = (id, text) => {
         if (!socket) return;
         // emit message to server
         socket.emit('send_message', chatId, text, (error) => {
@@ -79,7 +76,7 @@ const useChat = (chatId) => {
         });
 
         // display message on client
-        setMessages((prev) => [...prev, createMessage(id, username, text)]);
+        setMessages((prev) => [...prev, createMessage(id, text)]);
     };
 
     const updateChatName = (name) => {
