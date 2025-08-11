@@ -37,8 +37,9 @@ const MessagesLoadingAnimation = () => {
   );
 };
 
-const ChatMessages = ({ users, messages, isLoading = false }) => {
+const ChatMessages = ({ users = [], messages, isLoading = false }) => {
   const { id } = useContext(CurrentContext);
+  const avatarMap = new Map(users.map((user) => [user.id, user.avatar])); 
 
   // if (last message time - current message time) >= 12hr, show timestamp element
   return (
@@ -63,8 +64,7 @@ const ChatMessages = ({ users, messages, isLoading = false }) => {
               key={message.id}
               className={`max-w-4/5 flex items-start gap-2 ${message.senderId == id && 'flex-row-reverse self-end'}`}
             >
-              <Avatar size={2.5} />
-
+              <Avatar avatar={avatarMap.has(message.senderId) ? avatarMap.get(message.senderId) : null} size={2.5} />
               <div
                 className={`w-fit min-w-26 rounded-3xl border-2 border-gray-200 px-5 py-2 ${message.senderId == id ? 'rounded-tr-sm bg-gray-200' : 'rounded-tl-sm'}`}
               >

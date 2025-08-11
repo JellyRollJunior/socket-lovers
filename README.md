@@ -82,7 +82,6 @@
 
 - more features
     - refresh button(?)
-    - display avatar on message
 
 #### Data
 

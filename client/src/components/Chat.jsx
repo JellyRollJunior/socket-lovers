@@ -93,7 +93,7 @@ const Chat = () => {
         className="scrollbar-thin flex-1 overflow-y-scroll pl-3 pr-4 pt-3"
       >
         <ChatMessages
-          users={chat ? chat.user : null}
+          users={chat ? chat.users : []}
           messages={messages}
           isLoading={isLoading}
         />
