@@ -3,6 +3,17 @@ import { DatabaseError } from '../errors/DatabaseError.js';
 
 const prisma = new PrismaClient();
 
+const setAvatar = (userId, chat) => {
+    if (chat.users.length <= 1) {
+        chat.avatar = chat.users[0].avatar;
+    }
+    if (chat.users.length == 2) {
+        const otherUser = chat.users.find((user) => user.id != userId);
+        chat.avatar = otherUser.avatar;
+    }
+    return chat;
+};
+
 const getChats = async (userId) => {
     try {
         const data = await prisma.chat.findMany({
@@ -42,9 +53,10 @@ const getChats = async (userId) => {
         if (!data) return data;
         // return order: chats with latestMessage first (prisma returns null first)
         const messageIndex = data.findIndex((chat) => chat.latestMessage);
-        return messageIndex > 0
+        const orderedData = messageIndex > 0
             ? [...data.slice(messageIndex), ...data.slice(0, messageIndex)]
             : data;
+        return orderedData.map((chat) => setAvatar(userId, chat));
     } catch (error) {
         throw new DatabaseError('Unable to retrieve chats');
     }
@@ -53,7 +65,7 @@ const getChats = async (userId) => {
 const getChat = async (chatId, userId) => {
     // Verify userId has permission to retrieve chat
     try {
-        const chat = await prisma.chat.findFirst({
+        const data = await prisma.chat.findFirst({
             select: {
                 id: true,
                 name: true,
@@ -86,8 +98,8 @@ const getChat = async (chatId, userId) => {
                 },
             },
         });
-        if (!chat) throw new Error('404');
-        return chat;
+        if (!data) throw new Error('404');
+        return setAvatar(userId, data);
     } catch (error) {
         if (error.message == '404') {
             throw new DatabaseError('Unable to retrieve chat', 404);

@@ -77,9 +77,9 @@
 ### TODO
 
 - server
-    - preformat data based on userId (chats will send the right avatar)
 
 - client
+    - compatability with group chat avatars
     - enum chat type pridsma
         - how to access on client??
 
