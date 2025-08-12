@@ -6,6 +6,7 @@ const CREDENTIAL_LENGTH_ERROR = 'must be between 6 and 24 characters';
 const CHAT_NAME_LENGTH_ERROR = 'must be a maximum of 32 characters';
 const ARRAY_ERROR = 'must be an array of user ids.';
 const UUID_ERROR = 'must be a user id.';
+const USER_ID_LENGTH_ERROR = 'must be of length >= 1 and <= 4'
 const LENGTH_ERROR_350 = 'must be between 1 and 350 characters'
 
 const userValidation = [
@@ -29,7 +30,14 @@ const chatNameValidations = [
 
 const chatValidations = [
     check('userIds')
-        .isArray().withMessage(`userIds ${ARRAY_ERROR}`),
+        .isArray().withMessage(`userIds ${ARRAY_ERROR}`)
+        .custom((value) => {
+            if (value.length < 1 || value.length > 4) {
+                throw new Error(`userIds ${USER_ID_LENGTH_ERROR}`)
+            }
+            return true;
+        }),
+        
     check('userIds.*')
         .isUUID().withMessage(`userIds array contents ${UUID_ERROR}`),
 ]

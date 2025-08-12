@@ -1,5 +1,6 @@
 import { validateInput } from '../middleware/validations.js';
 import * as chatQueries from '../db/chat.queries.js';
+import { ValidationError } from '../errors/ValidationError.js';
 
 const getChats = async (req, res, next) => {
     try {

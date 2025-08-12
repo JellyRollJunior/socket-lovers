@@ -77,7 +77,6 @@
 ### TODO
 
 - server
-    - max users (maybe 5)
 
 - client
 
