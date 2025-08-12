@@ -40,7 +40,8 @@ const CreateChatForm = ({ closeForm }) => {
   };
 
   const handleChatListItemClick = (userId) => {
-    if (selectedUsers.length >= 4) return setUserError(' — Maximum 5 users allowed')
+    if (selectedUsers.length >= 4)
+      return setUserError(' — Maximum 5 users allowed');
     // if not in list, add user else remove user
     !selectedUsers.includes(userId)
       ? setSelectedUsers((prev) => [...prev, userId])
@@ -53,9 +54,7 @@ const CreateChatForm = ({ closeForm }) => {
       <hr className="mb-4" />
       <label className="font-medium text-gray-500">
         Users
-        <span className="text-red-400">
-          {userError}
-        </span>
+        <span className="text-red-400">{userError}</span>
       </label>
       <ul className="scrollbar-thin mt-1 h-40 overflow-y-scroll">
         {isLoading && <CreateChatLoading />}

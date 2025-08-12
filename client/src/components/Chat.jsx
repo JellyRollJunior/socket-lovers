@@ -64,10 +64,18 @@ const Chat = () => {
   const openDeleteModal = () => setIsDeleteModalOpen(true);
   const closeDeleteModal = () => setIsDeleteModalOpen(false);
 
+  // chat type & get chat avatar
+  const isGroupChat = chat && chat.users.length > 2;
+  const avatar = chat
+    ? chat.users.length == 2
+      ? chat.users.find((user) => user.id != id).avatar
+      : chat.users[0].avatar
+    : null;
+
   return (
     <div className="flex h-full flex-col">
       <header className="border-b-1 flex gap-2 border-gray-500 px-4 py-4">
-        <Avatar users={chat ? chat.users : null} size={3} />
+        <Avatar avatar={avatar} isGroupChat={isGroupChat} size={3} />
         <div className="flex flex-col">
           <h2 className="text-lg font-medium">
             {chat && chat.name ? chat.name : chatterNames}
@@ -77,7 +85,7 @@ const Chat = () => {
           </p>
         </div>
         <HeaderMenu>
-          <HeaderMenuItem label="View profile" onClick={openProfileModal} />
+          {!isGroupChat && <HeaderMenuItem label="View profile" onClick={openProfileModal} />}
           <HeaderMenuItem
             label="Rename conversation"
             onClick={openRenameModal}

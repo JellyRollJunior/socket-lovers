@@ -43,11 +43,11 @@ const ChatMessages = ({ users = [], messages = [], isLoading = false }) => {
   const isGroupChat = users.length > 2;
   if (!messages) messages = [];
 
-  // if (last message time - current message time) >= 12hr, show timestamp element
+  // if (last message time - current message time) >= 8hr, show timestamp element
   const shouldDisplayTimeMessage = (sendTime, index) => {
     return (
       index == 0 ||
-      new Date(sendTime) - new Date(messages[index - 1].sendTime) >= 3200000
+      (new Date(sendTime) - new Date(messages[index - 1].sendTime) >= 28800000)
     );
   };
 
