@@ -109,7 +109,7 @@ const getChatBySignature = async (userIdArray) => {
     }
 };
 
-const createChat = async (name, userIdArray) => {
+const createChat = async (name, userIdArray, avatar) => {
     try {
         const sortedIds = userIdArray.sort();
         const signature = sortedIds.join(':');
@@ -117,6 +117,7 @@ const createChat = async (name, userIdArray) => {
         const chat = await prisma.chat.create({
             data: {
                 name,
+                avatar,
                 signature,
                 users: {
                     connect: userIdObjectArray,

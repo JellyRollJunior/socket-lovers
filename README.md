@@ -80,9 +80,6 @@
     - preformat data based on userId (chats will send the right avatar)
 
 - client
-    - chat avatars
-        - on group chat creation
-            - if no avatar -> use trio 
     - enum chat type pridsma
         - how to access on client??
 
