@@ -13,8 +13,8 @@ const CreateChatForm = ({ closeForm }) => {
   const { users, isLoading } = useUsers();
   const { createChat, isLoading: isCreatingChat } = useCreateChat();
   const [filter, setFilter] = useState('');
-  const [isSelectErrorShown, setIsSelectErrorShown] = useState(false);
-  const [selectedUsers, setSelectedUsers] = useState('');
+  const [userError, setUserError] = useState('');
+  const [selectedUsers, setSelectedUsers] = useState([]);
   const [name, setName] = useState('');
 
   // search filter
@@ -27,10 +27,10 @@ const CreateChatForm = ({ closeForm }) => {
   const handleCreateChat = async (event) => {
     event.preventDefault();
     if (!selectedUsers || selectedUsers == '') {
-      return setIsSelectErrorShown(true);
+      return setUserError(' — Please select a chat partner');
     }
     // currently only support selecting one user, so put selected user in an array
-    const data = await createChat(name, [selectedUsers]);
+    const data = await createChat(name, selectedUsers);
     // reset form
     setSelectedUsers('');
     setName('');
@@ -39,14 +39,22 @@ const CreateChatForm = ({ closeForm }) => {
     navigate(`/chats/${data.id}`);
   };
 
+  const handleChatListItemClick = (userId) => {
+    if (selectedUsers.length >= 4) return setUserError(' — Maximum 5 users allowed')
+    // if not in list, add user else remove user
+    !selectedUsers.includes(userId)
+      ? setSelectedUsers((prev) => [...prev, userId])
+      : setSelectedUsers((prev) => [...prev.filter((id) => id != userId)]);
+  };
+
   return (
-    <form className="min-w-2xs flex flex-col" onSubmit={handleCreateChat}>
+    <form className="min-w-xs flex flex-col" onSubmit={handleCreateChat}>
       <h2 className="mb-1 self-center text-lg font-bold">New Conversation</h2>
       <hr className="mb-4" />
       <label className="font-medium text-gray-500">
         Users
         <span className="text-red-400">
-          {isSelectErrorShown && ' — Please select a chat partner'}
+          {userError}
         </span>
       </label>
       <ul className="scrollbar-thin mt-1 h-40 overflow-y-scroll">
@@ -58,8 +66,8 @@ const CreateChatForm = ({ closeForm }) => {
                 userId={user.id}
                 avatar={user.avatar}
                 username={user.username}
-                onClick={() => setSelectedUsers(user.id)}
-                selected={selectedUsers == user.id}
+                onClick={() => handleChatListItemClick(user.id)}
+                selected={selectedUsers.includes(user.id)}
               />
             </Fragment>
           ))}

@@ -77,11 +77,17 @@
 ### TODO
 
 - server
+    - max users (maybe 5)
 
 - client
+    - group chats
+        - selecting users 
+        - group chat avatar
+            - collage pic? or just trio
+        - view profile? (maybe just dont show this option for group chats)
 
 - more features
-    - refresh button(?)
+    - public chats
 
 #### Data
 
