@@ -37,56 +37,65 @@ const MessagesLoadingAnimation = () => {
   );
 };
 
-const ChatMessages = ({ users = [], messages, isLoading = false }) => {
+const ChatMessages = ({ users = [], messages = [], isLoading = false }) => {
   const { id } = useContext(CurrentContext);
-  const isGroupChat = users.length > 2;
   const userMap = new Map(users.map((user) => [user.id, user]));
+  const isGroupChat = users.length > 2;
+  if (!messages) messages = [];
 
   // if (last message time - current message time) >= 12hr, show timestamp element
+  const shouldDisplayTimeMessage = (sendTime, index) => {
+    return (
+      index == 0 ||
+      new Date(sendTime) - new Date(messages[index - 1].sendTime) >= 3200000
+    );
+  };
+
+  if (isLoading) {
+    return (
+      <ul className="flex flex-col gap-3">
+        <MessagesLoadingAnimation />
+      </ul>
+    );
+  }
+
   return (
     <ul className="flex flex-col gap-3">
-      {isLoading && <MessagesLoadingAnimation />}
-      {!isLoading && messages && messages.length == 0 && (
+      {messages.length == 0 && (
         <SystemMessage>Start the conversation with a message!</SystemMessage>
       )}
-      {!isLoading &&
-        messages &&
-        messages.map((message, index) => (
-          <Fragment key={`${message.id}-wrapper`}>
-            {(index == 0 ||
-              new Date(message.sendTime) -
-                new Date(messages[index - 1].sendTime) >=
-                3200000) && (
-              <SystemMessage>
-                {format(new Date(message.sendTime), 'EEEE LLLL do')}
-              </SystemMessage>
-            )}
-            <li
-              key={message.id}
-              className={`max-w-4/5 flex items-start gap-2 ${message.senderId == id && 'flex-row-reverse self-end'}`}
+      {messages.map((message, index) => (
+        <Fragment key={`${message.id}-wrapper`}>
+          {shouldDisplayTimeMessage(message.sendTime, index) && (
+            <SystemMessage>
+              {format(new Date(message.sendTime), 'EEEE LLLL do')}
+            </SystemMessage>
+          )}
+          <li
+            key={message.id}
+            className={`max-w-4/5 flex items-start gap-2 ${message.senderId == id && 'flex-row-reverse self-end'}`}
+          >
+            <Avatar
+              avatar={
+                userMap.has(message.senderId) &&
+                userMap.get(message.senderId).avatar
+              }
+              size={2.5}
+            />
+            <div
+              className={`min-w-26 w-fit rounded-3xl border-2 border-gray-200 px-5 py-2 ${message.senderId == id ? 'rounded-tr-sm bg-gray-200' : 'rounded-tl-sm'}`}
             >
-              <Avatar
-                avatar={
-                  userMap.has(message.senderId)
-                    && userMap.get(message.senderId).avatar
-                }
-                size={2.5}
-              />
-              <div
-                className={`min-w-26 w-fit rounded-3xl border-2 border-gray-200 px-5 py-2 ${message.senderId == id ? 'rounded-tr-sm bg-gray-200' : 'rounded-tl-sm'}`}
+              <h3>{message.content}</h3>
+              <p
+                className={`text-sm text-gray-500 ${message.senderId == id && 'justify-self-end'}`}
               >
-                <h3>{message.content}</h3>
-                <p
-                  className={`text-sm text-gray-500 ${message.senderId == id && 'justify-self-end'}`}
-                >
-                  {isGroupChat &&
-                    `${userMap.get(message.senderId).username} — `}
-                  {format(new Date(message.sendTime), 'h:mmaaa')}
-                </p>
-              </div>
-            </li>
-          </Fragment>
-        ))}
+                {isGroupChat && `${userMap.get(message.senderId).username} — `}
+                {format(new Date(message.sendTime), 'h:mmaaa')}
+              </p>
+            </div>
+          </li>
+        </Fragment>
+      ))}
     </ul>
   );
 };
