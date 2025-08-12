@@ -79,9 +79,18 @@
 - server
 
 - client
+    - compatability with group chat avatars
+    - enum chat type pridsma
+        - how to access on client??
 
 - more features
     - public chats
+        - programatically create public chat
+        - on signup,
+            - check if chat exist (if not create public chat)
+            - add new user to chat
+            - separate this logic into a function for signup to call
+                - encapsulation
 
 #### Data
 

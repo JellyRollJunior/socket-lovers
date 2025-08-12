@@ -35,6 +35,7 @@ model Chat {
   id        String  @id @default(uuid())
   signature String  @unique
   name      String?
+  avatar    String?
 
   latestMessage   Message? @relation(name: "latestMessage", fields: [latestMessageId], references: [id])
   latestMessageId String?  @unique
