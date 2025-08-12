@@ -16,6 +16,7 @@ const getChats = async (userId) => {
             select: {
                 id: true,
                 name: true,
+                avatar: true,
                 users: {
                     select: {
                         id: true,
@@ -56,6 +57,7 @@ const getChat = async (chatId, userId) => {
             select: {
                 id: true,
                 name: true,
+                avatar: true,
                 messages: {
                     select: {
                         id: true,
