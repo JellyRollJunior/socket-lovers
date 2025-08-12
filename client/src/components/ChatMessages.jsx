@@ -39,7 +39,8 @@ const MessagesLoadingAnimation = () => {
 
 const ChatMessages = ({ users = [], messages, isLoading = false }) => {
   const { id } = useContext(CurrentContext);
-  const avatarMap = new Map(users.map((user) => [user.id, user.avatar])); 
+  const isGroupChat = users.length > 2;
+  const userMap = new Map(users.map((user) => [user.id, user]));
 
   // if (last message time - current message time) >= 12hr, show timestamp element
   return (
@@ -64,14 +65,22 @@ const ChatMessages = ({ users = [], messages, isLoading = false }) => {
               key={message.id}
               className={`max-w-4/5 flex items-start gap-2 ${message.senderId == id && 'flex-row-reverse self-end'}`}
             >
-              <Avatar avatar={avatarMap.has(message.senderId) ? avatarMap.get(message.senderId) : null} size={2.5} />
+              <Avatar
+                avatar={
+                  userMap.has(message.senderId)
+                    && userMap.get(message.senderId).avatar
+                }
+                size={2.5}
+              />
               <div
-                className={`w-fit min-w-26 rounded-3xl border-2 border-gray-200 px-5 py-2 ${message.senderId == id ? 'rounded-tr-sm bg-gray-200' : 'rounded-tl-sm'}`}
+                className={`min-w-26 w-fit rounded-3xl border-2 border-gray-200 px-5 py-2 ${message.senderId == id ? 'rounded-tr-sm bg-gray-200' : 'rounded-tl-sm'}`}
               >
                 <h3>{message.content}</h3>
                 <p
                   className={`text-sm text-gray-500 ${message.senderId == id && 'justify-self-end'}`}
                 >
+                  {isGroupChat &&
+                    `${userMap.get(message.senderId).username} — `}
                   {format(new Date(message.sendTime), 'h:mmaaa')}
                 </p>
               </div>

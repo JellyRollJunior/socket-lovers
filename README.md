@@ -85,6 +85,7 @@
         - group chat avatar
             - collage pic? or just trio
         - view profile? (maybe just dont show this option for group chats)
+    - extract weird avatar src logic. move it outside this damn component
 
 - more features
     - public chats
