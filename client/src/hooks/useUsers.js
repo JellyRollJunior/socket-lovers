@@ -19,7 +19,6 @@ const useUsers = () => {
             } catch (error) {
                 handleTokenErrors(error);
                 toast('Unable to fetch users');
-                console.log(error);
             } finally {
                 setIsLoading(false);
             }

@@ -9,30 +9,14 @@ import refreshIcon from '../assets/svgs/refresh.svg';
 import { motion } from 'motion/react';
 
 const Chats = ({ chats, isLoading, openNewChatModal }) => {
-  const { id, username } = useContext(CurrentContext);
+  const { username } = useContext(CurrentContext);
   const { refetchChats } = useContext(ChatsContext);
   const [filter, setFilter] = useState('');
 
-  // add chat names to null chat names
-  const namedChats = chats
-    ? chats.map((chat) => {
-        if (!chat.name || chat.name == '') {
-          chat.name =
-            chat.users.length == 1
-              ? username
-              : chat.users
-                  .filter((user) => user.id != id)
-                  .map((user) => user.username)
-                  .join(', ');
-        }
-        return chat;
-      })
-    : [];
-
   // search filter
   const normalizedFilter = filter.trim().toLowerCase();
-  const filteredChats = namedChats
-    ? namedChats.filter((chat) =>
+  const filteredChats = chats
+    ? chats.filter((chat) =>
         chat.name.toLowerCase().includes(normalizedFilter)
       )
     : [];

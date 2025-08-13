@@ -81,6 +81,9 @@
         - how to access on client??
     
 - client
+    - login / notifications
+    - logout notifications
+    - signup notifications
 
 - more features
     - public chats
