@@ -52,6 +52,9 @@
 
 ### Learning Outcomes
 
+- Interaction
+    - Configuring API to require minimal data manipulation from client
+
 - Backend
     - Utilizing Socket.io to implement real time chatting
     - Uploading profile pictures
@@ -81,9 +84,6 @@
         - how to access on client??
     
 - client
-    - login / notifications
-    - logout notifications
-    - signup notifications
 
 - more features
     - public chats
