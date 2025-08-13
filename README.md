@@ -86,11 +86,15 @@
             - if public, send
             - if not, ensure user is in chat, send
         - clean up chatqueries
+        - implement get public chat messages query
+            - query chatId
+            - if public, send chat
+            - if not, ensure user is in chat, send chat
+        - order public chats by name
 
 - client
     - public chats compatability
-        - public chat section
-            - make it fixed, no scroll
+        - extract refresh button
 
     - BUGS:
         - chats: deselect doesnt work at 5 selected users
