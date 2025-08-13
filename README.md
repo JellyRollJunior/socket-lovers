@@ -80,7 +80,19 @@
 ### TODO
 
 - server
-    
+    - public chats
+    - programatically create public chat
+    - on signup,
+        - check if chat exist (if not create public chat)
+        - add new user to chat
+        - separate this logic into a function for signup to call
+            - encapsulation
+    - DB
+        - retrieve public chats
+        - add user to chat
+        - const CHAT_SELECT_OPTIONS = {}
+
+                
 - client
     - public chats compatability
         - public chat section
@@ -90,13 +102,7 @@
         - chats: navigate to chat fails when creating chat fails (undefined reading id)
 
 - more features
-    - public chats
-        - programatically create public chat
-        - on signup,
-            - check if chat exist (if not create public chat)
-            - add new user to chat
-            - separate this logic into a function for signup to call
-                - encapsulation
+
 
 #### Data
 

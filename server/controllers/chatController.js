@@ -1,7 +1,5 @@
-import dotenv from 'dotenv';
 import { validateInput } from '../middleware/validations.js';
 import * as chatQueries from '../db/chat.queries.js';
-dotenv.config();
 
 const getChats = async (req, res, next) => {
     try {
@@ -32,12 +30,7 @@ const createChat = async (req, res, next) => {
         const existingChat = await chatQueries.getChatBySignature(userIdArray);
         if (existingChat) return res.json(existingChat);
         const name = req.body.name ? req.body.name : null;
-        // if groupchat, set default group chat avatar
-        const avatar =
-            userIdArray.length > 2
-                ? process.env.SUPABASE_DEFAULT_GROUP_CHAT_AVATAR
-                : null;
-        const chat = await chatQueries.createChat(name, userIdArray, avatar);
+        const chat = await chatQueries.createChat(name, userIdArray);
         res.json(chat);
     } catch (error) {
         next(error);

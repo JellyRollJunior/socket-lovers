@@ -1,5 +1,7 @@
+import dotenv from 'dotenv';
 import { PrismaClient } from '@prisma/client';
 import { DatabaseError } from '../errors/DatabaseError.js';
+dotenv.config();
 
 const prisma = new PrismaClient();
 
@@ -31,6 +33,44 @@ const setChatName = (userId, chat) => {
                       .join(', ');
     }
     return chat;
+};
+
+const getPublicChats = async () => {
+    try {
+        const data = await prisma.chat.findMany({
+            where: {
+                type: CHAT_TYPES.PUBLIC,
+            },
+            select: {
+                id: true,
+                name: true,
+                avatar: true,
+                users: {
+                    select: {
+                        id: true,
+                        username: true,
+                        avatar: true,
+                    },
+                },
+                latestMessage: {
+                    select: {
+                        id: true,
+                        content: true,
+                        sendTime: true,
+                        senderId: true,
+                    },
+                },
+            },
+            orderBy: {
+                latestMessage: {
+                    sendTime: 'desc',
+                },
+            },
+        });
+        return data;
+    } catch (error) {
+        throw new DatabaseError('Unable to retrieve chats');
+    }
 };
 
 const getChats = async (userId) => {
@@ -146,7 +186,7 @@ const getChatBySignature = async (userIdArray) => {
     }
 };
 
-const createChat = async (name, userIdArray, avatar, isPublic = false) => {
+const createChat = async (name, userIdArray, isPublic = false) => {
     try {
         const sortedIds = userIdArray.sort();
         const signature = sortedIds.join(':');
@@ -156,6 +196,11 @@ const createChat = async (name, userIdArray, avatar, isPublic = false) => {
             : userIdArray.length > 2
               ? CHAT_TYPES.GROUP
               : CHAT_TYPES.PRIVATE;
+        // if groupchat, set default group chat avatar
+        const avatar =
+            userIdArray.length > 2
+                ? process.env.SUPABASE_DEFAULT_GROUP_CHAT_AVATAR
+                : null;
         const chat = await prisma.chat.create({
             data: {
                 name,
