@@ -80,10 +80,14 @@
 ### TODO
 
 - server
-    - enum chat type pridsma
-        - how to access on client??
     
 - client
+    - public chats compatability
+        - public chat section
+    - BUGS: 
+        - chats: deselect doesnt work at 5 selected users
+        - chats: clear create chat form on close
+        - chats: navigate to chat fails when creating chat fails (undefined reading id)
 
 - more features
     - public chats

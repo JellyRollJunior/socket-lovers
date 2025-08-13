@@ -3,6 +3,12 @@ import { DatabaseError } from '../errors/DatabaseError.js';
 
 const prisma = new PrismaClient();
 
+const CHAT_TYPES = Object.freeze({
+    PRIVATE: 'PRIVATE',
+    GROUP: 'GROUP',
+    PUBLIC: 'PUBLIC',
+});
+
 const setAvatar = (userId, chat) => {
     if (chat.users.length <= 1) {
         chat.avatar = chat.users[0].avatar;
@@ -115,7 +121,7 @@ const getChat = async (chatId, userId) => {
             },
         });
         if (!data) throw new Error('404');
-        const namedData = setChatName(data);
+        const namedData = setChatName(userId, data);
         return setAvatar(userId, namedData);
     } catch (error) {
         if (error.message == '404') {
@@ -140,14 +146,20 @@ const getChatBySignature = async (userIdArray) => {
     }
 };
 
-const createChat = async (name, userIdArray, avatar) => {
+const createChat = async (name, userIdArray, avatar, isPublic = false) => {
     try {
         const sortedIds = userIdArray.sort();
         const signature = sortedIds.join(':');
         const userIdObjectArray = sortedIds.map((id) => ({ id }));
+        const type = isPublic
+            ? CHAT_TYPES.PUBLIC
+            : userIdArray.length > 2
+              ? CHAT_TYPES.GROUP
+              : CHAT_TYPES.PRIVATE;
         const chat = await prisma.chat.create({
             data: {
                 name,
+                type,
                 avatar,
                 signature,
                 users: {
