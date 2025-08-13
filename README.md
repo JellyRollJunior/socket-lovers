@@ -77,11 +77,12 @@
 ### TODO
 
 - server
-
-- client
-    - compatability with group chat avatars
     - enum chat type pridsma
         - how to access on client??
+    
+- client
+    - compatability with group chat avatars
+
 
 - more features
     - public chats

@@ -1,7 +1,6 @@
 import { useState } from 'react';
-import trio from '../assets/images/trio-cheer.png'
 
-const Avatar = ({ avatar, isGroupChat = false, size = 4 }) => {
+const Avatar = ({ avatar, size = 4 }) => {
   const [error, setError] = useState(false);
 
   return (
@@ -12,7 +11,7 @@ const Avatar = ({ avatar, isGroupChat = false, size = 4 }) => {
       {!error && avatar && (
         <img
           className="h-full w-full border-none object-cover"
-          src={isGroupChat ? trio : avatar}
+          src={avatar}
           onError={() => setError(true)}
         />
       )}

@@ -84,7 +84,7 @@ const Chats = ({ chats, isLoading, openNewChatModal }) => {
                 <ChatsListItem
                   chatId={chat.id}
                   chatName={chat.name}
-                  users={chat.users}
+                  avatar={chat.avatar}
                   latestMessage={chat.latestMessage}
                 />
               </Fragment>

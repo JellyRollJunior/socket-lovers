@@ -35,8 +35,9 @@ const useChat = (chatId) => {
             try {
                 setIsLoading(true);
                 const chat = await fetchChat(chatId, abortController.signal);
-                setChat({ id: chat.id, name: chat.name, users: chat.users });
-                setMessages(chat.messages);
+                const { messages, ...chatData } = chat;
+                setChat(chatData);
+                setMessages(messages);
                 setErrorStatus(null);
             } catch (error) {
                 handleTokenErrors(error);

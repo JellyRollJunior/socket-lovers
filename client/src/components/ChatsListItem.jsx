@@ -3,19 +3,15 @@ import { Link } from 'react-router';
 import { Avatar } from './Avatar.jsx';
 // eslint-disable-next-line no-unused-vars
 import { motion } from 'motion/react';
-import { useContext } from 'react';
-import { CurrentContext } from '../contexts/CurrentProvider.jsx';
 
 const ChatsListItem = ({
   chatId,
   chatName,
-  users,
+  avatar,
   latestMessage,
   isLoading = false,
   delay = 0,
 }) => {
-  const { id } = useContext(CurrentContext);
-
   if (isLoading) {
     return (
       <motion.li
@@ -45,16 +41,10 @@ const ChatsListItem = ({
   const formattedDate = latestMessage
     ? format(new Date(latestMessage.sendTime), 'MMM do • h:mmaaa')
     : '';
-  const isGroupChat = users.length > 2;
-  const avatar =
-    users.length == 2
-      ? users.find((user) => user.id != id).avatar
-      : users[0].avatar;
-
   return (
     <li className="px-4 py-2 hover:bg-gray-200">
       <Link className="flex gap-2" to={`/chats/${chatId}`}>
-        <Avatar avatar={avatar} isGroupChat={isGroupChat} />
+        <Avatar avatar={avatar} />
         <div className="-mt-0.5 flex min-w-0 flex-col self-center leading-[1.2]">
           <h4 className="truncate text-lg font-medium">{chatName}</h4>
           <p className="-mt-1 truncate">{latestMessageContent}</p>
