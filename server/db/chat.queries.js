@@ -14,6 +14,19 @@ const setAvatar = (userId, chat) => {
     return chat;
 };
 
+const setChatName = (userId, chat) => {
+    if (!chat.name || chat.name == '') {
+        chat.name =
+            chat.users.length == 1
+                ? chat.users[0].username
+                : chat.users
+                      .filter((user) => user.id != userId)
+                      .map((user) => user.username)
+                      .join(', ');
+    }
+    return chat;
+};
+
 const getChats = async (userId) => {
     try {
         const data = await prisma.chat.findMany({
@@ -53,10 +66,13 @@ const getChats = async (userId) => {
         if (!data) return data;
         // return order: chats with latestMessage first (prisma returns null first)
         const messageIndex = data.findIndex((chat) => chat.latestMessage);
-        const orderedData = messageIndex > 0
-            ? [...data.slice(messageIndex), ...data.slice(0, messageIndex)]
-            : data;
-        return orderedData.map((chat) => setAvatar(userId, chat));
+        const orderedData =
+            messageIndex > 0
+                ? [...data.slice(messageIndex), ...data.slice(0, messageIndex)]
+                : data;
+        return orderedData
+            .map((chat) => setChatName(userId, chat))
+            .map((chat) => setAvatar(userId, chat));
     } catch (error) {
         throw new DatabaseError('Unable to retrieve chats');
     }
@@ -99,7 +115,8 @@ const getChat = async (chatId, userId) => {
             },
         });
         if (!data) throw new Error('404');
-        return setAvatar(userId, data);
+        const namedData = setChatName(data);
+        return setAvatar(userId, namedData);
     } catch (error) {
         if (error.message == '404') {
             throw new DatabaseError('Unable to retrieve chat', 404);
