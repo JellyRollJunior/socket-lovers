@@ -54,7 +54,7 @@ const getAllUsers = async () => {
                 username: 'asc',
             },
         });
-        return { users };
+        return users;
     } catch (error) {
         throw new DatabaseError('Unable to fetch users');
     }

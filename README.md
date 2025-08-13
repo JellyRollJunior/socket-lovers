@@ -90,7 +90,7 @@
     - DB
         - retrieve public chats
         - add user to chat
-        - const CHAT_SELECT_OPTIONS = {}
+        - refacotr to use include -> include password: false
     - PROBLEM
         - public chats will have all users
         - violates signature uniqueness

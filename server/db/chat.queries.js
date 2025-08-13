@@ -1,6 +1,7 @@
 import dotenv from 'dotenv';
 import { PrismaClient } from '@prisma/client';
 import { DatabaseError } from '../errors/DatabaseError.js';
+import { getAllUsers } from './user.queries.js';
 dotenv.config();
 
 const prisma = new PrismaClient();
@@ -10,6 +11,29 @@ const CHAT_TYPES = Object.freeze({
     GROUP: 'GROUP',
     PUBLIC: 'PUBLIC',
 });
+
+const USERS_SELECT = {
+    id: true,
+    username: true,
+    avatar: true,
+};
+
+const CHATS_SELECT = {
+    id: true,
+    name: true,
+    avatar: true,
+    users: {
+        select: USERS_SELECT,
+    },
+    latestMessage: {
+        select: {
+            id: true,
+            content: true,
+            sendTime: true,
+            senderId: true,
+        },
+    },
+};
 
 const setAvatar = (userId, chat) => {
     if (chat.users.length <= 1) {
@@ -45,26 +69,7 @@ const getChats = async (userId) => {
                     },
                 },
             },
-            select: {
-                id: true,
-                name: true,
-                avatar: true,
-                users: {
-                    select: {
-                        id: true,
-                        username: true,
-                        avatar: true,
-                    },
-                },
-                latestMessage: {
-                    select: {
-                        id: true,
-                        content: true,
-                        sendTime: true,
-                        senderId: true,
-                    },
-                },
-            },
+            select: CHATS_SELECT,
             orderBy: {
                 latestMessage: {
                     sendTime: 'desc',
@@ -92,26 +97,7 @@ const getPublicChats = async () => {
             where: {
                 type: CHAT_TYPES.PUBLIC,
             },
-            select: {
-                id: true,
-                name: true,
-                avatar: true,
-                users: {
-                    select: {
-                        id: true,
-                        username: true,
-                        avatar: true,
-                    },
-                },
-                latestMessage: {
-                    select: {
-                        id: true,
-                        content: true,
-                        sendTime: true,
-                        senderId: true,
-                    },
-                },
-            },
+            select: CHATS_SELECT,
             orderBy: {
                 latestMessage: {
                     sendTime: 'desc',
@@ -210,10 +196,30 @@ const createChat = async (name, userIdArray) => {
             },
             include: {
                 users: {
-                    select: {
-                        id: true,
-                        username: true,
-                    },
+                    select: USERS_SELECT,
+                },
+            },
+        });
+        return chat;
+    } catch (error) {
+        throw new DatabaseError('Unable to create chat');
+    }
+};
+
+const createPublicChat = async (name) => {
+    try {
+        const users = await getAllUsers();
+        const chat = await prisma.chat.create({
+            data: {
+                name,
+                type: CHAT_TYPES.PUBLIC,
+                users: {
+                    connect: users,
+                },
+            },
+            include: {
+                users: {
+                    select: USERS_SELECT,
                 },
             },
         });
@@ -277,10 +283,7 @@ const deleteChat = async (chatId, userId) => {
             },
             include: {
                 users: {
-                    select: {
-                        id: true,
-                        username: true,
-                    },
+                    select: USERS_SELECT,
                 },
             },
         });
@@ -296,11 +299,12 @@ const deleteChat = async (chatId, userId) => {
 
 export {
     getChats,
-    getPublicChats,
     getChat,
     getChatBySignature,
     createChat,
     updateChatName,
+    getPublicChats,
+    createPublicChat,
     updateChatUsers,
     deleteChat,
 };

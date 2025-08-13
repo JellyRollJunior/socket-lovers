@@ -18,16 +18,16 @@ const getUser = async (req, res, next) => {
     try {
         const { userId } = req.params;
         const user = await userQueries.getUserById(userId);
-        res.json(user)
+        res.json(user);
     } catch (error) {
         next(error);
     }
-}
+};
 
 const getAllUsers = async (req, res, next) => {
     try {
         const users = await userQueries.getAllUsers();
-        res.json(users);
+        res.json({ users });
     } catch (error) {
         next(error);
     }
