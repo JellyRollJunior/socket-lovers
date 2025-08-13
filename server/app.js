@@ -5,6 +5,7 @@ import { userRouter } from './routes/userRouter.js';
 import { chatRouter } from './routes/chatRouter.js';
 import { currentRouter } from './routes/currentRouter.js';
 import { error404Handler, errorHandler } from './middleware/errorHandler.js';
+import { ensurePublicChatsExist } from './services/publicChats.js';
 
 const app = express();
 app.use(cors());
@@ -19,5 +20,7 @@ app.use('/chats', chatRouter);
 // errors
 app.use(/(.*)/, error404Handler);
 app.use(errorHandler);
+
+ensurePublicChatsExist();
 
 export { app };

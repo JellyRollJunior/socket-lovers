@@ -1,7 +1,7 @@
 import * as publicChatQueries from '../db/publicChat.queries.js';
 
 const ensurePublicChatsExist = async () => {
-    let chats = await chatQueries.getPublicChats();
+    let chats = await publicChatQueries.getPublicChats();
     if (!chats || chats.length == 0) {
         chats = await Promise.all([
             await publicChatQueries.createPublicChat('Public Chat 1'),
@@ -11,14 +11,4 @@ const ensurePublicChatsExist = async () => {
     return chats;
 };
 
-const addToPublicChats = async (userId) => {
-    const publicChats = await ensurePublicChatsExist();
-    const updatedChats = await Promise.all(
-        publicChats.map((chat) => {
-            return publicChatQueries.updateChatUsers(chat.id, userId);
-        })
-    );
-    return updatedChats;
-};
-
-export { addToPublicChats };
+export { ensurePublicChatsExist };

@@ -1,30 +1,10 @@
 import dotenv from 'dotenv';
-import { PrismaClient } from '@prisma/client';
+import { PrismaClient, CHAT_TYPE } from '@prisma/client';
 import { DatabaseError } from '../errors/DatabaseError.js';
-import { getAllUsers } from './user.queries.js';
+import { CHATS_INCLUDE, USERS_INCLUDE } from './returnDataPresets.js';
 dotenv.config();
 
 const prisma = new PrismaClient();
-
-const CHAT_TYPES = Object.freeze({
-    PRIVATE: 'PRIVATE',
-    GROUP: 'GROUP',
-    PUBLIC: 'PUBLIC',
-});
-
-const USERS_INCLUDE = {
-    password: false,
-};
-
-const CHATS_INCLUDE = {
-    signature: false,
-    messages: false,
-    latestMessageId: false,
-    users: {
-        include: USERS_INCLUDE,
-    },
-    latestMessage: true,
-};
 
 const setAvatar = (userId, chat) => {
     if (chat.users.length <= 1) {
@@ -146,7 +126,7 @@ const createChat = async (name, userIdArray) => {
         const signature = sortedIds.join(':');
         const userIdObjectArray = sortedIds.map((id) => ({ id }));
         const type =
-            userIdArray.length > 2 ? CHAT_TYPES.GROUP : CHAT_TYPES.PRIVATE;
+            userIdArray.length > 2 ? CHAT_TYPE.GROUP : CHAT_TYPE.PRIVATE;
         // if groupchat, set default group chat avatar
         const avatar =
             userIdArray.length > 2

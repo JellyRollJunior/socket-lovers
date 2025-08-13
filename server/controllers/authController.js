@@ -3,7 +3,6 @@ import jwt from 'jsonwebtoken';
 import dotenv from 'dotenv';
 import { AuthenticationError } from '../errors/AuthenticationError.js';
 import { validateInput } from '../middleware/validations.js';
-import { addToPublicChats } from '../services/publicChats.js';
 import * as userQueries from '../db/user.queries.js';
 dotenv.config();
 
@@ -14,7 +13,6 @@ const signup = async (req, res, next) => {
         const password = req.body.password;
         const hashedPassword = await bcrypt.hash(password, 10);
         const user = await userQueries.createUser(username, hashedPassword);
-        await addToPublicChats(user.id);
         res.json({
             id: user.id,
             username: user.username,

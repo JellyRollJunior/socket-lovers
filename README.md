@@ -83,13 +83,13 @@
     - REFACTOR: public chats
         - change public chat structure
             - public chat does not need users. Anyone can send message to public chat!
-        - extract public chat queries
         - implement get /chats-public (?)
         - implement sending message to public chats
             - query chatId
             - if public, send
             - if not, ensure user is in chat, send
         - ensure public chat created in server on startup
+            - put this in a middleware otherwise server will crash on fail lol
     - make chat queries use prisma enum
     - make get /chats only return private and group chats
 
