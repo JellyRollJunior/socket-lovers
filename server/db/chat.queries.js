@@ -12,27 +12,18 @@ const CHAT_TYPES = Object.freeze({
     PUBLIC: 'PUBLIC',
 });
 
-const USERS_SELECT = {
-    id: true,
-    username: true,
-    avatar: true,
+const USERS_INCLUDE = {
+    password: false,
 };
 
-const CHATS_SELECT = {
-    id: true,
-    name: true,
-    avatar: true,
+const CHATS_INCLUDE = {
+    signature: false,
+    messages: false,
+    latestMessageId: false,
     users: {
-        select: USERS_SELECT,
+        include: USERS_INCLUDE,
     },
-    latestMessage: {
-        select: {
-            id: true,
-            content: true,
-            sendTime: true,
-            senderId: true,
-        },
-    },
+    latestMessage: true,
 };
 
 const setAvatar = (userId, chat) => {
@@ -69,7 +60,7 @@ const getChats = async (userId) => {
                     },
                 },
             },
-            select: CHATS_SELECT,
+            include: CHATS_INCLUDE,
             orderBy: {
                 latestMessage: {
                     sendTime: 'desc',
@@ -97,7 +88,7 @@ const getPublicChats = async () => {
             where: {
                 type: CHAT_TYPES.PUBLIC,
             },
-            select: CHATS_SELECT,
+            include: CHATS_INCLUDE,
             orderBy: {
                 latestMessage: {
                     sendTime: 'desc',
@@ -130,11 +121,7 @@ const getChat = async (chatId, userId) => {
                     },
                 },
                 users: {
-                    select: {
-                        id: true,
-                        username: true,
-                        avatar: true,
-                    },
+                    include: USERS_INCLUDE,
                 },
             },
             where: {
@@ -196,7 +183,7 @@ const createChat = async (name, userIdArray) => {
             },
             include: {
                 users: {
-                    select: USERS_SELECT,
+                    include: USERS_INCLUDE,
                 },
             },
         });
@@ -213,13 +200,14 @@ const createPublicChat = async (name) => {
             data: {
                 name,
                 type: CHAT_TYPES.PUBLIC,
+                avatar: process.env.SUPABASE_DEFAULT_GROUP_CHAT_AVATAR,
                 users: {
                     connect: users,
                 },
             },
             include: {
                 users: {
-                    select: USERS_SELECT,
+                    include: USERS_INCLUDE,
                 },
             },
         });
@@ -283,7 +271,7 @@ const deleteChat = async (chatId, userId) => {
             },
             include: {
                 users: {
-                    select: USERS_SELECT,
+                    include: USERS_INCLUDE,
                 },
             },
         });

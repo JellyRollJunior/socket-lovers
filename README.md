@@ -80,39 +80,25 @@
 ### TODO
 
 - server
-    - public chats
-    - programatically create public chat
-    - on signup,
-        - check if chat exist (if not create public chat)
-        - add new user to chat
-        - separate this logic into a function for signup to call
-            - encapsulation
-    - DB
-        - retrieve public chats
-        - add user to chat
-        - refacotr to use include -> include password: false
-    - PROBLEM
-        - public chats will have all users
-        - violates signature uniqueness
-        - solution -> make signature nullable
-            - make new function to create public chats that have null signature
+    - REFACTOR: public chats
+        - change public chat structure
+            - public chat does not need users. Anyone can send message to public chat!
+        - extract public chat queries
+        - implement get /chats-public (?)
+        - implement sending message to public chats
+            - query chatId
+            - if public, send
+            - if not, ensure user is in chat, send
+        - ensure public chat created in server on startup
 
-                
 - client
     - public chats compatability
         - public chat section
-    - BUGS: 
+            - public chat should use public chat avatar
+    - BUGS:
         - chats: deselect doesnt work at 5 selected users
         - chats: clear create chat form on close
         - chats: navigate to chat fails when creating chat fails (undefined reading id)
         - dont put null into avatar source box
 
-- more features
-
-
 #### Data
-
-users:
-
-- usagii: "ffb6b765-e140-489e-b694-a8b40b978145"
-- hachiware: "bdcbf276-85d3-4970-959c-591d2c575fad"
