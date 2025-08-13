@@ -83,7 +83,6 @@
     - REFACTOR: public chats
         - change public chat structure
             - public chat does not need users. Anyone can send message to public chat!
-        - implement get /chats-public (?)
         - implement sending message to public chats
             - query chatId
             - if public, send
