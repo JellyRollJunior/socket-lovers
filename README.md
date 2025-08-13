@@ -91,6 +91,11 @@
         - retrieve public chats
         - add user to chat
         - const CHAT_SELECT_OPTIONS = {}
+    - PROBLEM
+        - public chats will have all users
+        - violates signature uniqueness
+        - solution -> make signature nullable
+            - make new function to create public chats that have null signature
 
                 
 - client
@@ -100,6 +105,7 @@
         - chats: deselect doesnt work at 5 selected users
         - chats: clear create chat form on close
         - chats: navigate to chat fails when creating chat fails (undefined reading id)
+        - dont put null into avatar source box
 
 - more features
 

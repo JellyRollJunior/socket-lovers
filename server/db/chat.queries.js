@@ -35,44 +35,6 @@ const setChatName = (userId, chat) => {
     return chat;
 };
 
-const getPublicChats = async () => {
-    try {
-        const data = await prisma.chat.findMany({
-            where: {
-                type: CHAT_TYPES.PUBLIC,
-            },
-            select: {
-                id: true,
-                name: true,
-                avatar: true,
-                users: {
-                    select: {
-                        id: true,
-                        username: true,
-                        avatar: true,
-                    },
-                },
-                latestMessage: {
-                    select: {
-                        id: true,
-                        content: true,
-                        sendTime: true,
-                        senderId: true,
-                    },
-                },
-            },
-            orderBy: {
-                latestMessage: {
-                    sendTime: 'desc',
-                },
-            },
-        });
-        return data;
-    } catch (error) {
-        throw new DatabaseError('Unable to retrieve chats');
-    }
-};
-
 const getChats = async (userId) => {
     try {
         const data = await prisma.chat.findMany({
@@ -119,6 +81,44 @@ const getChats = async (userId) => {
         return orderedData
             .map((chat) => setChatName(userId, chat))
             .map((chat) => setAvatar(userId, chat));
+    } catch (error) {
+        throw new DatabaseError('Unable to retrieve chats');
+    }
+};
+
+const getPublicChats = async () => {
+    try {
+        const data = await prisma.chat.findMany({
+            where: {
+                type: CHAT_TYPES.PUBLIC,
+            },
+            select: {
+                id: true,
+                name: true,
+                avatar: true,
+                users: {
+                    select: {
+                        id: true,
+                        username: true,
+                        avatar: true,
+                    },
+                },
+                latestMessage: {
+                    select: {
+                        id: true,
+                        content: true,
+                        sendTime: true,
+                        senderId: true,
+                    },
+                },
+            },
+            orderBy: {
+                latestMessage: {
+                    sendTime: 'desc',
+                },
+            },
+        });
+        return data;
     } catch (error) {
         throw new DatabaseError('Unable to retrieve chats');
     }
@@ -186,16 +186,13 @@ const getChatBySignature = async (userIdArray) => {
     }
 };
 
-const createChat = async (name, userIdArray, isPublic = false) => {
+const createChat = async (name, userIdArray) => {
     try {
         const sortedIds = userIdArray.sort();
         const signature = sortedIds.join(':');
         const userIdObjectArray = sortedIds.map((id) => ({ id }));
-        const type = isPublic
-            ? CHAT_TYPES.PUBLIC
-            : userIdArray.length > 2
-              ? CHAT_TYPES.GROUP
-              : CHAT_TYPES.PRIVATE;
+        const type =
+            userIdArray.length > 2 ? CHAT_TYPES.GROUP : CHAT_TYPES.PRIVATE;
         // if groupchat, set default group chat avatar
         const avatar =
             userIdArray.length > 2
@@ -247,6 +244,26 @@ const updateChatName = async (chatId, name, userId) => {
     }
 };
 
+const updateChatUsers = async (chatId, userId) => {
+    try {
+        const data = await prisma.chat.update({
+            where: {
+                id: chatId,
+            },
+            data: {
+                users: {
+                    connect: {
+                        id: userId,
+                    },
+                },
+            },
+        });
+        return data;
+    } catch (error) {
+        throw new DatabaseError('Unable to update chat users');
+    }
+};
+
 const deleteChat = async (chatId, userId) => {
     try {
         const data = await prisma.chat.delete({
@@ -279,9 +296,11 @@ const deleteChat = async (chatId, userId) => {
 
 export {
     getChats,
+    getPublicChats,
     getChat,
     getChatBySignature,
     createChat,
     updateChatName,
+    updateChatUsers,
     deleteChat,
 };
