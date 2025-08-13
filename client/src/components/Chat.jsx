@@ -12,6 +12,13 @@ import { ChatProfileModal } from './ChatProfileModal.jsx';
 import { ChatRenameModal } from './ChatRenameModal.jsx';
 import { ChatDeleteModal } from './ChatDeleteModal.jsx';
 
+const getUsersString = (userId, users) => {
+  if (!users) return null;
+  const chatters =
+    users.length == 1 ? [users[0]] : users.filter((user) => user.id != userId);
+  return chatters.map((user) => user.username).join(', ');
+};
+
 const Chat = () => {
   const navigate = useNavigate();
   const { chatId } = useParams();
@@ -25,7 +32,8 @@ const Chat = () => {
     updateChatName,
   } = useChat(chatId);
   if (errorStatus == 400 || errorStatus == 404) navigate('/');
-  const isGroupChat = chat && chat.users.length > 2;
+  const isTwoPersonChat = chat && chat.users.length == 2;
+  const chatterNames = chat && getUsersString(id, chat.users);
 
   // join room on mount
   useJoinRoom(chatId);
@@ -38,16 +46,6 @@ const Chat = () => {
       element.scrollTop = element.scrollHeight;
     }
   }, [messages]);
-
-  // get other chatters
-  let chatters = [];
-  if (chat && chat.users) {
-    chatters =
-      chat.users.length == 1
-        ? [chat.users[0]]
-        : chat.users.filter((user) => user.id != id);
-  }
-  const chatterNames = chatters.map((user) => user.username).join(', ');
 
   // profile modal
   const [isProfileModalOpen, setIsProfileModalOpen] = useState(false);
@@ -78,7 +76,9 @@ const Chat = () => {
           </p>
         </div>
         <HeaderMenu>
-          {!isGroupChat && <HeaderMenuItem label="View profile" onClick={openProfileModal} />}
+          {isTwoPersonChat && (
+            <HeaderMenuItem label="View profile" onClick={openProfileModal} />
+          )}
           <HeaderMenuItem
             label="Rename conversation"
             onClick={openRenameModal}
@@ -100,11 +100,13 @@ const Chat = () => {
         />
       </main>
       <ChatMessageInput sendMessage={sendMessage} isDisabled={isLoading} />
-      <ChatProfileModal
-        isOpen={isProfileModalOpen}
-        closeFunction={closeProfileModal}
-        userId={chatters[0] ? chatters[0].id : null}
-      />
+      {isTwoPersonChat && (
+        <ChatProfileModal
+          isOpen={isProfileModalOpen}
+          closeFunction={closeProfileModal}
+          userId={chat && chat.users.find((user) => user.id != id).id}
+        />
+      )}
       <ChatRenameModal
         isOpen={isRenameModalOpen}
         closeFunction={closeRenameModal}

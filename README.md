@@ -81,8 +81,6 @@
         - how to access on client??
     
 - client
-    - compatability with group chat avatars
-
 
 - more features
     - public chats

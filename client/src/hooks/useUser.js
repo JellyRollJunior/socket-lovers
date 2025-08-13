@@ -6,7 +6,7 @@ import { useTokenErrorHandler } from './useTokenErrorHandler.js';
 const useUser = (userId) => {
     const [user, setUser] = useState(null);
     const [isLoading, setIsLoading] = useState(false);
-    const { handleTokenError } = useTokenErrorHandler();
+    const { handleTokenErrors } = useTokenErrorHandler();
     const { toast } = useContext(ToastContext);
 
     useEffect(() => {
@@ -19,7 +19,7 @@ const useUser = (userId) => {
                 const data = await fetchUser(abortController.signal, userId);
                 setUser(data);
             } catch (error) {
-                handleTokenError(error);
+                handleTokenErrors(error);
                 toast('Unable to fetch user data');
             } finally {
                 setIsLoading(false);
@@ -29,7 +29,7 @@ const useUser = (userId) => {
         fetchUserData();
 
         return () => abortController.abort();
-    }, [userId, handleTokenError, toast]);
+    }, [userId, handleTokenErrors, toast]);
 
     return { user, isLoading };
 };
