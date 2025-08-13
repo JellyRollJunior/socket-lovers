@@ -3,11 +3,9 @@ import { CurrentContext } from '../contexts/CurrentProvider.jsx';
 import { ChatsContext } from '../contexts/ChatsProvider.jsx';
 import { ChatsListItem } from './ChatsListItem.jsx';
 import { ChatsLoading } from './ChatsLoading.jsx';
-import newChatIcon from '../assets/svgs/edit-square.svg';
-import refreshIcon from '../assets/svgs/refresh.svg';
-// eslint-disable-next-line no-unused-vars
-import { motion } from 'motion/react';
+import { RefreshButton } from './RefreshButton.jsx';
 import { ChatsPublic } from './ChatsPublic.jsx';
+import newChatIcon from '../assets/svgs/edit-square.svg';
 
 const Chats = ({ chats, isLoading, openNewChatModal }) => {
   const { username } = useContext(CurrentContext);
@@ -40,24 +38,9 @@ const Chats = ({ chats, isLoading, openNewChatModal }) => {
       <ChatsPublic />
       <div className="mt-5 flex items-center justify-between">
         <h3 className="pl-4 text-xl font-extrabold">Conversations</h3>
-        <motion.button
-          initial={{ rotate: 0 }}
-          transition={{
-            duration: 0.8,
-            ease: 'easeInOut',
-          }}
-          whileHover={{
-            rotate: 360,
-            transition: {
-              duration: 1,
-              ease: 'easeInOut',
-            },
-          }}
-          className="mr-5.5 rounded-2xl px-1 py-1 hover:bg-gray-200"
-          onClick={refetchChats}
-        >
-          <img src={refreshIcon} alt="Refresh icon" />
-        </motion.button>
+        <div className="mr-5.5">
+          <RefreshButton onclick={refetchChats} />
+        </div>
       </div>
       <main className="scrollbar-thin scrollbar-thumb-rounded-full scrollbar-track-rounded-full mt-2 flex-1 overflow-y-scroll">
         <ul>

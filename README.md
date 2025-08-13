@@ -93,8 +93,6 @@
         - order public chats by name
 
 - client
-    - public chats compatability
-        - extract refresh button
 
     - BUGS:
         - chats: deselect doesnt work at 5 selected users
