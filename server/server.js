@@ -5,6 +5,7 @@ import { createServer } from 'http';
 import { Server } from 'socket.io';
 import { attachSocketListeners } from './sockets/attachSocketListeners.js';
 import { instrument } from '@socket.io/admin-ui';
+import { seedPublicChats } from './services/publicChats.js';
 dotenv.config();
 
 const server = createServer(app);
@@ -31,4 +32,11 @@ instrument(io, {
 attachSocketListeners(io);
 
 const PORT = 3000;
-server.listen(PORT, () => console.log(`Listening on port: ${PORT}`));
+server.listen(PORT, async () => {
+    console.log(`Listening on port: ${PORT}`);
+    try {
+        await seedPublicChats();
+    } catch (error) {
+        console.log('Error seeding public chats');
+    }
+});

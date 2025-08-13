@@ -16,7 +16,7 @@ app.use('/', authRouter);
 app.use('/current', currentRouter);
 app.use('/users', userRouter);
 app.use('/chats', chatRouter);
-app.use('/chats-public', publicChatRouter)
+app.use('/chats-public', publicChatRouter);
 
 // errors
 app.use(/(.*)/, error404Handler);
