@@ -3,8 +3,8 @@ import { CurrentContext } from '../contexts/CurrentProvider.jsx';
 import { ChatsContext } from '../contexts/ChatsProvider.jsx';
 import { ChatsListItem } from './ChatsListItem.jsx';
 import { ChatsLoading } from './ChatsLoading.jsx';
-import { RefreshButton } from './RefreshButton.jsx';
 import { ChatsPublic } from './ChatsPublic.jsx';
+import { ChatsSectionTitle } from './ChatsSectionTitle.jsx';
 import newChatIcon from '../assets/svgs/edit-square.svg';
 
 const Chats = ({ chats, isLoading, openNewChatModal }) => {
@@ -36,16 +36,12 @@ const Chats = ({ chats, isLoading, openNewChatModal }) => {
         />
       </div>
       <ChatsPublic />
-      <div className="mt-5 flex items-center justify-between">
-        <h3 className="pl-4 text-xl font-extrabold">Conversations</h3>
-        <div className="mr-5.5">
-          <RefreshButton onclick={refetchChats} />
-        </div>
-      </div>
-      <main className="scrollbar-thin scrollbar-thumb-rounded-full scrollbar-track-rounded-full mt-2 flex-1 overflow-y-scroll">
+      <ChatsSectionTitle title="Conversations" refreshOnClick={refetchChats} />
+      <main className="scrollbar-thin scrollbar-thumb-rounded-full scrollbar-track-rounded-full mt-1 flex-1 overflow-y-scroll">
         <ul>
-          {isLoading && <ChatsLoading />}
-          {!isLoading &&
+          {isLoading ? (
+            <ChatsLoading />
+          ) : (
             filteredChats.map((chat) => (
               <Fragment key={chat.id}>
                 <ChatsListItem
@@ -55,7 +51,8 @@ const Chats = ({ chats, isLoading, openNewChatModal }) => {
                   latestMessage={chat.latestMessage}
                 />
               </Fragment>
-            ))}
+            ))
+          )}
         </ul>
       </main>
     </div>
