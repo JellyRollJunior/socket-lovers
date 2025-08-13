@@ -82,25 +82,6 @@ const getChats = async (userId) => {
     }
 };
 
-const getPublicChats = async () => {
-    try {
-        const data = await prisma.chat.findMany({
-            where: {
-                type: CHAT_TYPES.PUBLIC,
-            },
-            include: CHATS_INCLUDE,
-            orderBy: {
-                latestMessage: {
-                    sendTime: 'desc',
-                },
-            },
-        });
-        return data;
-    } catch (error) {
-        throw new DatabaseError('Unable to retrieve chats');
-    }
-};
-
 const getChat = async (chatId, userId) => {
     // Verify userId has permission to retrieve chat
     try {
@@ -193,30 +174,6 @@ const createChat = async (name, userIdArray) => {
     }
 };
 
-const createPublicChat = async (name) => {
-    try {
-        const users = await getAllUsers();
-        const chat = await prisma.chat.create({
-            data: {
-                name,
-                type: CHAT_TYPES.PUBLIC,
-                avatar: process.env.SUPABASE_DEFAULT_GROUP_CHAT_AVATAR,
-                users: {
-                    connect: users,
-                },
-            },
-            include: {
-                users: {
-                    include: USERS_INCLUDE,
-                },
-            },
-        });
-        return chat;
-    } catch (error) {
-        throw new DatabaseError('Unable to create chat');
-    }
-};
-
 const updateChatName = async (chatId, name, userId) => {
     try {
         const chat = await prisma.chat.update({
@@ -235,26 +192,6 @@ const updateChatName = async (chatId, name, userId) => {
         return chat;
     } catch (error) {
         throw new DatabaseError('Unable to update chat');
-    }
-};
-
-const updateChatUsers = async (chatId, userId) => {
-    try {
-        const data = await prisma.chat.update({
-            where: {
-                id: chatId,
-            },
-            data: {
-                users: {
-                    connect: {
-                        id: userId,
-                    },
-                },
-            },
-        });
-        return data;
-    } catch (error) {
-        throw new DatabaseError('Unable to update chat users');
     }
 };
 
@@ -291,8 +228,5 @@ export {
     getChatBySignature,
     createChat,
     updateChatName,
-    getPublicChats,
-    createPublicChat,
-    updateChatUsers,
     deleteChat,
 };

@@ -90,6 +90,8 @@
             - if public, send
             - if not, ensure user is in chat, send
         - ensure public chat created in server on startup
+    - make chat queries use prisma enum
+    - make get /chats only return private and group chats
 
 - client
     - public chats compatability
