@@ -9,6 +9,15 @@ const fetchChats = async (signal) => {
     return data.chats;
 };
 
+const fetchPublicChats = async (signal) => {
+    const data = await request('/chats-public', {
+        mode: 'cors',
+        method: 'GET',
+        signal
+    })
+    return data.chats;
+}
+
 const postChats = async (name, userIds) => {
     const data = await request('/chats', {
         mode: 'cors',
@@ -55,4 +64,4 @@ const deleteChat = async (chatId) => {
     return data;
 };
 
-export { fetchChats, postChats, fetchChat, patchChat, deleteChat };
+export { fetchChats, fetchPublicChats, postChats, fetchChat, patchChat, deleteChat };

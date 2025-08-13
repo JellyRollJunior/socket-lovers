@@ -85,11 +85,13 @@
             - query chatId
             - if public, send
             - if not, ensure user is in chat, send
+        - clean up chatqueries
 
 - client
     - public chats compatability
         - public chat section
-            - public chat should use public chat avatar
+            - make it fixed, no scroll
+
     - BUGS:
         - chats: deselect doesnt work at 5 selected users
         - chats: clear create chat form on close
