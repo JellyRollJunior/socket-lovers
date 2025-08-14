@@ -1,14 +1,63 @@
-import { PrismaClient } from '@prisma/client';
+import { PrismaClient, CHAT_TYPE } from '@prisma/client';
+import { USERS_INCLUDE } from './returnDataPresets.js';
+import { setAvatar, setChatName } from './formatChats.js';
 import { DatabaseError } from '../errors/DatabaseError.js';
 import { AuthorizationError } from '../errors/AuthorizationError.js';
-import * as chatQueries from './chat.queries.js';
 
 const prisma = new PrismaClient();
+
+const getChatMessages = async (chatId, userId) => {
+    try {
+        const data = await prisma.chat.findFirst({
+            include: {
+                signature: false,
+                latestMessageId: false,
+                latestMessage: false,
+                messages: {
+                    select: {
+                        id: true,
+                        content: true,
+                        sendTime: true,
+                        senderId: true,
+                        sender: {
+                            select: {
+                                avatar: true,
+                            }
+                        }
+                    },
+                    orderBy: {
+                        sendTime: 'asc',
+                    },
+                },
+                users: {
+                    include: USERS_INCLUDE,
+                },
+            },
+            where: {
+                id: chatId,
+            },
+        });
+        if (!data) throw new Error('404');
+        if (data.type == CHAT_TYPE.PUBLIC) return data;
+        const isUserInChat = data.users.some((user) => user.id == userId);
+        if (!isUserInChat) throw new Error('403');
+        const namedData = setChatName(userId, data);
+        return setAvatar(userId, namedData);
+    } catch (error) {
+        if (error.message == '403') {
+            throw new AuthorizationError('Unable to retrieve chat');
+        }
+        if (error.message == '404') {
+            throw new DatabaseError('Unable to retrieve chat', 404);
+        }
+        throw new DatabaseError('Unable to retrieve chat');
+    }
+};
 
 const createMessage = async (chatId, senderId, content) => {
     try {
         // getChat checks if user is authorized to access chat
-        const chat = await chatQueries.getChat(chatId, senderId);
+        const chat = await getChatMessages(chatId, senderId);
         if (!chat) throw new Error('403');
         const message = await prisma.message.create({
             data: {
@@ -35,4 +84,4 @@ const createMessage = async (chatId, senderId, content) => {
     }
 };
 
-export { createMessage };
+export { getChatMessages, createMessage };

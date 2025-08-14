@@ -1,5 +1,6 @@
 import { validateInput } from '../middleware/validations.js';
 import * as chatQueries from '../db/chat.queries.js';
+import * as messageQueries from '../db/message.queries.js'
 
 const getChats = async (req, res, next) => {
     try {
@@ -15,7 +16,7 @@ const getChat = async (req, res, next) => {
     try {
         validateInput(req);
         const { chatId } = req.params;
-        const chat = await chatQueries.getChat(chatId, req.user.id);
+        const chat = await messageQueries.getChatMessages(chatId, req.user.id);
         res.json(chat);
     } catch (error) {
         next(error);
