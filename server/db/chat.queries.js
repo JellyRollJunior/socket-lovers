@@ -1,6 +1,7 @@
 import dotenv from 'dotenv';
 import { PrismaClient, CHAT_TYPE } from '@prisma/client';
 import { DatabaseError } from '../errors/DatabaseError.js';
+import { AuthorizationError } from '../errors/AuthorizationError.js';
 import { CHATS_INCLUDE, USERS_INCLUDE } from './returnDataPresets.js';
 dotenv.config();
 
@@ -96,7 +97,7 @@ const getChat = async (chatId, userId) => {
         return setAvatar(userId, namedData);
     } catch (error) {
         if (error.message == '403') {
-            throw new DatabaseError('Unable to retrieve chat', 403);
+            throw new AuthorizationError('Unable to retrieve chat');
         }
         if (error.message == '404') {
             throw new DatabaseError('Unable to retrieve chat', 404);

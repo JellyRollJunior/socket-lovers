@@ -85,8 +85,10 @@
             - query chatId
             - if public, send
             - if not, ensure user is in chat, send
+    - just return avatar with every message. simplifies chat avatar display
 
 - client
+    - message avatar simplification compatability 
 
     - BUGS:
         - chats: deselect doesnt work at 5 selected users
