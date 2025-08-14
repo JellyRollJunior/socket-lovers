@@ -37,17 +37,15 @@ const MessagesLoadingAnimation = () => {
   );
 };
 
-const ChatMessages = ({ users = [], messages = [], isLoading = false }) => {
+const ChatMessages = ({ messages = [], isPrivateChat, isLoading = false }) => {
   const { id } = useContext(CurrentContext);
-  const userMap = new Map(users.map((user) => [user.id, user]));
-  const isGroupChat = users.length > 2;
   if (!messages) messages = [];
 
   // if (last message time - current message time) >= 8hr, show timestamp element
   const shouldDisplayTimeMessage = (sendTime, index) => {
     return (
       index == 0 ||
-      (new Date(sendTime) - new Date(messages[index - 1].sendTime) >= 28800000)
+      new Date(sendTime) - new Date(messages[index - 1].sendTime) >= 28800000
     );
   };
 
@@ -75,13 +73,7 @@ const ChatMessages = ({ users = [], messages = [], isLoading = false }) => {
             key={message.id}
             className={`max-w-4/5 flex items-start gap-2 ${message.senderId == id && 'flex-row-reverse self-end'}`}
           >
-            <Avatar
-              avatar={
-                userMap.has(message.senderId) &&
-                userMap.get(message.senderId).avatar
-              }
-              size={2.5}
-            />
+            <Avatar avatar={message.sender.avatar} size={2.5} />
             <div
               className={`min-w-26 w-fit rounded-3xl border-2 border-gray-200 px-5 py-2 ${message.senderId == id ? 'rounded-tr-sm bg-gray-200' : 'rounded-tl-sm'}`}
             >
@@ -89,7 +81,7 @@ const ChatMessages = ({ users = [], messages = [], isLoading = false }) => {
               <p
                 className={`text-sm text-gray-500 ${message.senderId == id && 'justify-self-end'}`}
               >
-                {isGroupChat && `${userMap.get(message.senderId).username} — `}
+                {!isPrivateChat && `${message.sender.username} — `}
                 {format(new Date(message.sendTime), 'h:mmaaa')}
               </p>
             </div>

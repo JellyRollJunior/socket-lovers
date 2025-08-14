@@ -21,6 +21,7 @@ const getChatMessages = async (chatId, userId) => {
                         senderId: true,
                         sender: {
                             select: {
+                                username: true,
                                 avatar: true,
                             }
                         }

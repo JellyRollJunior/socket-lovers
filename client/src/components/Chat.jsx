@@ -32,8 +32,11 @@ const Chat = () => {
     updateChatName,
   } = useChat(chatId);
   if (errorStatus == 400 || errorStatus == 404) navigate('/');
-  const isTwoPersonChat = chat && chat.users.length == 2;
+  const isPublicChat = chat && chat.type == 'PUBLIC';
   const chatterNames = chat && getUsersString(id, chat.users);
+  const isTwoPersonChat = chat && chat.users.length == 2;
+  const chatter =
+    isTwoPersonChat && chat.users.find((user) => user.id != id).id;
 
   // join room on mount
   useJoinRoom(chatId);
@@ -67,7 +70,7 @@ const Chat = () => {
     <div className="flex h-full flex-col">
       <header className="border-b-1 flex gap-2 border-gray-500 px-4 py-4">
         <Avatar avatar={chat && chat.avatar} size={3} />
-        <div className="flex flex-col">
+        <div className="flex flex-col justify-center">
           <h2 className="text-lg font-medium">
             {chat && chat.name ? chat.name : chatterNames}
           </h2>
@@ -75,38 +78,38 @@ const Chat = () => {
             {chatterNames}
           </p>
         </div>
-        <HeaderMenu>
-          {isTwoPersonChat && (
-            <HeaderMenuItem label="View profile" onClick={openProfileModal} />
-          )}
-          <HeaderMenuItem
-            label="Rename conversation"
-            onClick={openRenameModal}
-          />
-          <HeaderMenuItem
-            label="Delete converstation"
-            onClick={openDeleteModal}
-          />
-        </HeaderMenu>
+        {!isPublicChat && (
+          <HeaderMenu>
+            {isTwoPersonChat && (
+              <HeaderMenuItem label="View profile" onClick={openProfileModal} />
+            )}
+            <HeaderMenuItem
+              label="Rename conversation"
+              onClick={openRenameModal}
+            />
+            <HeaderMenuItem
+              label="Delete converstation"
+              onClick={openDeleteModal}
+            />
+          </HeaderMenu>
+        )}
       </header>
       <main
         ref={scrollContainerRef}
         className="scrollbar-thin flex-1 overflow-y-scroll pl-3 pr-4 pt-3"
       >
         <ChatMessages
-          users={chat ? chat.users : []}
           messages={messages}
+          isPrivateChat={chat && chat.type == 'PRIVATE'}
           isLoading={isLoading}
         />
       </main>
       <ChatMessageInput sendMessage={sendMessage} isDisabled={isLoading} />
-      {isTwoPersonChat && (
-        <ChatProfileModal
-          isOpen={isProfileModalOpen}
-          closeFunction={closeProfileModal}
-          userId={chat && chat.users.find((user) => user.id != id).id}
-        />
-      )}
+      <ChatProfileModal
+        isOpen={isProfileModalOpen}
+        closeFunction={closeProfileModal}
+        userId={chatter ? chatter.id : null}
+      />
       <ChatRenameModal
         isOpen={isRenameModalOpen}
         closeFunction={closeRenameModal}

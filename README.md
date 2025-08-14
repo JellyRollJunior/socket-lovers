@@ -80,15 +80,9 @@
 ### TODO
 
 - server
-    - REFACTOR: public chats
-        - implement sending message to public chats
-            - query chatId
-            - if public, send
-            - if not, ensure user is in chat, send
-    - just return avatar with every message. simplifies chat avatar display
+    - move chat user verification outside of db call
 
 - client
-    - message avatar simplification compatability 
 
     - BUGS:
         - chats: deselect doesnt work at 5 selected users
