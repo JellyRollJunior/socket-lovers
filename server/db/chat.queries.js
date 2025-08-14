@@ -63,13 +63,12 @@ const getChats = async (userId) => {
 };
 
 const getChat = async (chatId, userId) => {
-    // Verify userId has permission to retrieve chat
     try {
         const data = await prisma.chat.findFirst({
-            select: {
-                id: true,
-                name: true,
-                avatar: true,
+            include: {
+                signature: false,
+                latestMessageId: false,
+                latestMessage: false,
                 messages: {
                     select: {
                         id: true,
@@ -87,17 +86,18 @@ const getChat = async (chatId, userId) => {
             },
             where: {
                 id: chatId,
-                users: {
-                    some: {
-                        id: userId,
-                    },
-                },
             },
         });
         if (!data) throw new Error('404');
+        if (data.type == CHAT_TYPE.PUBLIC) return data;
+        const isUserInChat = data.users.includes((user) => (user.id = userId));
+        if (!isUserInChat) throw new Error('403');
         const namedData = setChatName(userId, data);
         return setAvatar(userId, namedData);
     } catch (error) {
+        if (error.message == '403') {
+            throw new DatabaseError('Unable to retrieve chat', 403);
+        }
         if (error.message == '404') {
             throw new DatabaseError('Unable to retrieve chat', 404);
         }

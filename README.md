@@ -85,12 +85,6 @@
             - query chatId
             - if public, send
             - if not, ensure user is in chat, send
-        - clean up chatqueries
-        - implement get public chat messages query
-            - query chatId
-            - if public, send chat
-            - if not, ensure user is in chat, send chat
-        - order public chats by name
 
 - client
 

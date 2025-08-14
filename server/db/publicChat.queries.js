@@ -45,24 +45,4 @@ const createPublicChat = async (name) => {
     }
 };
 
-const updateChatUsers = async (chatId, userId) => {
-    try {
-        const data = await prisma.chat.update({
-            where: {
-                id: chatId,
-            },
-            data: {
-                users: {
-                    connect: {
-                        id: userId,
-                    },
-                },
-            },
-        });
-        return data;
-    } catch (error) {
-        throw new DatabaseError('Unable to update chat users');
-    }
-};
-
-export { getPublicChats, createPublicChat, updateChatUsers };
+export { getPublicChats, createPublicChat };
