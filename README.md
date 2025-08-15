@@ -88,7 +88,6 @@
     - TEST: error states -> goto login
 
     - BUGS:
-        - chats: deselect doesnt work at 5 selected users
         - chats: clear create chat form on close
         - chats: navigate to chat fails when creating chat fails (undefined reading id)
         - dont put null into avatar source box

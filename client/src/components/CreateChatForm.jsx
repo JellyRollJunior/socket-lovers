@@ -40,7 +40,7 @@ const CreateChatForm = ({ closeForm }) => {
   };
 
   const handleChatListItemClick = (userId) => {
-    if (selectedUsers.length >= 4)
+    if (selectedUsers.length >= 4 && !selectedUsers.includes(userId))
       return setUserError(' — Maximum 5 users allowed');
     // if not in list, add user else remove user
     !selectedUsers.includes(userId)
@@ -49,7 +49,7 @@ const CreateChatForm = ({ closeForm }) => {
   };
 
   return (
-    <form className="min-w-xs flex flex-col" onSubmit={handleCreateChat}>
+    <form className="min-w-2xs flex flex-col" onSubmit={handleCreateChat}>
       <h2 className="mb-1 self-center text-lg font-bold">New Conversation</h2>
       <hr className="mb-4" />
       <label className="font-medium text-gray-500">
