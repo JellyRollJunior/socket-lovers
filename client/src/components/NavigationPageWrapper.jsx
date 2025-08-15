@@ -15,38 +15,40 @@ const NavigationPageWrapper = ({ children }) => {
   const path = location.pathname;
   return (
     <>
-      <nav className="fixed bottom-0 flex h-12 w-full items-center justify-around bg-gray-300 md:top-0 md:h-full md:w-12 md:flex-col md:justify-start md:gap-6 md:pt-10">
-        <button className="rounded-2xl px-1 py-1 hover:bg-gray-400"
-          onClick={() => logout()}>
-          <img className="w-8" src={logoutIcon} alt="Logout icon" />
+      <nav className="fixed bottom-0 grid h-12 w-full grid-cols-4 items-center bg-gray-300 md:top-0 md:flex md:h-full md:w-14 md:flex-col md:justify-start md:gap-11 md:pt-8">
+        <button
+          className="flex justify-center rounded-2xl px-1 py-1 hover:bg-gray-400"
+          onClick={() => logout()}
+        >
+          <img className="w-9" src={logoutIcon} alt="Logout icon" />
         </button>
-        <button className="rounded-2xl px-1 py-1 hover:bg-gray-400 md:mt-10">
+        <button className="flex justify-center rounded-2xl px-1 py-1 hover:bg-gray-400 md:mt-5">
           <Link to="/">
             <img
-              className="w-8"
+              className="w-9"
               src={path == '/' ? homeFilledIcon : homeIcon}
               alt="Home icon"
             />
           </Link>
         </button>
-        <div>
+        <div className="flex justify-center">
           <img
-              className="w-8"
-              src={path.includes('chats') ? messagesFilledIcon : messagesIcon}
-              alt="Home icon"
-            />
+            className="w-9"
+            src={path.includes('chats') ? messagesFilledIcon : messagesIcon}
+            alt="Home icon"
+          />
         </div>
-        <button className="rounded-2xl px-1 py-1 hover:bg-gray-400">
+        <button className="flex justify-center rounded-2xl px-1 py-1 hover:bg-gray-400">
           <Link to="/profile">
             <img
-              className="w-8"
+              className="w-9"
               src={path == '/profile' ? accountFilledIcon : accountIcon}
               alt="Profile icon"
             />
           </Link>
         </button>
       </nav>
-      <div className="h-screen pb-12 md:pb-0 md:pl-12">{children}</div>
+      <div className="h-screen pb-12 md:pb-0 md:pl-14">{children}</div>
     </>
   );
 };
