@@ -1,13 +1,11 @@
-import { useContext, useState } from 'react';
-import { CurrentContext } from '../contexts/CurrentProvider.jsx';
+import { useState } from 'react';
 
 const ChatMessageInput = ({ sendMessage, isDisabled = false }) => {
-  const { id } = useContext(CurrentContext);
   const [text, setText] = useState('');
 
   const handleSendMessage = (event) => {
     event.preventDefault();
-    sendMessage(id, text);
+    sendMessage(text);
     setText('');
   };
 

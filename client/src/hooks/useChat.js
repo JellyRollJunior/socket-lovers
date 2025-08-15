@@ -1,31 +1,38 @@
 import { useContext, useEffect, useState } from 'react';
-import { ToastContext } from '../contexts/ToastProvider.jsx';
-import { fetchChat } from '../services/chatApi.js';
-import { useTokenErrorHandler } from './useTokenErrorHandler.js';
-import { SocketContext } from '../contexts/SocketProvider.jsx';
 import { useNavigate } from 'react-router';
+import { fetchChat } from '../services/chatApi.js';
+import { ToastContext } from '../contexts/ToastProvider.jsx';
+import { SocketContext } from '../contexts/SocketProvider.jsx';
 import { ChatsContext } from '../contexts/ChatsProvider.jsx';
+import { CurrentContext } from '../contexts/CurrentProvider.jsx';
+import { useTokenErrorHandler } from './useTokenErrorHandler.js';
 
-const createMessage = (senderId, content) => {
+const createMessage = (content, id, username, avatar) => {
     const now = new Date().toISOString();
     return {
         id: now,
         content,
         sendTime: now,
-        senderId,
+        senderId: id,
+        sender: {
+            id,
+            avatar: avatar,
+            username: username,
+        },
     };
 };
 
 const useChat = (chatId) => {
     const navigate = useNavigate();
     const socket = useContext(SocketContext);
+    const { toast } = useContext(ToastContext);
+    const { refetchChats } = useContext(ChatsContext);
+    const { id, username, avatar } = useContext(CurrentContext);
     const [chat, setChat] = useState(null);
     const [messages, setMessages] = useState([]);
     const [isLoading, setIsLoading] = useState(false);
     const [errorStatus, setErrorStatus] = useState(null);
     const { handleTokenErrors } = useTokenErrorHandler();
-    const { toast } = useContext(ToastContext);
-    const { refetchChats } = useContext(ChatsContext);
 
     // retrieve initial chat
     useEffect(() => {
@@ -63,7 +70,7 @@ const useChat = (chatId) => {
         return () => socket.off('receive_message');
     }, [socket, chatId]);
 
-    const sendMessage = (id, text) => {
+    const sendMessage = (text) => {
         if (!socket) return;
         // emit message to server
         socket.emit('send_message', chatId, text, (error) => {
@@ -77,7 +84,8 @@ const useChat = (chatId) => {
         });
 
         // display message on client
-        setMessages((prev) => [...prev, createMessage(id, text)]);
+        const message = createMessage(text, id, username, avatar);
+        setMessages((prev) => [...prev, message]);
     };
 
     const updateChatName = (name) => {

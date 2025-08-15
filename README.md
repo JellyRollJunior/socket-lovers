@@ -80,12 +80,15 @@
 ### TODO
 
 - server
+    - standardize message return object
+        - getChats
+        - createMessage
 
 - client
     - chat: on 403, redirect to index
+    - refactor socket error handling
 
     - BUGS:
-        - chat: avatar undefined error on sending message
         - chats: deselect doesnt work at 5 selected users
         - chats: clear create chat form on close
         - chats: navigate to chat fails when creating chat fails (undefined reading id)
