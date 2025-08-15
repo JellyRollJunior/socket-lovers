@@ -36,7 +36,7 @@ const CreateChatForm = ({ closeForm }) => {
     setName('');
     closeForm();
     refetchChats();
-    navigate(`/chats/${data.id}`);
+    if (data && data.id) navigate(`/chats/${data.id}`);
   };
 
   const handleChatListItemClick = (userId) => {

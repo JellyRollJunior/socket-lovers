@@ -86,7 +86,4 @@
     - refactor socket error handling
     - TEST: error states -> goto login
 
-    - BUGS:
-        - chats: navigate to chat fails when creating chat fails (undefined reading id)
-        - dont put null into avatar source box
     - Features pretty much done. Just test app ATP after bug fixes
