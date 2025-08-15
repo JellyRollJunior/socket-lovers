@@ -28,4 +28,15 @@ const formatChat = (chat, userId) => {
     return avatarChat;
 };
 
-export { formatChat };
+const reorderChatsWithLatestMessageToFront = (chats) => {
+    if (!chats || chats.length == 0) return chats;
+    // return order: chats with latestMessage first (prisma returns null first)
+    const messageIndex = chats.findIndex((chat) => chat.latestMessage);
+    const orderedData =
+        messageIndex > 0
+            ? [...chats.slice(messageIndex), ...chats.slice(0, messageIndex)]
+            : chats;
+    return orderedData;
+};
+
+export { formatChat, reorderChatsWithLatestMessageToFront };

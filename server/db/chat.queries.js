@@ -23,14 +23,7 @@ const getChats = async (userId) => {
                 },
             },
         });
-        if (!data) return data;
-        // return order: chats with latestMessage first (prisma returns null first)
-        const messageIndex = data.findIndex((chat) => chat.latestMessage);
-        const orderedData =
-            messageIndex > 0
-                ? [...data.slice(messageIndex), ...data.slice(0, messageIndex)]
-                : data;
-        return orderedData;
+        return data;
     } catch (error) {
         throw new DatabaseError('Unable to retrieve chats');
     }

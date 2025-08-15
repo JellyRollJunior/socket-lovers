@@ -3,13 +3,16 @@ import * as chatQueries from '../db/chat.queries.js';
 import * as messageQueries from '../db/message.queries.js';
 import { isUserAuthorizedForChat } from '../services/chat.services.js';
 import { AuthorizationError } from '../errors/AuthorizationError.js';
-import { formatChat } from '../services/formatChats.js';
+import { formatChat, reorderChatsWithLatestMessageToFront } from '../services/formatChats.js';
 
 const getChats = async (req, res, next) => {
     try {
         const userId = req.user.id;
         const chats = await chatQueries.getChats(userId);
-        res.json({ chats });
+        if (!chats) throw new DatabaseError('Unable to retrieve chats', 404);
+        const orderedChats = reorderChatsWithLatestMessageToFront(chats);
+        const formattedChats = orderedChats.map((chat) => formatChat(chat, userId));
+        res.json({ chats: formattedChats });
     } catch (error) {
         next(error);
     }
