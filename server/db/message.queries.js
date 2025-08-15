@@ -56,6 +56,15 @@ const createMessage = async (chatId, senderId, content) => {
                     },
                 },
             },
+            include: {
+                sender: {
+                    select: {
+                        id: true,
+                        username: true,
+                        avatar: true,
+                    },
+                },
+            },
         });
         return message;
     } catch (error) {

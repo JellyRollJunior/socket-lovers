@@ -30,7 +30,7 @@ const handleSendMessage = async (socket, chatId, content, callback) => {
         // Verify user is authorized to post message in chat
         const chat = await messageQueries.getChatMessages(chatId);
         if (!chat) throw new DatabaseError('Unable to create message', 404);
-        if (!isUserAuthorizedForChat(chat)) {
+        if (!isUserAuthorizedForChat(chat, socket.data.user.id)) {
             throw new AuthorizationError('Unable to create message');
         }
         // create message and emit
