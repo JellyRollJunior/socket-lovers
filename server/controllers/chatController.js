@@ -1,9 +1,12 @@
 import { validateInput } from '../middleware/validations.js';
-import * as chatQueries from '../db/chat.queries.js';
-import * as messageQueries from '../db/message.queries.js';
+import {
+    formatChat,
+    reorderChatsWithLatestMessageToFront,
+} from '../services/formatChats.js';
 import { isUserAuthorizedForChat } from '../services/chat.services.js';
 import { AuthorizationError } from '../errors/AuthorizationError.js';
-import { formatChat, reorderChatsWithLatestMessageToFront } from '../services/formatChats.js';
+import * as chatQueries from '../db/chat.queries.js';
+import * as messageQueries from '../db/message.queries.js';
 
 const getChats = async (req, res, next) => {
     try {
@@ -11,7 +14,9 @@ const getChats = async (req, res, next) => {
         const chats = await chatQueries.getChats(userId);
         if (!chats) throw new DatabaseError('Unable to retrieve chats', 404);
         const orderedChats = reorderChatsWithLatestMessageToFront(chats);
-        const formattedChats = orderedChats.map((chat) => formatChat(chat, userId));
+        const formattedChats = orderedChats.map((chat) =>
+            formatChat(chat, userId)
+        );
         res.json({ chats: formattedChats });
     } catch (error) {
         next(error);
@@ -70,8 +75,13 @@ const deleteChat = async (req, res, next) => {
     try {
         validateInput(req);
         const { chatId } = req.params;
-        const chat = await chatQueries.deleteChat(chatId, req.user.id);
-        res.json(chat);
+        const chat = await messageQueries.getChatMessages(chatId);
+        if (!chat) throw new DatabaseError('Unable to delete chat', 404);
+        if (!isUserAuthorizedForChat(chat, req.user.id)) {
+            throw new AuthorizationError('Unable to delete chat');
+        }
+        const data = await chatQueries.deleteChat(chatId);
+        res.json(data);
     } catch (error) {
         next(error);
     }
