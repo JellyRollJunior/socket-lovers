@@ -1,7 +1,6 @@
-import { PrismaClient, CHAT_TYPE } from '@prisma/client';
-import { USERS_INCLUDE } from './returnDataPresets.js';
+import { PrismaClient } from '@prisma/client';
+import { MESSAGE_SELECT, USERS_INCLUDE } from './returnDataPresets.js';
 import { DatabaseError } from '../errors/DatabaseError.js';
-import { AuthorizationError } from '../errors/AuthorizationError.js';
 
 const prisma = new PrismaClient();
 
@@ -13,18 +12,7 @@ const getChatMessages = async (chatId) => {
                 latestMessageId: false,
                 latestMessage: false,
                 messages: {
-                    select: {
-                        id: true,
-                        content: true,
-                        sendTime: true,
-                        senderId: true,
-                        sender: {
-                            select: {
-                                username: true,
-                                avatar: true,
-                            },
-                        },
-                    },
+                    select: MESSAGE_SELECT,
                     orderBy: {
                         sendTime: 'asc',
                     },
@@ -56,15 +44,7 @@ const createMessage = async (chatId, senderId, content) => {
                     },
                 },
             },
-            include: {
-                sender: {
-                    select: {
-                        id: true,
-                        username: true,
-                        avatar: true,
-                    },
-                },
-            },
+            select: MESSAGE_SELECT,
         });
         return message;
     } catch (error) {

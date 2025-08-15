@@ -12,4 +12,17 @@ const CHATS_INCLUDE = {
     latestMessage: true,
 };
 
-export { USERS_INCLUDE, CHATS_INCLUDE };
+const MESSAGE_SELECT = {
+    id: true,
+    content: true,
+    sendTime: true,
+    sender: {
+        select: {
+            id: true,
+            username: true,
+            avatar: true,
+        },
+    },
+};
+
+export { USERS_INCLUDE, CHATS_INCLUDE, MESSAGE_SELECT };

@@ -81,7 +81,7 @@
 
 - server
     - standardize message return object
-        - getChats
+        - getChatsMessages
         - createMessage
 
 - client
