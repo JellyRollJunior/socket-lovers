@@ -1,6 +1,7 @@
 import { isUserAuthorizedForChat } from '../services/chat.services.js';
 import { createSocketError } from '../errors/SocketError.js';
 import { AuthorizationError } from '../errors/AuthorizationError.js';
+import { DatabaseError } from '../errors/DatabaseError.js';
 import * as messageQueries from '../db/message.queries.js';
 
 const handleJoinRoom = (socket, room, callback) => {

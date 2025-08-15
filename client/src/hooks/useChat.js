@@ -69,16 +69,20 @@ const useChat = (chatId) => {
         return () => socket.off('receive_message');
     }, [socket, chatId]);
 
+    const sendMessageErrors = {
+        403: 'Chat is unavailable',
+        404: 'Chat is unavailable and may have been deleted',
+    }
     const sendMessage = (text) => {
         if (!socket) return;
         // emit message to server
         socket.emit('send_message', chatId, text, (error) => {
-            if (error.status == 404) {
-                toast('Chat is unavailable and may have been deleted');
+            if (sendMessageErrors[error.status]) {
+                toast(sendMessageErrors[error.status]);
                 refetchChats();
                 navigate('/');
             } else {
-                toast('Unable to send message. Please try again later');
+                toast('Unable to send message. Please refresh and try again later');
             }
         });
 

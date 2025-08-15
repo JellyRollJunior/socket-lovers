@@ -82,8 +82,6 @@
 - server
 
 - client
-    - chat: on 403, redirect to index
-    - refactor socket error handling
     - TEST: error states -> goto login
 
     - Features pretty much done. Just test app ATP after bug fixes

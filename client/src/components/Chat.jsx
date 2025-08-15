@@ -31,7 +31,7 @@ const Chat = () => {
     sendMessage,
     updateChatName,
   } = useChat(chatId);
-  if (errorStatus == 400 || errorStatus == 404) navigate('/');
+  if (errorStatus == 400 || errorStatus == 404 || errorStatus == 403) navigate('/');
   const isPublicChat = chat && chat.type == 'PUBLIC';
   const chatterNames = chat && getUsersString(id, chat.users);
   const isTwoPersonChat = chat && chat.users.length == 2;
