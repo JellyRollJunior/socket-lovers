@@ -1,12 +1,11 @@
 import { PrismaClient, CHAT_TYPE } from '@prisma/client';
 import { USERS_INCLUDE } from './returnDataPresets.js';
-import { setAvatar, setChatName } from '../services/formatChats.js';
 import { DatabaseError } from '../errors/DatabaseError.js';
 import { AuthorizationError } from '../errors/AuthorizationError.js';
 
 const prisma = new PrismaClient();
 
-const getChatMessages = async (chatId, userId) => {
+const getChatMessages = async (chatId) => {
     try {
         const data = await prisma.chat.findFirst({
             include: {
@@ -39,8 +38,7 @@ const getChatMessages = async (chatId, userId) => {
             },
         });
         if (!data) throw new Error('404');
-        const namedData = setChatName(userId, data);
-        return setAvatar(userId, namedData);
+        return data;
     } catch (error) {
         if (error.message == '404') {
             throw new DatabaseError('Unable to retrieve chat', 404);

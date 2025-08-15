@@ -22,4 +22,10 @@ const setChatName = (userId, chat) => {
     return chat;
 };
 
-export { setAvatar, setChatName };
+const formatChat = (chat, userId) => {
+    const namedChat = setChatName(userId, chat);
+    const avatarChat = setAvatar(userId, namedChat);
+    return avatarChat;
+};
+
+export { formatChat };

@@ -82,8 +82,8 @@
 - server
     - move chat user verification outside of db call
         - getChats
-        - getChatMessages
         - createMessage
+    - move 404 error to controller
     - move data formating call to controller (null order, set avatar, set name)
 
 - client

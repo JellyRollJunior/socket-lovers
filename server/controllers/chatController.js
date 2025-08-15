@@ -3,6 +3,7 @@ import * as chatQueries from '../db/chat.queries.js';
 import * as messageQueries from '../db/message.queries.js';
 import { isUserAuthorizedForChat } from '../services/chat.services.js';
 import { AuthorizationError } from '../errors/AuthorizationError.js';
+import { formatChat } from '../services/formatChats.js';
 
 const getChats = async (req, res, next) => {
     try {
@@ -18,11 +19,13 @@ const getChat = async (req, res, next) => {
     try {
         validateInput(req);
         const { chatId } = req.params;
-        const chat = await messageQueries.getChatMessages(chatId, req.user.id);
-        if (!isUserAuthorizedForChat(chat, req.user.id)) {
+        const userId = req.user.id;
+        const chat = await messageQueries.getChatMessages(chatId);
+        if (!isUserAuthorizedForChat(chat, userId)) {
             throw new AuthorizationError('Unable to retrieve chat swag');
         }
-        res.json(chat);
+        const formattedChat = formatChat(chat, userId);
+        res.json(formattedChat);
     } catch (error) {
         next(error);
     }

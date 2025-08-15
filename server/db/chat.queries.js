@@ -1,7 +1,6 @@
 import dotenv from 'dotenv';
 import { PrismaClient, CHAT_TYPE } from '@prisma/client';
 import { CHATS_INCLUDE, USERS_INCLUDE } from './returnDataPresets.js';
-import { setAvatar, setChatName } from '../services/formatChats.js';
 import { DatabaseError } from '../errors/DatabaseError.js';
 dotenv.config();
 
@@ -31,9 +30,7 @@ const getChats = async (userId) => {
             messageIndex > 0
                 ? [...data.slice(messageIndex), ...data.slice(0, messageIndex)]
                 : data;
-        return orderedData
-            .map((chat) => setChatName(userId, chat))
-            .map((chat) => setAvatar(userId, chat));
+        return orderedData;
     } catch (error) {
         throw new DatabaseError('Unable to retrieve chats');
     }
