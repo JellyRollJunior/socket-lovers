@@ -1,7 +1,7 @@
 import dotenv from 'dotenv';
 import { PrismaClient, CHAT_TYPE } from '@prisma/client';
 import { CHATS_INCLUDE, USERS_INCLUDE } from './returnDataPresets.js';
-import { setAvatar, setChatName } from './formatChats.js';
+import { setAvatar, setChatName } from '../services/formatChats.js';
 import { DatabaseError } from '../errors/DatabaseError.js';
 dotenv.config();
 

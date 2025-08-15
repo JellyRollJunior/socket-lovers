@@ -1,6 +1,8 @@
 import { validateInput } from '../middleware/validations.js';
 import * as chatQueries from '../db/chat.queries.js';
-import * as messageQueries from '../db/message.queries.js'
+import * as messageQueries from '../db/message.queries.js';
+import { isUserAuthorizedForChat } from '../services/chat.services.js';
+import { AuthorizationError } from '../errors/AuthorizationError.js';
 
 const getChats = async (req, res, next) => {
     try {
@@ -17,6 +19,9 @@ const getChat = async (req, res, next) => {
         validateInput(req);
         const { chatId } = req.params;
         const chat = await messageQueries.getChatMessages(chatId, req.user.id);
+        if (!isUserAuthorizedForChat(chat, req.user.id)) {
+            throw new AuthorizationError('Unable to retrieve chat swag');
+        }
         res.json(chat);
     } catch (error) {
         next(error);

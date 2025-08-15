@@ -81,6 +81,10 @@
 
 - server
     - move chat user verification outside of db call
+        - getChats
+        - getChatMessages
+        - createMessage
+    - move data formating call to controller (null order, set avatar, set name)
 
 - client
 
@@ -89,5 +93,4 @@
         - chats: clear create chat form on close
         - chats: navigate to chat fails when creating chat fails (undefined reading id)
         - dont put null into avatar source box
-
-#### Data
+    - Features pretty much done. Just test app ATP after bug fixes

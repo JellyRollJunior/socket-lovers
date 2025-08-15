@@ -1,6 +1,6 @@
 import { PrismaClient, CHAT_TYPE } from '@prisma/client';
 import { USERS_INCLUDE } from './returnDataPresets.js';
-import { setAvatar, setChatName } from './formatChats.js';
+import { setAvatar, setChatName } from '../services/formatChats.js';
 import { DatabaseError } from '../errors/DatabaseError.js';
 import { AuthorizationError } from '../errors/AuthorizationError.js';
 
@@ -39,15 +39,9 @@ const getChatMessages = async (chatId, userId) => {
             },
         });
         if (!data) throw new Error('404');
-        if (data.type == CHAT_TYPE.PUBLIC) return data;
-        const isUserInChat = data.users.some((user) => user.id == userId);
-        if (!isUserInChat) throw new Error('403');
         const namedData = setChatName(userId, data);
         return setAvatar(userId, namedData);
     } catch (error) {
-        if (error.message == '403') {
-            throw new AuthorizationError('Unable to retrieve chat');
-        }
         if (error.message == '404') {
             throw new DatabaseError('Unable to retrieve chat', 404);
         }

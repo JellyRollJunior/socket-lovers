@@ -1,5 +1,5 @@
 const setAvatar = (userId, chat) => {
-    if (chat.users.length <= 1) {
+    if (chat.users.length == 1) {
         chat.avatar = chat.users[0].avatar;
     }
     if (chat.users.length == 2) {
