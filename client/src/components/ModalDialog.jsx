@@ -1,16 +1,15 @@
-import { useRef } from 'react';
+import { useEffect, useRef } from 'react';
 
-const ModalDialog = ({ isOpen, closeFunction, children }) => {
+const ModalDialog = ({ closeFunction, children }) => {
   const modalRef = useRef(null);
 
-  if (modalRef && modalRef.current) {
-    isOpen
-      ? modalRef.current.showModal()
-      : modalRef.current.open && modalRef.current.close();
-  }
+  useEffect(() => {
+    modalRef.current.showModal();
+  }, [modalRef]);
+
   return (
     <dialog
-      className="top-1/8 left-1/2 translate-x-[-50%] rounded-xl px-4 pb-4 pt-2 w-9/10 xs:w-sm"
+      className="top-1/8 w-9/10 xs:w-sm left-1/2 translate-x-[-50%] rounded-xl px-4 pb-4 pt-2"
       ref={modalRef}
     >
       <div className="flex flex-col">

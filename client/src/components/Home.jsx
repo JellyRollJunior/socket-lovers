@@ -13,10 +13,16 @@ const Home = () => {
 
   return (
     <>
-      <Chats chats={chats} isLoading={isLoading} openNewChatModal={openNewChatModal} />
-      <ModalDialog isOpen={isModalOpen} closeFunction={closeNewChatModal}>
-        <CreateChatForm closeForm={closeNewChatModal} />
-      </ModalDialog>
+      <Chats
+        chats={chats}
+        isLoading={isLoading}
+        openNewChatModal={openNewChatModal}
+      />
+      {isModalOpen && (
+        <ModalDialog closeFunction={closeNewChatModal}>
+          <CreateChatForm closeForm={closeNewChatModal} />
+        </ModalDialog>
+      )}
     </>
   );
 };

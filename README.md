@@ -87,7 +87,7 @@
     - TEST: error states -> goto login
 
     - BUGS:
-        - chats: clear create chat form on close
         - chats: navigate to chat fails when creating chat fails (undefined reading id)
         - dont put null into avatar source box
+        - chat profile modal broken
     - Features pretty much done. Just test app ATP after bug fixes

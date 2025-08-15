@@ -5,7 +5,7 @@ import { useRenameChat } from '../hooks/useRenameChat.js';
 import { useParams } from 'react-router';
 import { ChatsContext } from '../contexts/ChatsProvider.jsx';
 
-const ChatRenameModal = ({ isOpen, closeFunction, chatName, onSubmit }) => {
+const ChatRenameModal = ({ closeFunction, chatName, onSubmit }) => {
   const { chatId } = useParams();
   const { refetchChats } = useContext(ChatsContext);
   const { renameChat, isLoading } = useRenameChat(chatId);
@@ -24,7 +24,7 @@ const ChatRenameModal = ({ isOpen, closeFunction, chatName, onSubmit }) => {
   };
 
   return (
-    <ModalDialog isOpen={isOpen} closeFunction={closeFunction}>
+    <ModalDialog closeFunction={closeFunction}>
       <form className="flex flex-col" onSubmit={handleRenameChat}>
         <h2 className="mb-1 self-center text-lg font-bold">
           Rename Conversation

@@ -105,22 +105,22 @@ const Chat = () => {
         />
       </main>
       <ChatMessageInput sendMessage={sendMessage} isDisabled={isLoading} />
-      {<ChatProfileModal
-        isOpen={isProfileModalOpen}
-        closeFunction={closeProfileModal}
-        userId={chatter ? chatter.id : null}
-      />}
-      <ChatRenameModal
-        isOpen={isRenameModalOpen}
-        closeFunction={closeRenameModal}
-        chatName={chat && chat.name ? chat.name : ''}
-        onSubmit={onSubmitRenameChat}
-      />
-      <ChatDeleteModal
-        isOpen={isDeleteModalOpen}
-        closeFunction={closeDeleteModal}
-        chatId={chatId}
-      />
+      {isProfileModalOpen && (
+        <ChatProfileModal
+          closeFunction={closeProfileModal}
+          userId={chatter ? chatter.id : null}
+        />
+      )}
+      {isRenameModalOpen && (
+        <ChatRenameModal
+          closeFunction={closeRenameModal}
+          chatName={chat && chat.name ? chat.name : ''}
+          onSubmit={onSubmitRenameChat}
+        />
+      )}
+      {isDeleteModalOpen && (
+        <ChatDeleteModal closeFunction={closeDeleteModal} chatId={chatId} />
+      )}
     </div>
   );
 };

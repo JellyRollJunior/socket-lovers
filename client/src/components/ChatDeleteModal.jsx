@@ -5,7 +5,7 @@ import { useDeleteChat } from '../hooks/useDeleteChat.js';
 import { ModalDialog } from './ModalDialog.jsx';
 import warning from '../assets/svgs/warning.svg';
 
-const ChatDeleteModal = ({ isOpen, closeFunction, chatId }) => {
+const ChatDeleteModal = ({ closeFunction, chatId }) => {
   const navigate = useNavigate();
   const { refetchChats } = useContext(ChatsContext);
   const { deleteChat, isLoading } = useDeleteChat();
@@ -19,7 +19,7 @@ const ChatDeleteModal = ({ isOpen, closeFunction, chatId }) => {
   };
 
   return (
-    <ModalDialog isOpen={isOpen} closeFunction={closeFunction}>
+    <ModalDialog closeFunction={closeFunction}>
       <form className="flex flex-col" onSubmit={handleDeleteChat}>
         <h2 className="mb-1 self-center text-lg font-bold">
           Delete Conversation
