@@ -80,12 +80,6 @@
 ### TODO
 
 - server
-    - move chat user verification outside of db call
-        - createMessage
-    - move 404 error to controller
-        - createMessage
-    - move data formating call to controller (null order, set avatar, set name)
-        - createMessage
 
 - client
     - chat: on 403, redirect to index

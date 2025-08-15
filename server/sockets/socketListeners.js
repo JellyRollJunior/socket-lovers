@@ -1,8 +1,11 @@
+import { isUserAuthorizedForChat } from '../services/chat.services.js';
 import { createSocketError } from '../errors/SocketError.js';
+import { AuthorizationError } from '../errors/AuthorizationError.js';
 import * as messageQueries from '../db/message.queries.js';
 
 const handleJoinRoom = (socket, room, callback) => {
-    if (!room) return callback(createSocketError(`Unable to join room id: ${room}`));
+    if (!room)
+        return callback(createSocketError(`Unable to join room id: ${room}`));
     // leave all rooms besides [room: socket.id]
     socket.rooms.forEach((room) => {
         if (room != socket.id) {
@@ -16,7 +19,21 @@ const handleJoinRoom = (socket, room, callback) => {
 
 const handleSendMessage = async (socket, chatId, content, callback) => {
     try {
-        if (!chatId || !content || content.length > 250 || content.trim().length <= 0) throw Error('Payload error');
+        if (
+            !chatId ||
+            !content ||
+            content.length > 250 ||
+            content.trim().length <= 0
+        ) {
+            throw Error('Payload error');
+        }
+        // Verify user is authorized to post message in chat
+        const chat = await messageQueries.getChatMessages(chatId);
+        if (!chat) throw new DatabaseError('Unable to create message', 404);
+        if (!isUserAuthorizedForChat(chat)) {
+            throw new AuthorizationError('Unable to create message');
+        }
+        // create message and emit
         const message = await messageQueries.createMessage(
             chatId,
             socket.data.user.id,
