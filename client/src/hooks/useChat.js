@@ -13,7 +13,6 @@ const createMessage = (content, id, username, avatar) => {
         id: now,
         content,
         sendTime: now,
-        senderId: id,
         sender: {
             id,
             avatar: avatar,

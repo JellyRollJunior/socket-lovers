@@ -71,15 +71,15 @@ const ChatMessages = ({ messages = [], isPrivateChat, isLoading = false }) => {
           )}
           <li
             key={message.id}
-            className={`max-w-4/5 flex items-start gap-2 ${message.senderId == id && 'flex-row-reverse self-end'}`}
+            className={`max-w-4/5 flex items-start gap-2 ${message.sender.id == id && 'flex-row-reverse self-end'}`}
           >
             <Avatar avatar={message.sender.avatar} size={2.5} />
             <div
-              className={`min-w-26 w-fit rounded-3xl border-2 border-gray-200 px-5 py-2 ${message.senderId == id ? 'rounded-tr-sm bg-gray-200' : 'rounded-tl-sm'}`}
+              className={`min-w-26 w-fit rounded-3xl border-2 border-gray-200 px-5 py-2 ${message.sender.id == id ? 'rounded-tr-sm bg-gray-200' : 'rounded-tl-sm'}`}
             >
               <h3>{message.content}</h3>
               <p
-                className={`text-sm text-gray-500 ${message.senderId == id && 'justify-self-end'}`}
+                className={`text-sm text-gray-500 ${message.sender.id == id && 'justify-self-end'}`}
               >
                 {!isPrivateChat && `${message.sender.username} — `}
                 {format(new Date(message.sendTime), 'h:mmaaa')}

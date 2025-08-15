@@ -80,9 +80,6 @@
 ### TODO
 
 - server
-    - standardize message return object
-        - getChatsMessages
-        - createMessage
 
 - client
     - chat: on 403, redirect to index
