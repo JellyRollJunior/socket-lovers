@@ -21,8 +21,9 @@ const getChat = async (req, res, next) => {
         const { chatId } = req.params;
         const userId = req.user.id;
         const chat = await messageQueries.getChatMessages(chatId);
+        if (!chat) throw new DatabaseError('Unable to retrieve chat', 404);
         if (!isUserAuthorizedForChat(chat, userId)) {
-            throw new AuthorizationError('Unable to retrieve chat swag');
+            throw new AuthorizationError('Unable to retrieve chat');
         }
         const formattedChat = formatChat(chat, userId);
         res.json(formattedChat);

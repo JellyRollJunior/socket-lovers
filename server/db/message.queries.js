@@ -22,8 +22,8 @@ const getChatMessages = async (chatId) => {
                             select: {
                                 username: true,
                                 avatar: true,
-                            }
-                        }
+                            },
+                        },
                     },
                     orderBy: {
                         sendTime: 'asc',
@@ -37,12 +37,8 @@ const getChatMessages = async (chatId) => {
                 id: chatId,
             },
         });
-        if (!data) throw new Error('404');
         return data;
     } catch (error) {
-        if (error.message == '404') {
-            throw new DatabaseError('Unable to retrieve chat', 404);
-        }
         throw new DatabaseError('Unable to retrieve chat');
     }
 };
@@ -67,7 +63,9 @@ const createMessage = async (chatId, senderId, content) => {
         return message;
     } catch (error) {
         if (error.message == '403') {
-            throw new AuthorizationError('User is not authorized to view this resource');
+            throw new AuthorizationError(
+                'User is not authorized to view this resource'
+            );
         }
         if (error.code == 'P2025') {
             // P2025: An operation failed because it depends on one or more records that were required but not found

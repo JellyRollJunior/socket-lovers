@@ -84,9 +84,12 @@
         - getChats
         - createMessage
     - move 404 error to controller
+        - getChatMessages
+        - createMessage
     - move data formating call to controller (null order, set avatar, set name)
 
 - client
+    - chat: on 403, redirect to index
 
     - BUGS:
         - chats: deselect doesnt work at 5 selected users
