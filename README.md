@@ -89,5 +89,4 @@
     - BUGS:
         - chats: navigate to chat fails when creating chat fails (undefined reading id)
         - dont put null into avatar source box
-        - chat profile modal broken
     - Features pretty much done. Just test app ATP after bug fixes

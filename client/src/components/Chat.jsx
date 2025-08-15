@@ -35,8 +35,6 @@ const Chat = () => {
   const isPublicChat = chat && chat.type == 'PUBLIC';
   const chatterNames = chat && getUsersString(id, chat.users);
   const isTwoPersonChat = chat && chat.users.length == 2;
-  const chatter =
-    isTwoPersonChat && chat.users.find((user) => user.id != id).id;
 
   // join room on mount
   useJoinRoom(chatId);
@@ -108,7 +106,9 @@ const Chat = () => {
       {isProfileModalOpen && (
         <ChatProfileModal
           closeFunction={closeProfileModal}
-          userId={chatter ? chatter.id : null}
+          userId={
+            isTwoPersonChat && chat.users.find((user) => user.id != id).id
+          }
         />
       )}
       {isRenameModalOpen && (
