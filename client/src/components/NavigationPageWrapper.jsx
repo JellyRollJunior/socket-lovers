@@ -15,14 +15,14 @@ const NavigationPageWrapper = ({ children }) => {
   const path = location.pathname;
   return (
     <>
-      <nav className="fixed bottom-0 grid h-12 w-full grid-cols-4 items-center bg-gray-300 md:top-0 md:flex md:h-full md:w-14 md:flex-col md:justify-start md:gap-11 md:pt-8">
+      <nav className="fixed bottom-0 grid h-12 w-full grid-cols-4 items-center justify-center bg-gray-300 md:top-0 md:flex md:h-full md:w-14 md:flex-col md:justify-start md:gap-11 md:pt-8">
         <button
-          className="flex justify-center rounded-2xl px-1 py-1 hover:bg-gray-400"
+          className="mx-auto flex w-fit justify-center rounded-2xl px-1 py-1 hover:bg-gray-400"
           onClick={() => logout()}
         >
           <img className="w-9" src={logoutIcon} alt="Logout icon" />
         </button>
-        <button className="flex justify-center rounded-2xl px-1 py-1 hover:bg-gray-400 md:mt-5">
+        <button className="mx-auto flex w-fit justify-center rounded-2xl px-1 py-1 hover:bg-gray-400 md:mt-5">
           <Link to="/">
             <img
               className="w-9"
@@ -31,14 +31,14 @@ const NavigationPageWrapper = ({ children }) => {
             />
           </Link>
         </button>
-        <div className="flex justify-center">
+        <div className="mx-auto flex w-fit justify-center">
           <img
             className="w-9"
             src={path.includes('chats') ? messagesFilledIcon : messagesIcon}
             alt="Home icon"
           />
         </div>
-        <button className="flex justify-center rounded-2xl px-1 py-1 hover:bg-gray-400">
+        <button className="mx-auto flex w-fit justify-center rounded-2xl px-1 py-1 hover:bg-gray-400">
           <Link to="/profile">
             <img
               className="w-9"

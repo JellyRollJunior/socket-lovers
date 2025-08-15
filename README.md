@@ -76,12 +76,3 @@
 ### Start commands
 
 ### Acknowledgements
-
-### TODO
-
-- server
-
-- client
-    - TEST: error states -> goto login
-
-    - Features pretty much done. Just test app ATP after bug fixes
