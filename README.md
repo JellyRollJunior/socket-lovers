@@ -84,7 +84,6 @@
 - client
     - chat: on 403, redirect to index
     - refactor socket error handling
-    - make public rooms section small ? only have on public room tbh
     - TEST: error states -> goto login
 
     - BUGS:

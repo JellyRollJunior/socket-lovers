@@ -4,3 +4,7 @@
 @utility drop-shadow-pink-custom {
   filter: drop-shadow(2px 2px 0px #ef638766);
 }
+
+@theme {
+  --breakpoint-xs: 30rem;
+}

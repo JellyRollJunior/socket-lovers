@@ -20,7 +20,7 @@ const ChatDeleteModal = ({ isOpen, closeFunction, chatId }) => {
 
   return (
     <ModalDialog isOpen={isOpen} closeFunction={closeFunction}>
-      <form className="min-w-2xs flex flex-col" onSubmit={handleDeleteChat}>
+      <form className="flex flex-col" onSubmit={handleDeleteChat}>
         <h2 className="mb-1 self-center text-lg font-bold">
           Delete Conversation
         </h2>

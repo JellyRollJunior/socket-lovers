@@ -105,11 +105,11 @@ const Chat = () => {
         />
       </main>
       <ChatMessageInput sendMessage={sendMessage} isDisabled={isLoading} />
-      <ChatProfileModal
+      {<ChatProfileModal
         isOpen={isProfileModalOpen}
         closeFunction={closeProfileModal}
         userId={chatter ? chatter.id : null}
-      />
+      />}
       <ChatRenameModal
         isOpen={isRenameModalOpen}
         closeFunction={closeRenameModal}

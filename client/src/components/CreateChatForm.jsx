@@ -49,14 +49,14 @@ const CreateChatForm = ({ closeForm }) => {
   };
 
   return (
-    <form className="min-w-2xs flex flex-col" onSubmit={handleCreateChat}>
+    <form className="flex flex-col" onSubmit={handleCreateChat}>
       <h2 className="mb-1 self-center text-lg font-bold">New Conversation</h2>
       <hr className="mb-4" />
       <label className="font-medium text-gray-500">
         Users
         <span className="text-red-400">{userError}</span>
       </label>
-      <ul className="scrollbar-thin mt-1 h-40 overflow-y-scroll">
+      <ul className="scrollbar-thin h-40 overflow-y-scroll">
         {isLoading && <CreateChatLoading />}
         {!isLoading &&
           filteredUsers.map((user) => (

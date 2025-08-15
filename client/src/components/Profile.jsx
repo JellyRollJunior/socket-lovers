@@ -24,7 +24,7 @@ const Profile = ({
 
   if (isLoading) {
     return (
-      <div className="min-w-2xs flex flex-col items-center justify-center">
+      <div className="flex flex-col items-center justify-center">
         <motion.div
           style={{ backgroundColor: '#f3f4f6' }}
           animate={{ backgroundColor: '#d1d5db' }}
@@ -68,7 +68,7 @@ const Profile = ({
   };
 
   return (
-    <div className="min-w-2xs flex flex-col items-center justify-center">
+    <div className="flex flex-col items-center justify-center">
       <div
         className="relative"
         onMouseEnter={() => setIsEditingAvatar(true)}

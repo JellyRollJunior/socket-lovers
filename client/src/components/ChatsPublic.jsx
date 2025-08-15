@@ -9,7 +9,7 @@ const ChatsPublic = () => {
   return (
     <>
       <ChatsSectionTitle title="Public rooms" refreshOnClick={refetch} />
-      <ul className="mt-1">
+      <ul>
         {isLoading && <ChatsLoading items={1} />}
         {!isLoading &&
           publicChats.map((chat) => (
