@@ -13,6 +13,29 @@
 - User signup / login
 - Desktop and mobile design
 
+
+## Stack
+```
+client/            # Frontend (React, Vite, Tailwind, etc.)
+server/            # Backend (Express, Prisma, Passport, etc.)
+```
+### Frontend
+- React (with Vite)
+- React Router
+- Tailwind CSS
+- Socket.io for real-time communication
+- Motion for smooth animations
+- Date-fns for date formatting
+
+### Backend 
+- Node.js with Express for REST API
+- Prisma ORM w/ PostgreSQL database
+- Socket.io
+- Supabase Storage for saving user uploaded profile pictures
+- Multer and Sharp for file upload and image processing
+- Express validator for endpoint input validation
+- Jsonwebtoken & bcryptjs from authentication / authorization
+
 ## App Showcase
 
 <p align="center">
@@ -43,11 +66,7 @@
 | ---------------------------------------------------- | ---------------------------------------------------- | ----------------------------------------------------- |
 | <img width="300px" src="./readme/images/error.png" > | <img width="300px" src="./readme/images/login.png" > | <img width="300px" src="./readme/images/signup.png" > |
 
-### Server Stack
-
-### Frontend Stack
-
-### Endpoints & Socket Events
+## Endpoints & Socket Events
 
 | Method | URI                   | Function               | Token | Body                                | Notes         |
 | ------ | --------------------- | ---------------------- | ----- | ----------------------------------- | ------------- |
@@ -74,7 +93,7 @@
 | 'disconnecting'   |                | leave rooms before disconnect    |
 | 'disconnect'      |                | log id has disconnected          |
 
-### Learning Outcomes
+## Learning Outcomes
 
 - Interaction
     - Configuring API to require minimal data manipulation from client
@@ -97,7 +116,7 @@
 
 ### Retrospective aka yapping
 
-### Start commands
+## Start commands
 
 ```bash
 # Start backend server
@@ -139,4 +158,10 @@ SUPABASE_DEFAULT_GROUP_CHAT_AVATAR
 VITE_SERVER_URL
 ```
 
-### Acknowledgements
+## Acknowledgements
+
+| Usage  | Source                                                                          |
+| ------ | ------------------------------------------------------------------------------- |
+| Images | Chiikawa                                                                        |
+| Icons  | Google material icons                                                           |
+| Specs  | [The Odin Project](https://www.theodinproject.com/lessons/nodejs-messaging-app) |
