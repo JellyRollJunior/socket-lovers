@@ -13,13 +13,42 @@
 - User signup / login
 - Desktop and mobile design
 
+## Endpoints & Socket Events
+
+| Method | URI                   | Function               | Token | Body                                | Notes         |
+| ------ | --------------------- | ---------------------- | ----- | ----------------------------------- | ------------- |
+| POST   | /signup               | Create user            | N     | { username, password}               |               |
+| POST   | /login                | Login user             | N     | { username, password}               |               |
+| GET    | /current              | Retrieve current user  | Y     |                                     |               |
+| GET    | /users                | Retrieve all users     | Y     |                                     |               |
+| GET    | /users/:userId        | Retrieve user data     | Y     |                                     |               |
+| PATCH  | /users/:userId        | Update bio             | Y     | { bio }                             |               |
+| PATCH  | /users/:userId/avatar | Update profile picture | Y     | { avatar }                          |               |
+| GET    | /chats-public         | Retrieve public chats  | Y     |                                     |               |
+| GET    | /chats                | Retrieve chats         | Y     |                                     |               |
+| POST   | /chats                | Create chat            | Y     | { name, userIds: ['id_1', 'id_2'] } |               |
+| GET    | /chats/:chatId        | Retrieve chat          | Y     |                                     |               |
+| PATCH  | /chats/:chatId        | Update chat name       | Y     | { name }                            | name optional |
+| DELETE | /chats/:chatId        | Delete chat            | Y     |                                     |               |
+
+| Socket Event      | Arguments      | Use                              |
+| ----------------- | -------------- | -------------------------------- |
+| 'connection'      | token          | socket connection                |
+| 'send_message'    | token, message | sending messages                 |
+| 'receive_message' | message        | notify client to update messages |
+| 'join_room'       | token, chatId  | join chat                        |
+| 'disconnecting'   |                | leave rooms before disconnect    |
+| 'disconnect'      |                | log id has disconnected          |
 
 ## Stack
+
 ```
 client/            # Frontend (React, Vite, Tailwind, etc.)
 server/            # Backend (Express, Prisma, Passport, etc.)
 ```
+
 ### Frontend
+
 - React (with Vite)
 - React Router
 - Tailwind CSS
@@ -27,7 +56,8 @@ server/            # Backend (Express, Prisma, Passport, etc.)
 - Motion for smooth animations
 - Date-fns for date formatting
 
-### Backend 
+### Backend
+
 - Node.js with Express for REST API
 - Prisma ORM w/ PostgreSQL database
 - Socket.io
@@ -65,33 +95,6 @@ server/            # Backend (Express, Prisma, Passport, etc.)
 | Error                                                | Login                                                | Signup                                                |
 | ---------------------------------------------------- | ---------------------------------------------------- | ----------------------------------------------------- |
 | <img width="300px" src="./readme/images/error.png" > | <img width="300px" src="./readme/images/login.png" > | <img width="300px" src="./readme/images/signup.png" > |
-
-## Endpoints & Socket Events
-
-| Method | URI                   | Function               | Token | Body                                | Notes         |
-| ------ | --------------------- | ---------------------- | ----- | ----------------------------------- | ------------- |
-| POST   | /signup               | Create user            | N     | { username, password}               |               |
-| POST   | /login                | Login user             | N     | { username, password}               |               |
-| GET    | /current              | Retrieve current user  | Y     |                                     |               |
-| GET    | /users                | Retrieve all users     | Y     |                                     |               |
-| GET    | /users/:userId        | Retrieve user data     | Y     |                                     |               |
-| PATCH  | /users/:userId        | Update bio             | Y     | { bio }                             |               |
-| PATCH  | /users/:userId/avatar | Update profile picture | Y     | { avatar }                          |               |
-| GET    | /chats-public         | Retrieve public chats  | Y     |                                     |               |
-| GET    | /chats                | Retrieve chats         | Y     |                                     |               |
-| POST   | /chats                | Create chat            | Y     | { name, userIds: ['id_1', 'id_2'] } |               |
-| GET    | /chats/:chatId        | Retrieve chat          | Y     |                                     |               |
-| PATCH  | /chats/:chatId        | Update chat name       | Y     | { name }                            | name optional |
-| DELETE | /chats/:chatId        | Delete chat            | Y     |                                     |               |
-
-| Socket Event      | Arguments      | Use                              |
-| ----------------- | -------------- | -------------------------------- |
-| 'connection'      | token          | socket connection                |
-| 'send_message'    | token, message | sending messages                 |
-| 'receive_message' | message        | notify client to update messages |
-| 'join_room'       | token, chatId  | join chat                        |
-| 'disconnecting'   |                | leave rooms before disconnect    |
-| 'disconnect'      |                | log id has disconnected          |
 
 ## Learning Outcomes
 
