@@ -4,8 +4,6 @@
     <img align="center" width="700px" src="./readme/gifs/realtime-messaging.gif" >
 </p>
 
-### Description
-
 ### Features
 
 - Realtime messaging with sockets (messages saved on server)
@@ -17,27 +15,29 @@
 
 ## App Showcase
 
-| New conversation                                           |
+<p align="center">
+
+| New conversation (gif)                                     |
 | ---------------------------------------------------------- |
 | <img width="400px" src="./readme/gifs/creating-chat.gif" > |
 
-| Edit profile                                              |
+| Edit profile (gif)                                        |
 | --------------------------------------------------------- |
 | <img width="400px" src="./readme/gifs/edit-profile.gif" > |
 
-| Loading animations (NEATO!)                                     |
+| Loading animations (NEATO GIF!)                                 |
 | --------------------------------------------------------------- |
 | <img width="400px" src="./readme/gifs/loading-animations.gif" > |
 
-### Chat menu modals (options from three dots menu button)
+</p>
 
 | View profile                                                   | Rename conversation                                        | Delete conversation                                        |
 | -------------------------------------------------------------- | ---------------------------------------------------------- | ---------------------------------------------------------- |
 | <img width="300px" src="./readme/images/chatter-profile.png" > | <img width="300px" src="./readme/images/rename-chat.png" > | <img width="300px" src="./readme/images/delete-chat.png" > |
 
-| Message - Group chat                                         | Message - Private chat                                         | Refresh button animation                                    |
+| Message - Group chat                                         | Message - Private chat                                         | Refresh button animation (gif)                              |
 | ------------------------------------------------------------ | -------------------------------------------------------------- | ----------------------------------------------------------- |
-| <img width="200px" src="./readme/images/message-group.png" > | <img width="200px" src="./readme/images/message-private.png" > | <img width="400px" src="./readme/gifs/refresh-button.gif" > |
+| <img width="200px" src="./readme/images/message-group.png" > | <img width="200px" src="./readme/images/message-private.png" > | <img width="300px" src="./readme/gifs/refresh-button.gif" > |
 
 | Error                                                | Login                                                | Signup                                                |
 | ---------------------------------------------------- | ---------------------------------------------------- | ----------------------------------------------------- |
@@ -99,6 +99,44 @@
 
 ### Start commands
 
-### Acknowledgements
+```bash
+# Start backend server
+cd server
+npm install
+node --watch server.js
+```
 
-### README
+```bash
+# Start frontend react
+cd client
+npm install
+npm run dev
+
+# OR
+cd client
+npm install
+npm run build
+npm run preview
+```
+
+### Environment variables
+
+```bash
+# ./backend/.env
+PORT
+SERVER_URI
+CLIENT_URI
+DATABASE_URL
+TOKEN_SECRET
+SOCKET_ADMIN_USERNAME
+SOCKET_ADMIN_PASSWORD
+SUPABASE_URL
+SUPABASE_KEY
+SUPABASE_DEFAULT_CHAT_AVATAR
+SUPABASE_DEFAULT_GROUP_CHAT_AVATAR
+
+# ./client/.env
+VITE_SERVER_URL
+```
+
+### Acknowledgements
