@@ -68,8 +68,6 @@ server/            # Backend (Express, Prisma, Passport, etc.)
 
 ## App Showcase
 
-<p align="center">
-
 | New conversation (gif)                                     |
 | ---------------------------------------------------------- |
 | <img width="400px" src="./readme/gifs/creating-chat.gif" > |
@@ -81,8 +79,6 @@ server/            # Backend (Express, Prisma, Passport, etc.)
 | Loading animations (NEATO GIF!)                                 |
 | --------------------------------------------------------------- |
 | <img width="400px" src="./readme/gifs/loading-animations.gif" > |
-
-</p>
 
 | View profile                                                   | Rename conversation                                        | Delete conversation                                        |
 | -------------------------------------------------------------- | ---------------------------------------------------------- | ---------------------------------------------------------- |
@@ -100,6 +96,7 @@ server/            # Backend (Express, Prisma, Passport, etc.)
 
 - Interaction
     - Configuring API to require minimal data manipulation from client
+    - Emphasizing encapsulation and separation of concerns
 
 - Backend
     - Utilizing Socket.io to implement real time chatting
@@ -108,7 +105,9 @@ server/            # Backend (Express, Prisma, Passport, etc.)
         - Resize, compress, and reformat the image to webp with sharp
         - Store on supabase with supabase storage
             - supabase: create project -> get url + key -> create bucket policy -> go nuts
-    - chat signatures to enforce one chat for each unique group of users
+    - Chat signatures to enforce one chat for each unique group of users
+    - Seeding Public chats on server startup
+    - Prisma Enums
 
 - Frontend
     - Utilizing Socket.io-client to receive message updates
@@ -118,6 +117,10 @@ server/            # Backend (Express, Prisma, Passport, etc.)
     - Creating my own loading animations (more elaborate and fitting the UI)!
 
 ### Retrospective aka yapping
+
+This project has been a little over 2 months in the making. My first chat app, [Steel Ball Messenger](https://github.com/JellyRollJunior/steel-ball-messenger), was a messy, confusing, uncertain process. However, I learned the most from this process. I decided to remake the app and add more features. This is the outcome!
+
+I am very proud of this project. I really took time to plan out the architecture which made a huge difference in the enjoyability and ease of development. There is less mental strain when each module has it's own concern!
 
 ## Start commands
 
