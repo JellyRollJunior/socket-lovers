@@ -1,5 +1,5 @@
 import { format } from 'date-fns';
-import { Link } from 'react-router';
+import { Link, useParams } from 'react-router';
 import { Avatar } from './Avatar.jsx';
 // eslint-disable-next-line no-unused-vars
 import { motion } from 'motion/react';
@@ -12,6 +12,8 @@ const ChatsListItem = ({
   isLoading = false,
   delay = 0,
 }) => {
+  const { chatId: browserChatId } = useParams();
+
   if (isLoading) {
     return (
       <motion.li
@@ -42,7 +44,9 @@ const ChatsListItem = ({
     ? format(new Date(latestMessage.sendTime), 'MMM do • h:mmaaa')
     : '';
   return (
-    <li className="px-4 py-2 hover:bg-gray-200">
+    <li
+      className={`px-4 py-2 hover:bg-gray-200 ${chatId == browserChatId ? 'bg-gray-200' : 'inherit'}`}
+    >
       <Link className="flex gap-2" to={`/chats/${chatId}`}>
         <Avatar avatar={avatar} />
         <div className="-mt-0.5 flex min-w-0 flex-col self-center leading-[1.2]">

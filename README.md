@@ -13,8 +13,9 @@
     - edit bio, edit avatar
 
 - chats
-    - create, rename, delete
-    - send messages (realtime messaging with socket)
+    - Private, Group, Public chats
+    - create, rename, delete private & group chats
+    - realtime messaging with sockets
 
 ### App Showcase
 
@@ -37,10 +38,12 @@
 | GET    | /users/:userId        | Retrieve user data     | Y     |                                     |               |
 | PATCH  | /users/:userId        | Update bio             | Y     | { bio }                             |               |
 | PATCH  | /users/:userId/avatar | Update profile picture | Y     | { avatar }                          |               |
+| GET    | /chats-public         | Retrieve public chats  | Y     |                                     |               |
 | GET    | /chats                | Retrieve chats         | Y     |                                     |               |
 | POST   | /chats                | Create chat            | Y     | { name, userIds: ['id_1', 'id_2'] } |               |
 | GET    | /chats/:chatId        | Retrieve chat          | Y     |                                     |               |
 | PATCH  | /chats/:chatId        | Update chat name       | Y     | { name }                            | name optional |
+| DELETE | /chats/:chatId        | Delete chat            | Y     |                                     |               |
 
 | Socket Event    | Arguments      | Use                           |
 | --------------- | -------------- | ----------------------------- |
@@ -76,3 +79,26 @@
 ### Start commands
 
 ### Acknowledgements
+
+
+### README
+- VIDEOS
+    - messaging
+    - creating chat
+    - edit avatar
+    - Edit bio
+    - loading animations
+        - chats
+        - messages
+        - users
+    - refresh button animation
+    - chat message differences
+
+- images
+    - index
+    - profile
+    - login
+    - signup
+    - chatter profile
+    - rename chat
+    - delete chat
