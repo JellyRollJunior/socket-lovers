@@ -1,33 +1,53 @@
 <h1 align="center">Socket Lovers</h1>
-<h3 align="center"></h3>
+<h3 align="center">Message your friends (and enemies) in real time!</h3>
 <p align="center">
-    <img align="center" width="500px" src="" >
+    <img align="center" width="700px" src="./readme/gifs/realtime-messaging.gif" >
 </p>
 
 ### Description
 
 ### Features
 
-- users
-    - username, bio, avatar
-    - edit bio, edit avatar
+- Realtime messaging with sockets (messages saved on server)
+- Private, Group, Public chats
+- Create, rename, delete private & group chats
+- Customize user profile picture and bio (saved to cloud storage)
+- User signup / login
+- Desktop and mobile design
 
-- chats
-    - Private, Group, Public chats
-    - create, rename, delete private & group chats
-    - realtime messaging with sockets
+## App Showcase
 
-### App Showcase
+| New conversation                                           |
+| ---------------------------------------------------------- |
+| <img width="400px" src="./readme/gifs/creating-chat.gif" > |
 
-|                             |
-| --------------------------- |
-| <img width="400px" src="" > |
+| Edit profile                                              |
+| --------------------------------------------------------- |
+| <img width="400px" src="./readme/gifs/edit-profile.gif" > |
+
+| Loading animations (NEATO!)                                     |
+| --------------------------------------------------------------- |
+| <img width="400px" src="./readme/gifs/loading-animations.gif" > |
+
+### Chat menu modals (options from three dots menu button)
+
+| View profile                                                   | Rename conversation                                        | Delete conversation                                        |
+| -------------------------------------------------------------- | ---------------------------------------------------------- | ---------------------------------------------------------- |
+| <img width="300px" src="./readme/images/chatter-profile.png" > | <img width="300px" src="./readme/images/rename-chat.png" > | <img width="300px" src="./readme/images/delete-chat.png" > |
+
+| Message - Group chat                                         | Message - Private chat                                         | Refresh button animation                                    |
+| ------------------------------------------------------------ | -------------------------------------------------------------- | ----------------------------------------------------------- |
+| <img width="200px" src="./readme/images/message-group.png" > | <img width="200px" src="./readme/images/message-private.png" > | <img width="400px" src="./readme/gifs/refresh-button.gif" > |
+
+| Error                                                | Login                                                | Signup                                                |
+| ---------------------------------------------------- | ---------------------------------------------------- | ----------------------------------------------------- |
+| <img width="300px" src="./readme/images/error.png" > | <img width="300px" src="./readme/images/login.png" > | <img width="300px" src="./readme/images/signup.png" > |
 
 ### Server Stack
 
 ### Frontend Stack
 
-### Endpoints
+### Endpoints & Socket Events
 
 | Method | URI                   | Function               | Token | Body                                | Notes         |
 | ------ | --------------------- | ---------------------- | ----- | ----------------------------------- | ------------- |
@@ -45,13 +65,14 @@
 | PATCH  | /chats/:chatId        | Update chat name       | Y     | { name }                            | name optional |
 | DELETE | /chats/:chatId        | Delete chat            | Y     |                                     |               |
 
-| Socket Event    | Arguments      | Use                           |
-| --------------- | -------------- | ----------------------------- |
-| 'connection'    | token          | socket connection             |
-| 'send_message'  | token, message | sending messages              |
-| 'join_room'     | token, chatId  | join chat                     |
-| 'disconnecting' |                | leave rooms before disconnect |
-| 'disconnect'    |                | log id has disconnected       |
+| Socket Event      | Arguments      | Use                           |
+| ----------------- | -------------- | ----------------------------- |
+| 'connection'      | token          | socket connection             |
+| 'send_message'    | token, message | sending messages              |
+| 'receive_message' | message        | notify client to update messages |
+| 'join_room'       | token, chatId  | join chat                     |
+| 'disconnecting'   |                | leave rooms before disconnect |
+| 'disconnect'      |                | log id has disconnected       |
 
 ### Learning Outcomes
 
@@ -79,6 +100,5 @@
 ### Start commands
 
 ### Acknowledgements
-
 
 ### README
