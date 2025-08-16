@@ -65,14 +65,14 @@
 | PATCH  | /chats/:chatId        | Update chat name       | Y     | { name }                            | name optional |
 | DELETE | /chats/:chatId        | Delete chat            | Y     |                                     |               |
 
-| Socket Event      | Arguments      | Use                           |
-| ----------------- | -------------- | ----------------------------- |
-| 'connection'      | token          | socket connection             |
-| 'send_message'    | token, message | sending messages              |
+| Socket Event      | Arguments      | Use                              |
+| ----------------- | -------------- | -------------------------------- |
+| 'connection'      | token          | socket connection                |
+| 'send_message'    | token, message | sending messages                 |
 | 'receive_message' | message        | notify client to update messages |
-| 'join_room'       | token, chatId  | join chat                     |
-| 'disconnecting'   |                | leave rooms before disconnect |
-| 'disconnect'      |                | log id has disconnected       |
+| 'join_room'       | token, chatId  | join chat                        |
+| 'disconnecting'   |                | leave rooms before disconnect    |
+| 'disconnect'      |                | log id has disconnected          |
 
 ### Learning Outcomes
 
