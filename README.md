@@ -82,23 +82,3 @@
 
 
 ### README
-- VIDEOS
-    - messaging
-    - creating chat
-    - edit avatar
-    - Edit bio
-    - loading animations
-        - chats
-        - messages
-        - users
-    - refresh button animation
-    - chat message differences
-
-- images
-    - index
-    - profile
-    - login
-    - signup
-    - chatter profile
-    - rename chat
-    - delete chat
